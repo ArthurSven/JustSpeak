@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "562297810018",
+    "project_id": "justspeak-928a6",
+    "storage_bucket": "justspeak-928a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562297810018:android:1ff5a69e8083db70f6753b",
+        "android_client_info": {
+          "package_name": "com.devapps.justspeak_10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562297810018-9krq3lnb70a6kr1l6laigojvh9i5ajrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0j9SM_MUUoQEyKUKV_FHBv7rASFQPxfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562297810018-9krq3lnb70a6kr1l6laigojvh9i5ajrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.JustSpeak10.Splasher" parent="Theme.JustSpeak10">
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logoblue</item>
+        <item name="postSplashScreenTheme">@style/Theme.JustSpeak10</item>
+    </style>
+
+
+</resources>
