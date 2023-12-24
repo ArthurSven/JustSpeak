@@ -33,6 +33,10 @@ object ChichewaScreen : ScreenDestination {
 }
 
 //German routes
+
+object GermanNavigation : ScreenDestination {
+    override val route = "german_navigation"
+}
 object GermanHomeScreen : ScreenDestination {
     override val route = "german_home_screen"
 }
@@ -51,4 +55,8 @@ object GermanTriviaScreen : ScreenDestination {
 
 object GermanQuizScreen : ScreenDestination {
     override val route = "german_quiz_screen"
+}
+
+object Signout : ScreenDestination {
+    override val route = "signout_user"
 }

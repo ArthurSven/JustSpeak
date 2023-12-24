@@ -69,7 +69,10 @@ import androidx.compose.ui.layout.ContentScale
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Screens.German.GermanNavigation
 import com.devapps.justspeak_10.ui.destinations.Check
+import com.devapps.justspeak_10.ui.destinations.GermanNavigation
+import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.Purple40
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.delay
@@ -112,6 +115,7 @@ fun Navigation() {
         composable(Start.route) {
             SelectLanguageScreen(
                 userData = googleClientAuth.getSignedInUser(),
+                navController = startNavController,
                 onSignOut = {
                     coroutineScope.launch {
                         googleClientAuth.signOut()
@@ -119,6 +123,9 @@ fun Navigation() {
                     }
                 }
             )
+        }
+        composable(GermanNavigation.route) {
+            GermanNavigation(startNavController)
         }
         composable(Check.route) {
             LaunchedEffect(key1 = Unit) {
@@ -130,6 +137,12 @@ fun Navigation() {
                     startNavController.navigate(Signup.route)
                 }
             }
+        }
+        composable(Signout.route) {
+           LaunchedEffect(Unit) {
+                googleClientAuth.signOut()
+            }
+
         }
     }
 }
@@ -317,6 +330,7 @@ fun SocialLoginButton(
 @Composable
 fun SelectLanguageScreen(
     userData: UserData?,
+    navController: NavController,
     onSignOut: () -> Unit
 ) {
     Column(
@@ -334,7 +348,9 @@ fun SelectLanguageScreen(
                 .padding(all = 20.dp),
             textAlign = TextAlign.Center)
         LanguageCard(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(GermanNavigation.route)
+            },
             backgroundColor = AzureBlue,
             country = R.drawable.deutschland,
             language = "German",
@@ -378,7 +394,7 @@ fun LanguageCard(
                 .padding(all = 20.dp)
                 .height(200.dp)
                 .clickable {
-                    onClick
+                    onClick()
                 }
         ) {
             Row(
