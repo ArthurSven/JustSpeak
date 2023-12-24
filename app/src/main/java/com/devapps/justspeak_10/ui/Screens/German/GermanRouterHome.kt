@@ -164,10 +164,22 @@ fun GermanHomeContent(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
+                        .background(color = Color.LightGray)
                 ) {
-                    Spacer(modifier = Modifier
-                        .height(20.dp))
                     UserBar(userData)
+                    Column(
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 10.dp)
+                    ) {
+                        Spacer(modifier = Modifier
+                            .height(20.dp))
+                        Spacer(modifier = Modifier
+                            .height(20.dp))
+                        Text(text = "Let's started with...",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold)
+                    }
                 }
         }
 

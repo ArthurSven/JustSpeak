@@ -36,7 +36,7 @@ fun UserBar(userData: UserData?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 10.dp)
+            .padding(top = 20.dp, start = 10.dp)
     ) {
         if (userData?.userProfileUrl != null) {
             val req = ImageRequest.Builder(LocalContext.current)
