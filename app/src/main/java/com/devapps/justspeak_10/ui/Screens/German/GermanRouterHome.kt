@@ -18,8 +18,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
@@ -38,6 +40,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -68,7 +72,14 @@ import com.devapps.justspeak_10.ui.theme.AzureBlue
 import com.devapps.justspeak_10.ui.viewmodels.AuthViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
+import com.devapps.justspeak_10.ui.Screens.German.GermanGrammarScreen
+import com.devapps.justspeak_10.ui.destinations.Start
 
+data class CardItem(
+    val cardTitle: String,
+    val cardIcon: Int,
+    val cardRoute: String
+)
 @Composable
 fun GermanNavigation(startNavController: NavController) {
     val context = LocalContext.current.applicationContext
@@ -87,6 +98,7 @@ fun GermanNavigation(startNavController: NavController) {
             GermanHomeContent(
                 userData = googleClientAuth.getSignedInUser(),
                 cardNavController = germanNavController,
+                backNavController = startNavController,
                 onSignOut = {
                     coroutineScope.launch {
                         googleClientAuth.signOut()
@@ -96,16 +108,52 @@ fun GermanNavigation(startNavController: NavController) {
             )
         }
         composable(GermanGrammarScreen.route) {
-
+            GermanGrammarScreen(
+                germanGrammarNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
         composable(GermanPhrasesScreen.route) {
-
+            GermanPhraseScreen(
+                germanPhraseNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
         composable(GermanTriviaScreen.route) {
-
+            GermanTriviaScreen(
+                germanTriviaNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
         composable(GermanQuizScreen.route) {
-
+            GermanQuizScreen(
+                germanQuizNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
@@ -122,15 +170,20 @@ fun GermanNavigation(startNavController: NavController) {
 fun GermanHomeContent(
     userData: UserData?,
     cardNavController: NavController,
+    backNavController: NavController,
     onSignOut: () -> Unit
 ) {
+
+    val selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
         Surface(
             modifier = Modifier
         ) {
             val showMenu = remember { mutableStateOf(false) }
             Scaffold(
                 containerColor = Color.White,
-                topBar = { TopAppBar(title = { Text(
+                topBar = { CenterAlignedTopAppBar(title = { Text(
                     "JustSpeak",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold)},
@@ -163,6 +216,16 @@ fun GermanHomeContent(
                                     .background(color = Color.White))
                         }
                     },
+                    navigationIcon = {
+                                     IconButton(onClick = {
+                                         backNavController.navigate(Start.route)
+                                     }) {
+                                         Icon(
+                                             imageVector = Icons.Default.ArrowBack,
+                                             contentDescription = "exit button",
+                                             tint = AzureBlue)
+                                     }
+                    },
                 modifier = Modifier
                     .fillMaxWidth(),
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -188,17 +251,48 @@ fun GermanHomeContent(
                             .height(20.dp))
                         Spacer(modifier = Modifier
                             .height(20.dp))
-                        Text(text = "Let's started with...",
+                        Text(text = "Let's start with...",
                             fontSize = 18.sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier
                             .height(20.dp))
+
+                        val items = listOf(
+                            CardItem(
+                                cardTitle = "Grammar",
+                                cardIcon = R.drawable.grammar,
+                                cardRoute = GermanGrammarScreen.route
+                            ),
+                            CardItem(
+                                cardTitle = "Phrases",
+                                cardIcon = R.drawable.phrase,
+                                cardRoute = GermanPhrasesScreen.route
+                            ),
+                            CardItem(
+                                cardTitle = "Quizzes",
+                                cardIcon = R.drawable.quiz,
+                                cardRoute = GermanQuizScreen.route
+                            ),
+                            CardItem(
+                                cardTitle = "Trivia",
+                                cardIcon = R.drawable.trivia,
+                                cardRoute = GermanTriviaScreen.route
+                            ),
+                        )
                         LazyVerticalGrid(columns = GridCells.Fixed(2),
                             content = {
                                 items(4) { i ->
                                     val cardItem = items[i]
+                                    GermanCard(
+                                        selected = selectedItemIndex == i,
+                                        onClick = {
+                                                  cardNavController.navigate(cardItem.cardRoute)
+                                        },
+                                        icon = cardItem.cardIcon,
+                                        cardTitle = cardItem.cardTitle
+                                    )
                                 }
                             })
                     }
@@ -212,6 +306,7 @@ fun GermanHomeContent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GermanCard(
+    selected: Boolean,
     onClick: () -> Unit,
     icon: Int,
     cardTitle: String
