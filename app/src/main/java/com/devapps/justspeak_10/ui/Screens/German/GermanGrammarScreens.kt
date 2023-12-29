@@ -37,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,6 +48,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
+import com.devapps.justspeak_10.ui.Components.getGermanAdjectiveExamples
+import com.devapps.justspeak_10.ui.Components.getGermanAdjectives
 import com.devapps.justspeak_10.ui.Components.getGermanLetters
 import com.devapps.justspeak_10.ui.Components.getGermanSounds
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
@@ -158,6 +162,9 @@ fun GermanGrammarNavigation(grammarNavController: NavController) {
         composable(GermanAlphabetScreen.route) {
             GermanAlphabet()
         }
+        composable(GermanAdjectiveScreen.route) {
+            GermanAdjectives()
+        }
     }
 }
 
@@ -239,13 +246,51 @@ fun GermanAlphabet() {
         ) {
             Spacer(modifier = Modifier
                 .height(20.dp))
-            Text(text = "Alphabet (das Alphabet)",
+            Text(text = "Adjectives (die Adjektive)",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 color = Color.Black)
             Spacer(modifier = Modifier
                 .height(10.dp))
             GermanAlphabetList()
+        }
+    }
+}
+
+@Composable
+fun GermanAdjectives() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors( containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp)
+        ) {
+            Spacer(modifier = Modifier
+                .height(20.dp))
+            Text(text = "Adjectives (die Adjektive)",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "Adjectives like in any other language are used for description of nouns" +
+                    ". German adjectives are dependent on the gender and case of the nouns.")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "Below are common adjectives you will encounter:")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            GermanAdjectiveList()
+
         }
     }
 }
@@ -263,8 +308,28 @@ fun GermanAlphabetList() {
             GermanAlphabetItem(letter = letter, sound = sound)
         }
     }
+
 }
 
+@Composable
+fun GermanAdjectiveList() {
+    val german = getGermanAdjectives()
+    val english = getEnglishAdjectives()
+    val examples = getGermanAdjectiveExamples()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(350.dp)
+    ) {
+        items(german) { germanWorter ->
+            val index = german.indexOf(germanWorter)
+            val second = if (index < english.size) english[index] else ""
+            val third = if (index < examples.size) examples[index] else ""
+
+            AdjectiveRow(german = germanWorter, english = second, example = third)
+        }
+    }
+}
 @Composable
 fun GermanAlphabetItem(letter: String, sound: String) {
     Row(
@@ -322,15 +387,45 @@ fun GrammarListItem(
                 color = Color.Black)
         }
     }
+
+
 }
 
-
+@Composable
+fun AdjectiveRow(german: String, english: String, example: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 10.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(text = german,
+                fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier
+                .width(30.dp))
+            Text(text = "-")
+            Spacer(modifier = Modifier
+                .width(30.dp))
+            Text(text = english)
+        }
+        Spacer(modifier = Modifier
+            .height(5.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(text = "e.g.",
+                fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier
+                .width(10.dp))
+            Text(text = example)
+        }
+    }
+}
 @Composable
 @Preview(showBackground = true)
 fun ViewGrammarScreens() {
-    Column {
-        GermanAlphabetItem("A", "Ah like apple")
-        GermanAlphabetItem("B", "Bae like Bear")
-    }
-
-}
+GermanAdjectiveList()}
