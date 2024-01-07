@@ -1,6 +1,22 @@
 package com.devapps.justspeak_10.ui.Components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.devapps.justspeak_10.ui.theme.AzureBlue
 
 @Composable
 fun getGermanSounds(): List<String> {
@@ -20,7 +36,7 @@ fun getGermanLetters(): List<String> {
 @Composable
 fun getGermanAdjectives(): List<String> {
     return listOf("Alt", "Neu", "Jung", "Groß", "Klein", "Schön", "Hässlich", "Früh", "Spät", "Leicht",
-        "Schwierig", "Langsam", "Schnell", "Lang", "Kurz", "Dick", "DÜnn")
+        "Schwierig", "Langsam", "Schnell", "Lang", "Kurz", "Dick", "Dünn")
 }
 
 @Composable
@@ -44,5 +60,312 @@ fun getGermanAdjectiveExamples() : List<String> {
     )
 }
 
+@Composable
+fun GermanDefEndTable() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+            .background(color = AzureBlue)
+    ) {
+        Text(text = "Case",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Masc",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Fem",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Neu",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Plu",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Nom",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Acc",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Dat",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Gen",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+}
 
+@Composable
+fun GermanIndEndTable() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+            .background(color = AzureBlue)
+    ) {
+        Text(text = "Case",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Masc",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Fem",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Neu",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "Plu",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Nom",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "er",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "es",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Acc",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "e",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "es",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Dat",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Text(text = "Gen",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+        Text(text = "en",
+            modifier = Modifier
+                .weight(0.25f)
+                .padding(start = 5.dp))
+    }
+}
 
+@Composable
+fun CaseParagraph(case: String, description: String) {
+    Column {
+        Text(text = case,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp)
+        Spacer(modifier = Modifier
+            .height(3.dp))
+        Text(text = description)
+        Spacer(modifier = Modifier
+            .height(10.dp))
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun ViewComponents() {
+
+}

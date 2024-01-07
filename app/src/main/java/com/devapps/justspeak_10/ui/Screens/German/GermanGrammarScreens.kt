@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
@@ -38,7 +40,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,6 +52,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.CaseParagraph
+import com.devapps.justspeak_10.ui.Components.GermanDefEndTable
+import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
 import com.devapps.justspeak_10.ui.Components.getGermanAdjectiveExamples
@@ -63,6 +71,7 @@ import com.devapps.justspeak_10.ui.destinations.GermanPronounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
+import com.google.common.io.Files.append
 
 data class GrammarListItem(
 val itemTitle: String,
@@ -164,6 +173,9 @@ fun GermanGrammarNavigation(grammarNavController: NavController) {
         }
         composable(GermanAdjectiveScreen.route) {
             GermanAdjectives()
+        }
+        composable(GermanCaseScreen.route) {
+            GermanCases()
         }
     }
 }
@@ -271,7 +283,8 @@ fun GermanAdjectives() {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(all = 10.dp)
         ) {
             Spacer(modifier = Modifier
@@ -290,10 +303,150 @@ fun GermanAdjectives() {
             Spacer(modifier = Modifier
                 .height(10.dp))
             GermanAdjectiveList()
-
+            Spacer(modifier = Modifier
+                .height(20.dp))
+            Text(text = "Adjective endings",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text("Adjectives in german have different endings. This is determined by the case " +
+                    "of the sentence or the gender of a noun.")
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "There are two different groups of endings, endings can either be under " +
+                    "definite or indefinite.")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "With definite articles",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            GermanDefEndTable()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "With indefinite articles",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            GermanIndEndTable()
         }
     }
 }
+
+@Composable
+fun GermanCases() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(all = 10.dp)
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Articles",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                    .height(10.dp))
+            Text(text = "Sentences in the German language fall into 4 different cases: Nominative, " +
+                    "Accusative, Dative and Genitive. Each case has a different emphasis depending" +
+                    " on the situation.")
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "Before we get into cases, we need to understand that german nouns have genders. " +
+                    " They can either be Masculine (der), Feminine (die) and neutral (das)." +
+                    " These are also known as articles")
+            Spacer(modifier = Modifier
+                .height(30.dp))
+            Text("There two types of articles:")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            TextsForArticles("Bestimmte Artikeln",
+                "Definite articles: (Der, die, das). These are the english equivalent of (The).")
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = " - Der Junge singt - The boy is singing.")
+            Text(text = " - Die Frau tanzt  - The woman is dancing.")
+            Text(text = " - Das Kind weint  - The child is crying.")
+            Spacer(modifier = Modifier
+                .height(15.dp))
+            TextsForArticles("Unbestimmte Artikeln",
+                "Indefinite articles(ein, eine, ein). These are the english equivalent of (A).")
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = " - Ein Junge singt - A boy is singing.")
+            Text(text = " - Eine Frau tanzt - A woman is dancing.")
+            Text(text = " - Ein Kind weint  - A child is crying.")
+            Spacer(modifier = Modifier
+                .height(40.dp))
+            Text(
+                text = "Cases",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "With an understanding of articles, you can now grasp cases. German ")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            CaseParagraph(
+                "Nominativ (Nominative)",
+                "This case shows the subject of the sentence or who the sentence is about " +
+                        "e.g. Der Junge nimmt den Ball. (The boy takes the ball)"
+            )
+            CaseParagraph(
+                "Akkusativ (Accusative)",
+                "This case shows the direct object of the sentence e.g. Ich habe das " +
+                        "Mädchen gesehen. (I saw the girl)"
+            )
+            CaseParagraph(
+                "Dativ (Dative)",
+                "This case shows the indirect object of a sentence e.g. Ich gab dem Mann " +
+                        "das Geldbeutel. (I gave the wallet to the man)"
+            )
+            CaseParagraph(
+                "Genitiv (Genitive)",
+                "This case shows possession of something in a sentence e.g. Die Frau des " +
+                        "Mannes kommt heute nicht. (The man's wife is not coming today)"
+            )
+        }
+    }
+}
+
+@Composable
+fun TextsForArticles(article: String, def: String) {
+    val text = buildAnnotatedString {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+            append(" - $article - ")
+        }
+        append(def)
+    }
+
+    Text(text = text)
+}
+
 
 @Composable
 fun GermanAlphabetList() {
