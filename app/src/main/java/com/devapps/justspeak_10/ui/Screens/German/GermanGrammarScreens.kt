@@ -52,9 +52,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.AdjectiveRow
 import com.devapps.justspeak_10.ui.Components.CaseParagraph
+import com.devapps.justspeak_10.ui.Components.GermanAdjectiveList
+import com.devapps.justspeak_10.ui.Components.GermanAlphabetItem
+import com.devapps.justspeak_10.ui.Components.GermanAlphabetList
 import com.devapps.justspeak_10.ui.Components.GermanDefEndTable
+import com.devapps.justspeak_10.ui.Components.GermanDefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
+import com.devapps.justspeak_10.ui.Components.GermanIndefiniteArticleTable
+import com.devapps.justspeak_10.ui.Components.GermanPeopleNounList
+import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
 import com.devapps.justspeak_10.ui.Components.getGermanAdjectiveExamples
@@ -77,6 +85,42 @@ data class GrammarListItem(
 val itemTitle: String,
     val itemRoute: String
 )
+
+@Composable
+fun GrammarListItem(
+    selected: Boolean,
+    listTitle: String,
+    onClick: () -> Unit
+) {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .height(60.dp)
+            .clickable {
+                onClick()
+            },
+        colors = CardDefaults.cardColors( containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 30.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = listTitle,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black)
+        }
+    }
+
+
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GermanGrammarScreen(
@@ -177,6 +221,9 @@ fun GermanGrammarNavigation(grammarNavController: NavController) {
         composable(GermanCaseScreen.route) {
             GermanCases()
         }
+        composable(GermanNounScreen.route) {
+            GermanNouns()
+        }
     }
 }
 
@@ -258,7 +305,7 @@ fun GermanAlphabet() {
         ) {
             Spacer(modifier = Modifier
                 .height(20.dp))
-            Text(text = "Adjectives (die Adjektive)",
+            Text(text = "Alphabet",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 color = Color.Black)
@@ -319,7 +366,7 @@ fun GermanAdjectives() {
                     "definite or indefinite.")
             Spacer(modifier = Modifier
                 .height(10.dp))
-            Text(text = "With definite articles",
+            Text(text = "With definite articles endings",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.Black)
@@ -328,7 +375,7 @@ fun GermanAdjectives() {
             GermanDefEndTable()
             Spacer(modifier = Modifier
                 .height(10.dp))
-            Text(text = "With indefinite articles",
+            Text(text = "With indefinite articles endings",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.Black)
@@ -413,116 +460,66 @@ fun GermanCases() {
                 .height(10.dp))
             CaseParagraph(
                 "Nominativ (Nominative)",
-                "This case shows the subject of the sentence or who the sentence is about " +
-                        "e.g. Der Junge nimmt den Ball. (The boy takes the ball)"
+                "This case shows the subject of the sentence or who the sentence is about.",
+                "Die Sonne scheint (The sun shines)\n \n - Die Sonne is the subject as the " +
+                        "sentence is about the sun."
             )
             CaseParagraph(
                 "Akkusativ (Accusative)",
-                "This case shows the direct object of the sentence e.g. Ich habe das " +
-                        "Mädchen gesehen. (I saw the girl)"
+                "This case shows the direct object of the sentence or what is directly " +
+                        "affected by the verb.",
+                "Ich kaufe einen neuen Computer (I am buying a new computer)\n \n - den Computer is " +
+                        "the object as it is being bought. Ich is the subject."
             )
             CaseParagraph(
                 "Dativ (Dative)",
-                "This case shows the indirect object of a sentence e.g. Ich gab dem Mann " +
-                        "das Geldbeutel. (I gave the wallet to the man)"
+                "This case shows the indirect object of a sentence or the item which is" +
+                        "indirectly affected.",
+                "Ich habe dem Mann den Ball geworfen (I threw the ball to the man)\n \n - dem Mann" +
+                        " is the indirect object as the ball was thrown to him, den Ball was thrown " +
+                        "making the ball an object and I threw the ball making Ich the subject."
             )
             CaseParagraph(
                 "Genitiv (Genitive)",
-                "This case shows possession of something in a sentence e.g. Die Frau des " +
-                        "Mannes kommt heute nicht. (The man's wife is not coming today)"
+                "This case shows possession of something in a sentence",
+                "Das Auto der Frau ist Kaputt (The woman's car is broken)\n \n - der Frau shows " +
+                        "ownership. The car belongs to the woman"
             )
+            Spacer(modifier = Modifier
+                .height(20.dp))
+            Text("With each case explained, below are tables showing how each article is written" +
+                    " with a particular case")
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "Definite articles",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(3.dp))
+            GermanDefiniteArticleTable()
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "Indefinite articles",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(3.dp))
+            GermanIndefiniteArticleTable()
+            Spacer(modifier = Modifier
+                .height(10.dp))
         }
     }
 }
 
 @Composable
-fun TextsForArticles(article: String, def: String) {
-    val text = buildAnnotatedString {
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append(" - $article - ")
-        }
-        append(def)
-    }
-
-    Text(text = text)
-}
-
-
-@Composable
-fun GermanAlphabetList() {
-    val letters = getGermanLetters()
-    val sounds = getGermanSounds()
-
-    LazyColumn {
-        items(letters) { letter ->
-            val index = letters.indexOf(letter)
-            val sound = if (index < sounds.size) sounds[index] else ""
-
-            GermanAlphabetItem(letter = letter, sound = sound)
-        }
-    }
-
-}
-
-@Composable
-fun GermanAdjectiveList() {
-    val german = getGermanAdjectives()
-    val english = getEnglishAdjectives()
-    val examples = getGermanAdjectiveExamples()
-
-    LazyColumn(
-        modifier = Modifier
-            .height(350.dp)
-    ) {
-        items(german) { germanWorter ->
-            val index = german.indexOf(germanWorter)
-            val second = if (index < english.size) english[index] else ""
-            val third = if (index < examples.size) examples[index] else ""
-
-            AdjectiveRow(german = germanWorter, english = second, example = third)
-        }
-    }
-}
-@Composable
-fun GermanAlphabetItem(letter: String, sound: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 10.dp)
-    ) {
-        Text(text = letter,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
-        Spacer(modifier = Modifier
-            .width(30.dp))
-        Text(text = "-",
-            fontSize = 20.sp)
-        Column(
-            modifier = Modifier
-                .padding(start = 30.dp)
-        ) {
-            Text(text = sound,
-                fontSize = 20.sp)
-        }
-    }
-}
-
-@Composable
-fun GrammarListItem(
-   selected: Boolean,
-   listTitle: String,
-   onClick: () -> Unit
-) {
+fun GermanNouns() {
     ElevatedCard(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 5.dp)
-            .height(60.dp)
-            .clickable {
-                onClick()
-            },
-        colors = CardDefaults.cardColors( containerColor = Color.White),
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp,
@@ -531,54 +528,75 @@ fun GrammarListItem(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 30.dp),
-            verticalArrangement = Arrangement.Center
+                .verticalScroll(rememberScrollState())
+                .padding(all = 10.dp)
         ) {
-            Text(text = listTitle,
-                fontSize = 20.sp,
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Nouns",
                 fontWeight = FontWeight.Bold,
-                color = Color.Black)
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            Text(
+                text = "Nouns are basically objects and things that we see and know. In German " +
+                    "nouns have genders which can get tricky for many english speakers as english " +
+                    "words do not have genders. It is important to learn each German noun with its " +
+                    "gender in oder to learn the genders easily. Another tip is to capitalise nouns." +
+                    " In this chapter, you will learn about significant nouns as well as tips and " +
+                    "tricks to remembering some noun genders."
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(text = "Most nouns end with en, el, er, ling, ent, ier, eur, ler as well as " +
+                    "nationalities, times of the day, seasons, days, months tend to be masculine")
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "Most nouns end with in, heit, kei, ung, tät, ion, age, ur, schaft, ei, " +
+                    "-ie, -anz, -enz as well as numbers tend to be feminine.")
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "People Nouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            GermanPeopleNounList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Place Nouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
         }
     }
-
-
 }
 
-@Composable
-fun AdjectiveRow(german: String, english: String, example: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 10.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(text = german,
-                fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier
-                .width(30.dp))
-            Text(text = "-")
-            Spacer(modifier = Modifier
-                .width(30.dp))
-            Text(text = english)
-        }
-        Spacer(modifier = Modifier
-            .height(5.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(text = "e.g.",
-                fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier
-                .width(10.dp))
-            Text(text = example)
-        }
-    }
-}
+
+
+
 @Composable
 @Preview(showBackground = true)
 fun ViewGrammarScreens() {
-GermanAdjectiveList()}
+    GermanNouns()
+}
