@@ -57,11 +57,14 @@ import com.devapps.justspeak_10.ui.Components.CaseParagraph
 import com.devapps.justspeak_10.ui.Components.GermanAdjectiveList
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetItem
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetList
+import com.devapps.justspeak_10.ui.Components.GermanBodyPartNounList
 import com.devapps.justspeak_10.ui.Components.GermanDefEndTable
 import com.devapps.justspeak_10.ui.Components.GermanDefiniteArticleTable
+import com.devapps.justspeak_10.ui.Components.GermanFoodNounList
 import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
 import com.devapps.justspeak_10.ui.Components.GermanIndefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanPeopleNounList
+import com.devapps.justspeak_10.ui.Components.GermanPlaceNounList
 import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
@@ -77,6 +80,8 @@ import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
 import com.devapps.justspeak_10.ui.destinations.GermanNounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPronounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
+import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
+import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
 import com.google.common.io.Files.append
@@ -258,6 +263,14 @@ fun GermanGrammarItemScreen(navController: NavController) {
             itemTitle = "Sentence Structure",
             itemRoute = GermanSentenceStructureScreen.route
         ),
+        GrammarListItem(
+            itemTitle = "Tenses",
+            itemRoute = GermanTenseScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Verbs and Conjugation",
+            itemRoute = GermanVerbConjugationScreen.route
+        )
     )
     Column(
         modifier = Modifier
@@ -273,7 +286,7 @@ fun GermanGrammarItemScreen(navController: NavController) {
         Spacer(modifier = Modifier
             .height(10.dp))
         LazyColumn(content = {
-            items(6) {i->
+            items(items.size) {i->
                 val listItem = items[i]
                 GrammarListItem(
                     selected = selectedItemIndex == i,
@@ -587,6 +600,45 @@ fun GermanNouns() {
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
                 color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            GermanPlaceNounList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Food and drink Nouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            GermanFoodNounList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Body Part Nouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            GermanBodyPartNounList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
             )
         }
     }

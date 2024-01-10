@@ -90,7 +90,9 @@ object GermanTenseScreen : ScreenDestination {
     override val route = "german_tense_screen"
 }
 
-
+object GermanVerbConjugationScreen : ScreenDestination {
+    override val route = "german_verb_conjugation_screen"
+}
 
 object Signout : ScreenDestination {
     override val route = "signout_user"

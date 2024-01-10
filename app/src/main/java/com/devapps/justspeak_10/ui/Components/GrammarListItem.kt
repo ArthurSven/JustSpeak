@@ -835,7 +835,7 @@ fun GermanPeopleNounList() {
 
     LazyColumn(
         modifier = Modifier
-            .height(200.dp)
+            .height(300.dp)
     ) {
         items(german) { germanNouns ->
             val index = german.indexOf(germanNouns)
@@ -846,10 +846,112 @@ fun GermanPeopleNounList() {
     }
 }
 
+@Composable
+fun getGermanPlaceNouns() : List<String> {
+    return listOf(
+        "das Haus", "die Wohnung", "das Gebäude", "die Stadt", "das Land", "das Dorf", "der See",
+        "das Meer", "der Berg", "der Strand", "der Laden", "die Straße", "die Gemeinde", "die Kirche",
+        "die Moschee"
+    )
+}
 
+@Composable
+fun getEnglishPlaceNouns() : List<String> {
+    return listOf(
+        "House", "Apartment", "Building", "City", "Country", "Village", "Lake", "Sea", "Mountain",
+        "Beach", "Shop", "Street/Road", "Community", "Church", "Mosque"
+    )
+}
 
+@Composable
+fun GermanPlaceNounList() {
+    val german = getGermanPlaceNouns()
+    val english = getEnglishPlaceNouns()
 
+    LazyColumn(
+        modifier = Modifier
+            .height(300.dp)
+    ) {
+        items(german) { germanNouns ->
+            val index = german.indexOf(germanNouns)
+            val englishNouns = if (index < english.size) english[index] else ""
 
+            NounItem(germanNoun = germanNouns, englishNoun = englishNouns)
+        }
+    }
+}
+
+@Composable
+fun getGermanFoodNouns() : List<String> {
+    return listOf(
+        "der Apfel", "die Banane", "der Rindfleisch", "das Huhn", "der Schweinfleisch", "das Gemüse",
+        "der Kuchen", "die Kartoffeln", "die Pommes", "das Wasser", "der Kaffee", "der Tee", "die Böhnen"
+        , "der Reis", "der Saft", "das Bier", "Brot", "Frühstück", "Mittagessen", "Abendessen",
+        "die Teller", "die Tasse", "die Gabel", "der Löffel", "das Messer"
+    )
+}
+
+@Composable
+fun getEnglishFoodNouns() : List<String> {
+    return listOf(
+        "Apple", "Banana", "Beef", "Chicken", "Pork", "Vegetables", "Cake", "Potatoes", "Chips/Fries",
+        "Water", "Coffee", "Tea", "Beans", "Rice", "Juice", "Beer", "Bread", "Breakfast", "Lunch", "Dinner",
+        "Plate", "Cup", "Fork", "Spoon", "Knife"
+    )
+}
+
+@Composable
+fun GermanFoodNounList() {
+    val german = getGermanFoodNouns()
+    val english = getEnglishFoodNouns()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(300.dp)
+    ) {
+        items(german) { germanNouns ->
+            val index = german.indexOf(germanNouns)
+            val englishNouns = if (index < english.size) english[index] else ""
+
+            NounItem(germanNoun = germanNouns, englishNoun = englishNouns)
+        }
+    }
+}
+
+@Composable
+fun getGermanBodyPartNouns() : List<String> {
+    return listOf(
+        "das Auge", "der Kopf", "der Körper", "die Nase", "der Mund", "das Ohr", "die Haare", "der Hals",
+        "der Arm", "der Finger", "die Brust", "der Ellbogen", "der Knochen", "das Bein", "der Fuß",
+        "das Zeh", "der Haut", "der Rücken"
+    )
+}
+
+@Composable
+fun getEnglishBodyPartNouns() : List<String> {
+    return listOf(
+        "Eye", "Head", "Body", "Mouth", "Ear", "Hair", "Neck", "Arm", "Finger", "Chest", "Elbow",
+        "Bone", "Leg", "Foot", "Toe", "Skin", "Back"
+    )
+}
+
+@Composable
+fun GermanBodyPartNounList() {
+    val german = getGermanBodyPartNouns()
+    val english = getEnglishBodyPartNouns()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(300.dp)
+    ) {
+        items(german) { germanNouns ->
+            val index = german.indexOf(germanNouns)
+            val englishNouns = if (index < english.size) english[index] else ""
+
+            NounItem(germanNoun = germanNouns, englishNoun = englishNouns)
+        }
+    }
+}
 
 @Composable
 @Preview(showBackground = true)
