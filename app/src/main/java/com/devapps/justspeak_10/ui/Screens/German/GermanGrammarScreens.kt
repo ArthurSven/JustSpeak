@@ -65,6 +65,7 @@ import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
 import com.devapps.justspeak_10.ui.Components.GermanIndefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanPeopleNounList
 import com.devapps.justspeak_10.ui.Components.GermanPlaceNounList
+import com.devapps.justspeak_10.ui.Components.PronounTable
 import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
@@ -228,6 +229,9 @@ fun GermanGrammarNavigation(grammarNavController: NavController) {
         }
         composable(GermanNounScreen.route) {
             GermanNouns()
+        }
+        composable(GermanPronounScreen.route) {
+            GermanPronouns()
         }
     }
 }
@@ -640,15 +644,80 @@ fun GermanNouns() {
                 modifier = Modifier
                     .height(20.dp)
             )
+            PronounTable()
+        }
+    }
+}
+
+@Composable
+fun GermanPronouns() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(all = 10.dp)
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Pronouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            Text(
+                text = "Pronouns are the little words that replace nouns in a sentence. The German " +
+                    "language like other languages also has pronouns. German has a number of " +
+                    "pronouns which will be explained in this chapter. Once you get a feel for " +
+                    "pronouns, your fluency will definitely improve."
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Personal Pronouns",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            Text(
+                text = "In english these are equivalent to (I, you, she, he, it, me). The pronouns " +
+                    "however change depending on the case. In German we have the following:"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            PronounTable()
         }
     }
 }
 
 
 
-
 @Composable
 @Preview(showBackground = true)
 fun ViewGrammarScreens() {
-    GermanNouns()
+    GermanPronouns()
 }

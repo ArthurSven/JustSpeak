@@ -954,7 +954,116 @@ fun GermanBodyPartNounList() {
 }
 
 @Composable
+fun PronounTable() {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+                .background(color = AzureBlue)
+        ) {
+            Text(
+                text = "Nominative",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .weight(0.33f)
+                    .padding(start = 5.dp)
+            )
+            Text(
+                text = "Accusative",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .weight(0.33f)
+                    .padding(start = 5.dp)
+            )
+            Text(
+                text = "Dative",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .weight(0.33f)
+                    .padding(start = 5.dp)
+            )
+        }
+        GermanPronounList()
+    }
+}
+
+@Composable
+fun PronounRow(nominative: String, accusative: String, dative: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp)
+    ) {
+        Text(
+            text = nominative,
+            modifier = Modifier
+                .weight(0.33f)
+                .padding(start = 5.dp)
+        )
+        Text(
+            text = accusative,
+            modifier = Modifier
+                .weight(0.33f)
+                .padding(start = 5.dp)
+        )
+        Text(
+            text = dative,
+            modifier = Modifier
+                .weight(0.33f)
+                .padding(start = 5.dp)
+        )
+    }
+}
+
+@Composable
+fun getNominativePronouns() : List<String> {
+    return listOf(
+        "Ich (I)", "Du (you)", "Er (he)", "Sie (she)", "Es (it)", "Wir (we)", "Ihr (you plural)",
+        "Sie (You formal)", "sie (they)"
+    )
+}
+
+@Composable
+fun getAccusativePronouns() : List<String> {
+    return listOf(
+        "mich (me)", "dich (you)", "ihn (him)", "sie(her)", "es (it)", "uns (us)", "euch (you)",
+        "sie (you)", "sie (them)"
+    )
+}
+
+@Composable
+fun getDativePronouns() : List<String> {
+    return listOf(
+        "mir (to me)", "dir (to you)", "ihm (to him/it)", "ihr (to her/it)", "ihm (to it)",
+        "uns (to us)", "euch (to you)", "Ihnen (to you)", "ihnen (to them)"
+    )
+}
+
+@Composable
+fun GermanPronounList() {
+    val nom = getNominativePronouns()
+    val acc = getAccusativePronouns()
+    val dat = getDativePronouns()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(300.dp)
+    ) {
+        items(nom) { germanPronouns ->
+            val index = nom.indexOf(germanPronouns)
+            val accPronouns = if (index < acc.size) acc[index] else ""
+            val datPronouns = if (index < dat.size) dat[index] else ""
+
+            PronounRow(nominative = germanPronouns, accusative = accPronouns, dative = datPronouns)
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun ViewComponents() {
-NounItem("Der Maus", "The Mouse")
 }
