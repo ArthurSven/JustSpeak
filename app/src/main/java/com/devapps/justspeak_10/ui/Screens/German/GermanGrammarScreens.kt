@@ -68,6 +68,7 @@ import com.devapps.justspeak_10.ui.Components.GermanPlaceNounList
 import com.devapps.justspeak_10.ui.Components.PronounTable
 import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.VerbTable
 import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
 import com.devapps.justspeak_10.ui.Components.getGermanAdjectiveExamples
 import com.devapps.justspeak_10.ui.Components.getGermanAdjectives
@@ -1017,6 +1018,22 @@ fun GermanVerbsAndConjugation() {
                     "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
                     "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
                     "stem due to conjugation.")
+            Spacer(modifier = Modifier
+                .height(40.dp))
+            Text(
+                text = "Top 20 Verbs to know in German",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "Make sure to learn the conjugations of all these verbs as you will " +
+                    "encounter these verbs frequently as you speak and learn more German."
+            )
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            VerbTable()
         }
     }
 }

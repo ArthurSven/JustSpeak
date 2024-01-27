@@ -1063,9 +1063,101 @@ fun GermanPronounList() {
     }
 }
 
+@Composable
+fun germanCommonVerbs() : List<String> {
+    return listOf(
+        "haben", "sein", "werden", "können", "machen", "gehen", "sollen", "kommen", "geben", "sagen",
+        "müssen", "sehen", "finden", "mögen", "dürfen", "fahren", "liegen", "lassen", "stehen",
+        "heißen"
+    )
+}
+
+@Composable
+fun englishCommonVerbs() : List<String> {
+    return listOf(
+        "to have", "to be", "to become", "to be able to", "to do", "to go", "should", "to come",
+        "to give", "to say", "must", "to see", "to find", "to like", "to be allowed to", "to drive",
+        "to lay", "to let", "to stand", "to be called"
+    )
+}
+
+@Composable
+fun GermanVerbList() {
+    val verb = germanCommonVerbs()
+    val translation = englishCommonVerbs()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(400.dp)
+    ) {
+        items(verb) { germanVerbs ->
+            val index = verb.indexOf(germanVerbs)
+            val translatedVerbs = if (index < translation.size) translation[index] else ""
+
+            VerbRow(verbs = germanVerbs, translations = translatedVerbs)
+        }
+    }
+
+}
+
+@Composable
+fun VerbRow(verbs: String, translations: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp)
+    ) {
+        Text(
+            text = verbs,
+            modifier = Modifier
+                .weight(0.50f)
+                .padding(start = 5.dp)
+        )
+        Text(
+            text = translations,
+            modifier = Modifier
+                .weight(0.50f)
+                .padding(start = 5.dp)
+        )
+    }
+}
+
+@Composable
+fun VerbTable() {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+                .background(color = AzureBlue)
+        ) {
+            Text(
+                text = "Verb",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .weight(0.50f)
+                    .padding(start = 5.dp)
+            )
+            Text(
+                text = "Translation",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .weight(0.50f)
+                    .padding(start = 5.dp)
+            )
+        }
+        Spacer(modifier = Modifier
+            .height(5.dp))
+        GermanVerbList()
+    }
+}
+
 
 
 @Composable
 @Preview(showBackground = true)
 fun ViewComponents() {
+    VerbTable()
 }
