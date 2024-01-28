@@ -1034,6 +1034,26 @@ fun GermanVerbsAndConjugation() {
             Spacer(modifier = Modifier
                 .height(10.dp))
             VerbTable()
+            Spacer(modifier = Modifier
+                .height(40.dp)
+            )
+            Text(
+                text = "Verb Conjugation",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            Text(
+                text = "Verb conjugation is when a verb changes its form in order to match the " +
+                    "pronoun. The pronoun and the verb can show the quantity of the subject of a " +
+                    "sentence whether there is one or more persons as subject of a sentence. Below " +
+                    "are tables showing conjugation of verbs haben (to have), sein (to be) and " +
+                    "können (to be able to, can) while in present tense:"
+            )
         }
     }
 }
