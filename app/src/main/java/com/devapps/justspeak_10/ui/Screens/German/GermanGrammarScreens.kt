@@ -65,7 +65,10 @@ import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
 import com.devapps.justspeak_10.ui.Components.GermanIndefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanPeopleNounList
 import com.devapps.justspeak_10.ui.Components.GermanPlaceNounList
+import com.devapps.justspeak_10.ui.Components.HabenConjugationTable
+import com.devapps.justspeak_10.ui.Components.KannConjugationTable
 import com.devapps.justspeak_10.ui.Components.PronounTable
+import com.devapps.justspeak_10.ui.Components.SeinConjugationTable
 import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.VerbTable
@@ -824,6 +827,19 @@ fun GermanSentenceStructure() {
                     "sentence. Below are some examples of how connectives bridge main and " +
                     "subordinate clauses:"
             )
+            Spacer(modifier = Modifier
+                .height(15.dp))
+            Text(text = "Ich komme zu spät weil ich mein Zimmer aufräumen muss - (I come late " +
+                    "because I have to clean my room)\n \n" +
+                    "Ich habe es versucht die Aufgabe zu erledigen aber ich konnte es nicht machen " +
+                    "- (I tried to complete the task but I could not do it)\n \n" +
+                    "Wenn du zuhause bist, ruf mich an okay? - (When you are at home, call me " +
+                    "okay?)\n \n" +
+                    "Die Kinder verstehen nichts obwohl ich alles erklärt habe - (The children do " +
+                    "not understand anything although I explained everything)\n \n" +
+                    "Ich schlafe immer denn ich bin immer noch krank - (I am still sleeping because " +
+                    "I am still sick)")
+
         }
     }
 }
@@ -1054,6 +1070,40 @@ fun GermanVerbsAndConjugation() {
                     "are tables showing conjugation of verbs haben (to have), sein (to be) and " +
                     "können (to be able to, can) while in present tense:"
             )
+            Spacer(modifier = Modifier
+                .height(15.dp))
+            Text(
+                text = "Verb haben (to have)",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            HabenConjugationTable()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Verb Sein (to be)",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            SeinConjugationTable()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Verb können (to be able to, can)",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            KannConjugationTable()
+
         }
     }
 }
