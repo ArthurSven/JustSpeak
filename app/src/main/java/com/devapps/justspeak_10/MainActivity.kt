@@ -11,6 +11,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.Animatable
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -62,10 +63,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.UserBar
@@ -377,6 +387,10 @@ fun LanguageCard(
     borderColor: Color,
     content: String
 ) {
+
+    var expanded by remember {
+        mutableStateOf(false)
+    }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -392,7 +406,7 @@ fun LanguageCard(
             ,
             modifier = Modifier
                 .padding(all = 20.dp)
-                .height(200.dp)
+               // .height(200.dp)
                 .clickable {
                     onClick()
                 }
@@ -420,10 +434,31 @@ fun LanguageCard(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White)
-                    Text(text = content,
-                        fontSize = 16.sp,
-                        color = Color.White)
+                    AnimatedVisibility(visible = expanded) {
+                        Column() {
+                            Text(
+                                buildAnnotatedString {
+                                    withStyle(style = SpanStyle(color = Color.White,
+                                        fontSize = 16.sp)) {
+                                        append(content)
+                                    }
+                                }
+                            )
+                        }
+                    }
+
+                    Icon(
+                        imageVector = if(expanded) Icons.Filled.KeyboardArrowUp else
+                            Icons.Filled.KeyboardArrowDown,
+                        contentDescription = "Down",
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable {
+                                expanded = !expanded
+                            },
+                        tint = Color.White)
                 }
+
 
             }
         }
