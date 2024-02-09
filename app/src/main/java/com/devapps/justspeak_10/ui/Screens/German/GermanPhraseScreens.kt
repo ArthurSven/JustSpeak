@@ -2,8 +2,10 @@ package com.devapps.justspeak_10.ui.Screens.German
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -107,7 +109,13 @@ fun GermanPhraseScreen(
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)
             ) {
-                Text(text = "German Phrases")
+
+                Spacer(modifier = Modifier
+                    .height(20.dp))
+                Text(text = "Phrases",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black)
             }
         }
 

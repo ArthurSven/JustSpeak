@@ -299,7 +299,7 @@ fun GermanGrammarItemScreen(navController: NavController) {
             .height(20.dp))
         Text(text = "Grammar Items",
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
+            fontSize = 18.sp,
             color = Color.Black)
         Spacer(modifier = Modifier
             .height(10.dp))

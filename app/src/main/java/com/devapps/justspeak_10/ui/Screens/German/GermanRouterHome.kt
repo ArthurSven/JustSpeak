@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
@@ -61,6 +63,7 @@ import com.devapps.justspeak_10.R
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.profileCard
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPhrasesScreen
@@ -74,6 +77,7 @@ import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 import com.devapps.justspeak_10.ui.Screens.German.GermanGrammarScreen
 import com.devapps.justspeak_10.ui.destinations.Start
+import com.devapps.justspeak_10.ui.theme.offWhite
 
 data class CardItem(
     val cardTitle: String,
@@ -239,7 +243,7 @@ fun GermanHomeContent(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
-                        .background(color = Color.LightGray)
+                        .background(color = offWhite)
                 ) {
 
                     UserBar(userData)
@@ -248,9 +252,14 @@ fun GermanHomeContent(
                             .padding(start = 10.dp, end = 10.dp)
                     ) {
                         Spacer(modifier = Modifier
-                            .height(20.dp))
+                            .height(10.dp))
+                        profileCard(
+                            AzureBlue,
+                            R.drawable.deu,
+                            "German Lesson",
+                            Color.Blue )
                         Spacer(modifier = Modifier
-                            .height(20.dp))
+                            .height(10.dp))
                         Text(text = "Let's start with...",
                             fontSize = 18.sp,
                             color = Color.Black,
@@ -320,9 +329,9 @@ fun GermanCard(
             defaultElevation = 10.dp
         ),
         modifier = Modifier
-            .height(170.dp)
-            .width(150.dp)
-            .padding(all = 20.dp)
+            .height(200.dp)
+            .width(110.dp)
+            .padding(all = 8.dp)
     ) {
         Column(
             modifier = Modifier
