@@ -102,7 +102,7 @@ fun GermanPhraseCard(
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(140.dp),
         colors = CardDefaults.cardColors( containerColor = Color.White),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
@@ -112,8 +112,18 @@ fun GermanPhraseCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(all = 10.dp)
         ) {
-
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(text = "Introductions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp)
+            Spacer(modifier = Modifier
+                .height(5.dp))
+            Text(text = "In this module, you will learn how to great and introduce yourself. " +
+                    "What to say depending on the time of the day and how to addreess different " +
+                    "groups of people.")
         }
     }
 }
