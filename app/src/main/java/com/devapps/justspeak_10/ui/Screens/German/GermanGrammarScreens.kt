@@ -1114,5 +1114,5 @@ fun GermanVerbsAndConjugation() {
 @Composable
 @Preview(showBackground = true)
 fun ViewGrammarScreens() {
-    GermanVerbsAndConjugation()
+    GermanAlphabet()
 }
