@@ -94,6 +94,34 @@ object GermanVerbConjugationScreen : ScreenDestination {
     override val route = "german_verb_conjugation_screen"
 }
 
+object GermanPhraseListScreen : ScreenDestination {
+    override val route = "german_phrase_list_screen"
+}
+
+object GermanIntroductionScreen : ScreenDestination {
+    override val route = "german_introduction_screen"
+}
+
+object GermanExpressionScreen : ScreenDestination {
+    override val route = "german_expressions_screen"
+}
+
+object GermanEatingScreen : ScreenDestination {
+    override val route = "german_eating_screen"
+}
+
+object GermanEmergencyScreen : ScreenDestination {
+    override val route = "german_emergency_screen"
+}
+
+object GermanQuestionsScreen : ScreenDestination {
+    override val route = "german_question_screen"
+}
+
+object GermanTimeScreen : ScreenDestination {
+    override val route = "german_time_screen"
+}
+
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }

@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -96,17 +97,23 @@ fun profileCard(
 
 @Composable
 fun GermanPhraseCard(
-//    phraseTitle: String,
-//    onClick: () -> Unit
+    selected: Boolean,
+    phraseTitle: String,
+    phraseDescription: String,
+    onClick: () -> Unit
 ) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp),
+            .height(160.dp)
+            .padding(10.dp)
+            .clickable {
+                onClick()
+            },
         colors = CardDefaults.cardColors( containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
+            defaultElevation = 20.dp,
         )
     ) {
         Column(
@@ -116,14 +123,14 @@ fun GermanPhraseCard(
         ) {
             Spacer(modifier = Modifier
                 .height(10.dp))
-            Text(text = "Introductions",
+            Text(text = phraseTitle,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp)
+                fontSize = 20.sp)
             Spacer(modifier = Modifier
                 .height(5.dp))
-            Text(text = "In this module, you will learn how to great and introduce yourself. " +
-                    "What to say depending on the time of the day and how to addreess different " +
-                    "groups of people.")
+            Text(
+                text = phraseDescription,
+                textAlign = TextAlign.Justify)
         }
     }
 }
@@ -131,5 +138,5 @@ fun GermanPhraseCard(
 @Composable
 @Preview(showBackground = true)
 fun CheckComponents() {
-    GermanPhraseCard()
+
 }
