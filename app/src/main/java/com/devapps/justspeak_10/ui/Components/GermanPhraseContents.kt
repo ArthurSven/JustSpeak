@@ -150,14 +150,18 @@ fun getGermanIntroductories() : List<String> {
     "Darf ich ... vorstellen?", "Das ist", "Wie heißt du/heißen Sie?", "Ich heiße",
         "Wie ist dein/Ihr Name?", "Mein Name ist", "Ich bin ...", "Wia hoaßt du", "I hoaß",
         "Wie häissisch", "Woher kommst du", "Ich komme aus ...", "Wohar chunsch", "Ich chume us",
-        "Wo wohnst du", "Ich wohne in"
+        "Wo wohnst du", "Ich wohne in..."
     )
 }
 
 @Composable
 fun getEnglishIntroductories() : List<String> {
     return listOf(
-
+        "May I introduce...", "This is", "What's your name - inf/formal", "I am called",
+        "What's your name", "My name is", "I am ...", "What's your name (Bavarian)",
+        "What's your name (Switzerland)", "Where are you from", "I come from",
+        "Where are you from (Switzerland)", "I come from (Switzerland)", "Where do you live",
+        "I live in..."
     )
 }
 
