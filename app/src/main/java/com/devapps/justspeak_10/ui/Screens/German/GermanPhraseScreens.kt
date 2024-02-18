@@ -43,6 +43,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
+import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.UserBar
@@ -56,6 +58,8 @@ import com.devapps.justspeak_10.ui.destinations.GermanQuestionsScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTimeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
+import com.devapps.justspeak_10.ui.theme.offWhite
+
 data class PhraseListItem(
     val itemTitle: String,
     val itemDescription: String,
@@ -157,7 +161,10 @@ fun GermanPhraseNavigation(navController: NavController) {
             GermanPhraseListLandingScreen(germanPhraseNavController)
         }
         composable(GermanIntroductionScreen.route) {
-
+            GermanIntroductions()
+        }
+        composable(GermanExpressionScreen.route) {
+            GermanExpressions()
         }
     }
 }
@@ -211,6 +218,7 @@ fun GermanPhraseListLandingScreen(
         modifier = Modifier
             .fillMaxWidth()
             .padding(all = 5.dp)
+
     ) {
         Spacer(
             modifier = Modifier
@@ -241,70 +249,244 @@ fun GermanPhraseListLandingScreen(
 
 @Composable
 fun GermanIntroductions() {
-    ElevatedCard(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
+            .verticalScroll(rememberScrollState())
+            .background(color = Color.LightGray)
     ) {
-        Column(
+        ElevatedCard(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
         ) {
-            Spacer(
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Introductions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "In German culture, it is important to introduce yourself when you arrive" +
+                            "at a place where there's people. This section will take you through " +
+                            "introductions and greetings used in the German speaking world:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Greetings",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanGreetingList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(
-                text = "Introductions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(10.dp)
-            )
-            Text(
-                text = "In German culture, it is important to introduce yourself when you arrive" +
-                    "at a place where there's people. This section will take you through " +
-                    "introductions and greetings used in the German speaking world:")
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(
-                text = "Greetings",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-            )
-            GermanGreetingList()
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(
-                text = "Goodbyes",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-            )
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Text(
+                    text = "Goodbyes",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanGoodbyeList()
+            }
 
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Text(
+                    text = "Goodbyes",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanGoodbyeList()
+            }
+
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Text(
+                    text = "Expressions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanGreetingExpressionList()
+            }
+
+        }
+    }
+
+}
+
+@Composable
+fun GermanExpressions() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = Color.LightGray)
+    ) {
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Expressions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Expressions are an essential part of the language. These sentences allow " +
+                            "learners to carry across messages and help people to speak the language" +
+                            "without thinking too much about grammar rules."
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 20.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Phrases",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+
+            }
         }
     }
 }
@@ -312,5 +494,5 @@ fun GermanIntroductions() {
 @Composable
 @Preview(showBackground = true)
 fun ViewPhraseScreens() {
-    GermanIntroductions()
+    GermanExpressions()
 }
