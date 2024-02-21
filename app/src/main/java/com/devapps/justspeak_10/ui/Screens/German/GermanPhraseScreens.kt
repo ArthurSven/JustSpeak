@@ -157,7 +157,7 @@ fun GermanPhraseNavigation(navController: NavController) {
             GermanPhraseListLandingScreen(germanPhraseNavController)
         }
         composable(GermanIntroductionScreen.route) {
-            GermanIntroductions()
+
         }
     }
 }
