@@ -107,7 +107,7 @@ fun GermanQuizScreen(
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)
             ) {
-                Text(text = "German Qui")
+                Text(text = "German Quiz")
             }
         }
 

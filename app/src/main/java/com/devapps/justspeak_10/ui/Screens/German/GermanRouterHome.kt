@@ -62,6 +62,7 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.R
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
+import com.devapps.justspeak_10.ui.Components.GermanFoodNounList
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.profileCard
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarScreen
@@ -76,6 +77,7 @@ import com.devapps.justspeak_10.ui.viewmodels.AuthViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 import com.devapps.justspeak_10.ui.Screens.German.GermanGrammarScreen
+import com.devapps.justspeak_10.ui.destinations.GermanFlashCardScreen
 import com.devapps.justspeak_10.ui.destinations.Start
 import com.devapps.justspeak_10.ui.theme.offWhite
 
@@ -158,6 +160,9 @@ fun GermanNavigation(startNavController: NavController) {
                     }
                 }
             )
+        }
+        composable(GermanFlashCardScreen.route) {
+
         }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
@@ -289,6 +294,11 @@ fun GermanHomeContent(
                                 cardIcon = R.drawable.trivia,
                                 cardRoute = GermanTriviaScreen.route
                             ),
+                            CardItem(
+                                cardTitle = "FlashCards",
+                                cardIcon = R.drawable.flashcards,
+                                cardRoute = GermanFlashCardScreen.route
+                            )
                         )
                         LazyVerticalGrid(columns = GridCells.Fixed(2),
                             content = {

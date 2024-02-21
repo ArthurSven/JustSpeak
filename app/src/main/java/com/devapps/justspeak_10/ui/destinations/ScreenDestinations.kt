@@ -57,6 +57,22 @@ object GermanQuizScreen : ScreenDestination {
     override val route = "german_quiz_screen"
 }
 
+object GermanFlashCardScreen : ScreenDestination {
+    override val route = "german_flashcard_screen"
+}
+
+object GermanTranslateScreen : ScreenDestination {
+    override val route = "german_translate_screen"
+}
+
+object GermanFlashcardListScreen : ScreenDestination {
+    override val route = "german_flashcard_list_screen"
+}
+
+object GermanAddFlashcardScreen : ScreenDestination {
+    override val route = "german_add_flashcard_screen"
+}
+
 //German grammar screens
 
 object GermanGrammarItemScreen : ScreenDestination {
