@@ -11,11 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -74,6 +76,7 @@ fun GermanFlashScreen(
         composable(GermanFlashcardListScreen.route) {
             com.devapps.justspeak_10.ui.Screens.German.GermanFlashcardListScreen(
                 germanFlashcardListNavController = flashCardNavController,
+                germanFlashcardNavController,
                 userData = userData,
                 onSignOut = {
                     coroutineScope.launch {
@@ -84,7 +87,16 @@ fun GermanFlashScreen(
             )
         }
         composable(GermanAddFlashcardScreen.route) {
-
+          GermanAddFlashCard(
+              germanAddFlashcardNavController = flashCardNavController,
+              germanFlashcardNavController,
+              userData = userData,
+              onSignOut = {
+                  coroutineScope.launch {
+                      googleClientAuth.signOut()
+                      Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                  }
+              })
         }
     }
 }
@@ -93,6 +105,7 @@ fun GermanFlashScreen(
 @Composable
 fun GermanFlashcardListScreen(
     germanFlashcardListNavController: NavController,
+    homeNaviController: NavController,
     userData: UserData?,
     onSignOut: () -> Unit
 ) {
@@ -135,7 +148,8 @@ fun GermanFlashcardListScreen(
             },
             navigationIcon = {
                 IconButton(
-                    onClick = { germanFlashcardListNavController.navigate(GermanHomeScreen.route)
+                    onClick = {
+                        homeNaviController.navigate(GermanHomeScreen.route)
                     }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -143,6 +157,7 @@ fun GermanFlashcardListScreen(
                         tint = AzureBlue)
                 }
             },
+            
             modifier = Modifier
                 .fillMaxWidth(),
             colors = TopAppBarDefaults.topAppBarColors(
@@ -150,6 +165,21 @@ fun GermanFlashcardListScreen(
                 titleContentColor = AzureBlue
             )
         )
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = {
+                    germanFlashcardListNavController.navigate(GermanAddFlashcardScreen.route)
+            },
+                contentColor = Color.White,
+                containerColor = AzureBlue
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Create,
+                    contentDescription = "Add Flashcard",
+                )
+                Text(text = "Create Flashcard")
+            }
         }
     ) { it ->
         Column(
@@ -184,6 +214,7 @@ fun GermanFlashcardListScreen(
 @Composable
 fun GermanAddFlashCard(
     germanAddFlashcardNavController: NavController,
+    homeNaviController: NavController,
     userData: UserData?,
     onSignOut: () -> Unit
 ) {
@@ -226,7 +257,8 @@ fun GermanAddFlashCard(
             },
             navigationIcon = {
                 IconButton(
-                    onClick = { germanAddFlashcardNavController.navigate(GermanHomeScreen.route)
+                    onClick = {
+                        germanAddFlashcardNavController.navigate(GermanFlashcardListScreen.route)
                     }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,

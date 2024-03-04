@@ -162,7 +162,15 @@ fun GermanNavigation(startNavController: NavController) {
             )
         }
         composable(GermanFlashCardScreen.route) {
-
+            GermanFlashScreen(
+                germanFlashcardNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                })
         }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
@@ -302,7 +310,7 @@ fun GermanHomeContent(
                         )
                         LazyVerticalGrid(columns = GridCells.Fixed(2),
                             content = {
-                                items(4) { i ->
+                                items(items.size) { i ->
                                     val cardItem = items[i]
                                     GermanCard(
                                         selected = selectedItemIndex == i,
