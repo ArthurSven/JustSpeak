@@ -9,7 +9,7 @@ interface OfflineFlashcardRepository {
 
     suspend fun getAllFlashcardsByUsername(username: String) : List<FlashcardLocal>
 
-    suspend fun createFlaschard(flashcardLocal: FlashcardLocal)
+    suspend fun createFlashcard(flashcardLocal: FlashcardLocal)
 
     suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal)
 }
@@ -19,15 +19,15 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : OfflineFlashcardRepository {
     override suspend fun getAllFlashcardsByUsername(username: String): List<FlashcardLocal> {
-        TODO("Not yet implemented")
+        return flashcardDao.getFlashcardsByUsername(username)
     }
 
-    override suspend fun createFlaschard(flashcardLocal: FlashcardLocal) {
-        TODO("Not yet implemented")
+    override suspend fun createFlashcard(flashcardLocal: FlashcardLocal) {
+        flashcardDao.createFlashcard(flashcardLocal)
     }
 
     override suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal) {
-        TODO("Not yet implemented")
+        flashcardDao.deleteFlashCard(flashcardLocal)
     }
 
 
