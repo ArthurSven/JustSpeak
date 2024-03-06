@@ -14,6 +14,9 @@ interface FlashcardDao {
     @Query("SELECT * FROM flashcards WHERE creator = :username ORDER BY date_created DESC")
     suspend fun getFlashcardsByUsername(username: String) : List<FlashcardLocal>
 
+    @Query("SELECT * FROM flashcards WHERE is_synced = false ORDER BY date_created")
+    suspend fun getUnsyncedFlashcards() : List<FlashcardLocal>
+
     @Insert
     suspend fun createFlashcard(flashcardLocal: FlashcardLocal)
 

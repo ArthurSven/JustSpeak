@@ -115,4 +115,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0")
+
+
 }
