@@ -59,9 +59,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFlashcardRepository(
-        flashcardDao: FlashcardDao,
+        db: JustSpeakDatabase,
         firestore: FirebaseFirestore
     ): OfflineFlashcardRepository {
-        return OfflineflashcardRepositoryImpl(flashcardDao, firestore)
+        return OfflineflashcardRepositoryImpl(db.flashcardDao(), firestore)
     }
 }

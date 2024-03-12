@@ -7,12 +7,13 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RoomDatabase
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FlashcardDao {
 
     @Query("SELECT * FROM flashcards WHERE creator = :username ORDER BY date_created DESC")
-    suspend fun getFlashcardsByUsername(username: String) : List<FlashcardLocal>
+    suspend fun getFlashcardsByUsername(username: String) : Flow<List<FlashcardLocal>>
 
     @Query("SELECT * FROM flashcards WHERE is_synced = false ORDER BY date_created")
     suspend fun getUnsyncedFlashcards() : List<FlashcardLocal>
