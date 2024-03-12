@@ -2,6 +2,7 @@ package com.devapps.justspeak_10.data.local.Repository
 
 import com.devapps.justspeak_10.data.local.db.FlashcardDao
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
+import com.devapps.justspeak_10.utils.Response
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
@@ -13,7 +14,7 @@ interface OfflineFlashcardRepository {
 
     suspend fun getUnSyncedFlashcards() : List<FlashcardLocal>
 
-    suspend fun createFlashcard(flashcardLocal: FlashcardLocal)
+    suspend fun createFlashcard(flashcardLocal: FlashcardLocal) : Response
 
     suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal)
 
@@ -36,14 +37,19 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
         return flashcardDao.getUnsyncedFlashcards()
     }
 
-    override suspend fun createFlashcard(flashcardLocal: FlashcardLocal) {
+    override suspend fun createFlashcard(flashcardLocal: FlashcardLocal) : Response {
 
-        val docReference = flashcardCollection.add(flashcardLocal.toFlashCardNetwork()).await()
 
-        // Update the local flashcard with the remote ID and mark as synced
-        flashcardLocal.remoteId = docReference.id
-        flashcardLocal.isSynced = true
-        flashcardDao.createFlashcard(flashcardLocal)
+        return try {
+            val docReference = flashcardCollection.add(flashcardLocal.toFlashCardNetwork()).await()
+            // Update the local flashcard with the remote ID and mark as synced
+            flashcardLocal.remoteId = docReference.id
+            flashcardLocal.isSynced = true
+            val success = flashcardDao.createFlashcard(flashcardLocal)
+            Response.Success(success)
+        } catch (e: Exception) {
+            return Response.Error(e)
+        }
     }
 
     override suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal) {
