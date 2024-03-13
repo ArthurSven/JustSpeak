@@ -39,19 +39,30 @@ class FlashcardViewModel @Inject constructor(
             }
         }
 
-        suspend fun insertFlashcard(flashcardLocal: FlashcardLocal) : Response {
-            val result = offlineFlashcardRepository.createFlashcard(flashcardLocal)
 
-            When(result)  {
+    suspend fun insertFlashcard(flashcardLocal: FlashcardLocal) {
+        viewModelScope.launch {
+            val result = offlineFlashcardRepository.createFlashcard(flashcardLocal)
+            when(result) {
                 is Response.Error -> {
-                  onInsertResult(InsertFlashcardResult(
-                      data = flashcardLocal,
-                      errorMessage = result
-                  ))
-            }
+                    onInsertResult(
+                        InsertFlashcardResult(
+                            data = flashcardLocal,
+                            errorMessage = result.error.message
+                        )
+                    )
+                }
+                is Response.Success -> {
+                    onInsertResult(
+                        InsertFlashcardResult(
+                            data = flashcardLocal,
+                            errorMessage = null
+                        )
+                    )
+                }
             }
         }
-
+    }
         fun onInsertResult(result: InsertFlashcardResult) {
             _insertResultState.update {
                 it.copy(
@@ -60,5 +71,11 @@ class FlashcardViewModel @Inject constructor(
                 )
             }
         }
+
+    fun resetState() {
+        _insertResultState.update {
+            InsertFlashcardState()
+        }
+    }
 
 }

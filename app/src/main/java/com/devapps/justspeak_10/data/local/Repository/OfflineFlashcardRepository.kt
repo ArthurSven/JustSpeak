@@ -38,8 +38,6 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createFlashcard(flashcardLocal: FlashcardLocal) : Response {
-
-
         return try {
             val docReference = flashcardCollection.add(flashcardLocal.toFlashCardNetwork()).await()
             // Update the local flashcard with the remote ID and mark as synced
