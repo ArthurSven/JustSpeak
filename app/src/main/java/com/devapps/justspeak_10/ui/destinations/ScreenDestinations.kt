@@ -106,6 +106,10 @@ object GermanTenseScreen : ScreenDestination {
     override val route = "german_tense_screen"
 }
 
+object GermanPrepositionScreen : ScreenDestination {
+    override val route = "german_preposition_screen"
+}
+
 object GermanVerbConjugationScreen : ScreenDestination {
     override val route = "german_verb_conjugation_screen"
 }

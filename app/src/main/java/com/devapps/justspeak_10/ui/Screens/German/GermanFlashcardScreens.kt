@@ -219,6 +219,8 @@ fun GermanAddFlashCard(
     onSignOut: () -> Unit
 ) {
     val showMenu = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
         containerColor = Color.White,
         topBar = { CenterAlignedTopAppBar(title = { Text(

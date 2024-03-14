@@ -43,6 +43,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.UserBar
@@ -157,7 +158,7 @@ fun GermanPhraseNavigation(navController: NavController) {
             GermanPhraseListLandingScreen(germanPhraseNavController)
         }
         composable(GermanIntroductionScreen.route) {
-
+            GermanIntroductions()
         }
     }
 }
@@ -304,7 +305,7 @@ fun GermanIntroductions() {
                 modifier = Modifier
                     .height(10.dp)
             )
-
+            GermanGoodbyeList()
         }
     }
 }

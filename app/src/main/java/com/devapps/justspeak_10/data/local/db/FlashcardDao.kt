@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface FlashcardDao {
 
     @Query("SELECT * FROM flashcards WHERE creator = :username ORDER BY date_created DESC")
-    suspend fun getFlashcardsByUsername(username: String) : Flow<List<FlashcardLocal>>
+     fun getFlashcardsByUsername(username: String) : Flow<List<FlashcardLocal>>
 
     @Query("SELECT * FROM flashcards WHERE is_synced = false ORDER BY date_created")
     suspend fun getUnsyncedFlashcards() : List<FlashcardLocal>

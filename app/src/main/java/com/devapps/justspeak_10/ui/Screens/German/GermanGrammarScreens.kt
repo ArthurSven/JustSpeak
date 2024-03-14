@@ -83,6 +83,7 @@ import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarItemScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
 import com.devapps.justspeak_10.ui.destinations.GermanNounScreen
+import com.devapps.justspeak_10.ui.destinations.GermanPrepositionScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPronounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
@@ -237,6 +238,9 @@ fun GermanGrammarNavigation(grammarNavController: NavController) {
         composable(GermanPronounScreen.route) {
             GermanPronouns()
         }
+        composable(GermanPrepositionScreen.route) {
+            GermanPrepositions()
+        }
         composable(GermanSentenceStructureScreen.route) {
             GermanSentenceStructure()
         }
@@ -272,6 +276,10 @@ fun GermanGrammarItemScreen(navController: NavController) {
         GrammarListItem(
             itemTitle = "Nouns",
             itemRoute = GermanNounScreen.route
+        ),
+        GrammarListItem(
+          itemTitle = "Prepositions",
+            itemRoute = GermanPrepositionScreen.route
         ),
         GrammarListItem(
             itemTitle = "Pronouns",
@@ -1104,6 +1112,42 @@ fun GermanVerbsAndConjugation() {
                 .height(5.dp))
             KannConjugationTable()
 
+        }
+    }
+}
+
+@Composable
+fun GermanPrepositions() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(all = 10.dp)
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "German Prepositions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
         }
     }
 }
