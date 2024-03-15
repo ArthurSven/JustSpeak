@@ -1139,14 +1139,28 @@ fun GermanPrepositions() {
                     .height(20.dp)
             )
             Text(
-                text = "German Prepositions",
+                text = "Prepositions",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 color = Color.Black
             )
             Spacer(
                 modifier = Modifier
-                    .height(10.dp)
+                    .height(20.dp)
+            )
+            Text(
+                text = "Prepositions connect a noun to the sentence body, they also determine the case" +
+                        " of the noun, article and can equally signal whether a noun is stationery " +
+                        "or moving. \n \n There are 4 groups of prepositions namely accusative, " +
+                        "dative, genitive and two-way:"
+            )
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Accusative Prepositions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
             )
         }
     }
