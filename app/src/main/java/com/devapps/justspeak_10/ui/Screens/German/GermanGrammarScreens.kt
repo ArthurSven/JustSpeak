@@ -1162,6 +1162,18 @@ fun GermanPrepositions() {
                 fontSize = 18.sp,
                 color = Color.Black
             )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            Text(text = "These are the prepositions thst go with accusative case only. They usually" +
+                    "signal something is moving:"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(3.dp)
+            )
+
         }
     }
 }

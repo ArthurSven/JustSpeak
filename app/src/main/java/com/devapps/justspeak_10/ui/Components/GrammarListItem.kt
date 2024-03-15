@@ -1334,6 +1334,48 @@ fun KannList() {
 }
 
 @Composable
+fun getGermanAccusativePrepositions() : List<String> {
+    return listOf(
+        "für", "um", "bis", "gegen", "durch", "entlang", "ohne", "wider"
+    )
+}
+
+@Composable
+fun getEnglishAccusativePrepositions() : List<String> {
+    return listOf(
+        "for", "around", "until", "against", "through", "along", "without", "against (opposition)"
+    )
+}
+
+@Composable
+fun getTwoWayGermanPrepositions() : List<String> {
+    return listOf(
+        "an", "auf", "hinter", "neben", "in", "über", "unter", "vor"
+    )
+}
+
+@Composable
+fun getTwoWayEnglishPrepositions() : List<String> {
+    return listOf(
+        "on", "ontop of", "behind", "next to", "in", "above", "under", "in front of"
+    )
+}
+
+@Composable
+fun getGermanDativePrepositions() : List<String> {
+    return listOf(
+        "mit", "aus", "außer", "bei", "nach", "seit", "von", "zu", "gegenüber (von) "
+    )
+}
+
+@Composable
+fun getEnglishDativePrepositions() : List<String> {
+    return listOf(
+        "with", "out of", "except for/apart from", "at", "after", "since", "from", "to, at",
+        "opposite of"
+    )
+}
+@Composable
 @Preview(showBackground = true)
 fun ViewComponents() {
     GermanFoodNounList()
