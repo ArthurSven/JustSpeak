@@ -54,17 +54,21 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.AdjectiveRow
 import com.devapps.justspeak_10.ui.Components.CaseParagraph
+import com.devapps.justspeak_10.ui.Components.GermanAccusativePrepositionsList
 import com.devapps.justspeak_10.ui.Components.GermanAdjectiveList
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetItem
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetList
 import com.devapps.justspeak_10.ui.Components.GermanBodyPartNounList
+import com.devapps.justspeak_10.ui.Components.GermanDativePrepositionsList
 import com.devapps.justspeak_10.ui.Components.GermanDefEndTable
 import com.devapps.justspeak_10.ui.Components.GermanDefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanFoodNounList
+import com.devapps.justspeak_10.ui.Components.GermanGenitivePrepositionsList
 import com.devapps.justspeak_10.ui.Components.GermanIndEndTable
 import com.devapps.justspeak_10.ui.Components.GermanIndefiniteArticleTable
 import com.devapps.justspeak_10.ui.Components.GermanPeopleNounList
 import com.devapps.justspeak_10.ui.Components.GermanPlaceNounList
+import com.devapps.justspeak_10.ui.Components.GermanTwoWayPrepositionsList
 import com.devapps.justspeak_10.ui.Components.HabenConjugationTable
 import com.devapps.justspeak_10.ui.Components.KannConjugationTable
 import com.devapps.justspeak_10.ui.Components.PronounTable
@@ -1166,14 +1170,73 @@ fun GermanPrepositions() {
                 modifier = Modifier
                     .height(5.dp)
             )
-            Text(text = "These are the prepositions thst go with accusative case only. They usually" +
+            Text(text = "These are the prepositions that go with accusative case only. They usually" +
                     "signal something is moving:"
             )
             Spacer(
                 modifier = Modifier
                     .height(3.dp)
             )
-
+            GermanAccusativePrepositionsList()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Dative Prepositions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            Text(text = "These are the prepositions that go with detive case only. They usually" +
+                    "signal something is stationary or not moving:"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(3.dp)
+            )
+            GermanDativePrepositionsList()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Genitive Prepositions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            Text(text = "These are the prepositions that go with genitive case only:"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(3.dp)
+            )
+            GermanGenitivePrepositionsList()
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            Text(
+                text = "Two way Prepositions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(5.dp)
+            )
+            Text(text = "These are the prepositions that can either go with dative or accusative" +
+                    "case:"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(3.dp)
+            )
+            GermanTwoWayPrepositionsList()
         }
     }
 }
@@ -1184,5 +1247,5 @@ fun GermanPrepositions() {
 @Composable
 @Preview(showBackground = true)
 fun ViewGrammarScreens() {
-    GermanVerbsAndConjugation()
+    GermanPrepositions()
 }
