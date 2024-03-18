@@ -41,6 +41,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun profileCard(
@@ -133,6 +135,13 @@ fun GermanPhraseCard(
                 textAlign = TextAlign.Justify)
         }
     }
+}
+
+@Composable
+fun getCurrentDate() : String {
+    val currentDate = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    return currentDate.format(formatter)
 }
 
 @Composable

@@ -13,6 +13,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -20,36 +22,45 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.devapps.justspeak_10.data.local.model.FlashcardLocal
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.getCurrentDate
 import com.devapps.justspeak_10.ui.destinations.GermanAddFlashcardScreen
 import com.devapps.justspeak_10.ui.destinations.GermanFlashcardListScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
 import com.devapps.justspeak_10.ui.viewmodels.AuthViewModel
+import com.devapps.justspeak_10.ui.viewmodels.FlashcardViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 
@@ -221,6 +232,19 @@ fun GermanAddFlashCard(
     val showMenu = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+
+    val googleAuthUiClient by lazy {
+        GoogleClientAuth(
+            context = context,
+            oneTapClient = Identity.getSignInClient(context)
+        )
+    }
+
+    val username = googleAuthUiClient.getSignedInUser()?.username.toString()
+    val flashcardViewModel: FlashcardViewModel = hiltViewModel()
+
+    val insetResultState by flashcardViewModel.insertResultState.collectAsState()
+
     Scaffold(
         containerColor = Color.White,
         topBar = { CenterAlignedTopAppBar(title = { Text(
@@ -283,6 +307,15 @@ fun GermanAddFlashCard(
                 .padding(it)
                 .background(color = Color.LightGray)
         ) {
+
+            var germanFlashcard by remember {
+                mutableStateOf("")
+            }
+            var englishTrnslation by remember {
+                mutableStateOf("")
+            }
+            var currentDate = getCurrentDate()
+
             UserBar(userData)
             Column(
                 modifier = Modifier
@@ -298,10 +331,76 @@ fun GermanAddFlashCard(
                     fontSize = 18.sp,
                     color = Color.Black
                 )
+                Spacer(
+                    modifier = Modifier
+                        .height(30.dp)
+                )
+                OutlinedTextField(
+                    value = germanFlashcard,
+                    onValueChange = { germanFlashcard = it},
+                    label = {
+                        Text(text = "German")
+                    }
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                OutlinedTextField(
+                    value = englishTrnslation,
+                    onValueChange = { englishTrnslation = it},
+                    label = {
+                        Text(text = "German")
+                    }
+                )
+                Spacer(modifier = Modifier
+                    .height(15.dp)
+                )
+                Button(
+                    onClick = {
+                        if(germanFlashcard.isNotEmpty() && englishTrnslation.isNotEmpty()) {
+                            val flashcardLocal = FlashcardLocal(
+                                germanTranslation = germanFlashcard,
+                                englishTranslation = englishTrnslation,
+                                creator = username,
+                                dateCreated = currentDate
+                            )
+                            coroutineScope.launch {
+                                flashcardViewModel.insertFlashcard(flashcardLocal)
+                            }
+                        } else {
+                            // Display a message if either of the fields is empty
+                            Toast.makeText(context, "Please fill in both German and English " +
+                                    "translations.", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    modifier = Modifier
+                        .width(310.dp)
+                        .height(40.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Blue,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(text = "Add flashcard")
+                    }
+                LaunchedEffect(insetResultState) {
+                    if (insetResultState.isSuccessful) {
+                        Toast.makeText(context, "Flashcard has successfully created",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                        flashcardViewModel.resetState()
+                        germanFlashcard = ""
+                        englishTrnslation = ""
+                    } else {
+                        Toast.makeText(context, "Failed to create flashcard: " +
+                                "${insetResultState.error}",
+                            Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
-
-
     }
 }
 
