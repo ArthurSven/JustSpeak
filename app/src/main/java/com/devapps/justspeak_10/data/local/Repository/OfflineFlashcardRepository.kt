@@ -78,7 +78,7 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
             "german translation" to germanTranslation,
             "english translation" to englishTranslation,
             "creator" to creator,
-            "dtae created" to dateCreated
+            "date created" to dateCreated
         )
     }
 

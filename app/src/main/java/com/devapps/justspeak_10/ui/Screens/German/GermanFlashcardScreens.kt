@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -325,78 +327,94 @@ fun GermanAddFlashCard(
                     modifier = Modifier
                         .height(20.dp)
                 )
-                Text(
-                    text = "Add a Flashcard",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Black
-                )
-                Spacer(
+
+                Card(
                     modifier = Modifier
-                        .height(30.dp)
-                )
-                OutlinedTextField(
-                    value = germanFlashcard,
-                    onValueChange = { germanFlashcard = it},
-                    label = {
-                        Text(text = "German")
-                    }
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                OutlinedTextField(
-                    value = englishTrnslation,
-                    onValueChange = { englishTrnslation = it},
-                    label = {
-                        Text(text = "German")
-                    }
-                )
-                Spacer(modifier = Modifier
-                    .height(15.dp)
-                )
-                Button(
-                    onClick = {
-                        if(germanFlashcard.isNotEmpty() && englishTrnslation.isNotEmpty()) {
-                            val flashcardLocal = FlashcardLocal(
-                                germanTranslation = germanFlashcard,
-                                englishTranslation = englishTrnslation,
-                                creator = username,
-                                dateCreated = currentDate
-                            )
-                            coroutineScope.launch {
-                                flashcardViewModel.insertFlashcard(flashcardLocal)
-                            }
-                        } else {
-                            // Display a message if either of the fields is empty
-                            Toast.makeText(context, "Please fill in both German and English " +
-                                    "translations.", Toast.LENGTH_SHORT).show()
-                        }
-                    },
-                    modifier = Modifier
-                        .width(310.dp)
-                        .height(40.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Blue,
-                        contentColor = Color.White
-                    )
+                        .fillMaxWidth()
+                        .padding(all = 10.dp)
+                        .background(color = Color.White),
+                    shape = RoundedCornerShape(15.dp)
                 ) {
-                    Text(text = "Add flashcard")
-                    }
-                LaunchedEffect(insetResultState) {
-                    if (insetResultState.isSuccessful) {
-                        Toast.makeText(context, "Flashcard has successfully created",
-                            Toast.LENGTH_SHORT)
-                            .show()
-                        flashcardViewModel.resetState()
-                        germanFlashcard = ""
-                        englishTrnslation = ""
-                    } else {
-                        Toast.makeText(context, "Failed to create flashcard: " +
-                                "${insetResultState.error}",
-                            Toast.LENGTH_LONG).show()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = Color.White)
+                            .padding(all = 16.dp)
+                    ) {
+                        Text(
+                            text = "Add a Flashcard",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = Color.Black
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(30.dp)
+                        )
+                        OutlinedTextField(
+                            value = germanFlashcard,
+                            onValueChange = { germanFlashcard = it},
+                            label = {
+                                Text(text = "German")
+                            }
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(10.dp)
+                        )
+                        OutlinedTextField(
+                            value = englishTrnslation,
+                            onValueChange = { englishTrnslation = it},
+                            label = {
+                                Text(text = "English translation")
+                            }
+                        )
+                        Spacer(modifier = Modifier
+                            .height(15.dp)
+                        )
+                        Button(
+                            onClick = {
+                                if(germanFlashcard.isNotEmpty() && englishTrnslation.isNotEmpty()) {
+                                    val flashcardLocal = FlashcardLocal(
+                                        germanTranslation = germanFlashcard,
+                                        englishTranslation = englishTrnslation,
+                                        creator = username,
+                                        dateCreated = currentDate
+                                    )
+                                    coroutineScope.launch {
+                                        flashcardViewModel.insertFlashcard(flashcardLocal)
+                                    }
+                                } else {
+                                    // Display a message if either of the fields is empty
+                                    Toast.makeText(context, "Please fill in both German and English " +
+                                            "translations.", Toast.LENGTH_SHORT).show()
+                                }
+                            },
+                            modifier = Modifier
+                                .width(310.dp)
+                                .height(40.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Blue,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text(text = "Add flashcard")
+                        }
+                        LaunchedEffect(insetResultState) {
+                            if (insetResultState.isSuccessful) {
+                                Toast.makeText(context, "Flashcard has successfully created",
+                                    Toast.LENGTH_LONG)
+                                    .show()
+                                flashcardViewModel.resetState()
+                                germanFlashcard = ""
+                                englishTrnslation = ""
+                            } else {
+                                Toast.makeText(context, "Failed to create flashcard: " +
+                                        "${insetResultState.error}",
+                                    Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
                 }
             }
