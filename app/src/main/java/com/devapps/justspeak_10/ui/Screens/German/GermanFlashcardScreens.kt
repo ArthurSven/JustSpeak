@@ -2,13 +2,19 @@ package com.devapps.justspeak_10.ui.Screens.German
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -54,6 +60,8 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
+import com.devapps.justspeak_10.ui.Components.GridItem
+import com.devapps.justspeak_10.ui.Components.RandomColorBox
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getCurrentDate
 import com.devapps.justspeak_10.ui.destinations.GermanAddFlashcardScreen
@@ -65,6 +73,7 @@ import com.devapps.justspeak_10.ui.viewmodels.AuthViewModel
 import com.devapps.justspeak_10.ui.viewmodels.FlashcardViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -123,6 +132,22 @@ fun GermanFlashcardListScreen(
     onSignOut: () -> Unit
 ) {
     val showMenu = remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val googleAuthClient by lazy {
+        GoogleClientAuth(
+            context = context,
+            oneTapClient = Identity.getSignInClient(context)
+        )
+    }
+
+    val flashcardViewModel: FlashcardViewModel = hiltViewModel()
+    val username = googleAuthClient.getSignedInUser()?.username.toString()
+
+    val flashcardState by remember { flashcardViewModel.userFlashcards }.collectAsState(emptyList())
+
     Scaffold(
         containerColor = Color.White,
         topBar = { CenterAlignedTopAppBar(title = { Text(
@@ -201,6 +226,10 @@ fun GermanFlashcardListScreen(
                 .padding(it)
                 .background(color = Color.LightGray)
         ) {
+
+            LaunchedEffect(username) {
+                flashcardViewModel.setCreatedBy(username)
+            }
             UserBar(userData)
             Column(
                 modifier = Modifier
@@ -216,6 +245,36 @@ fun GermanFlashcardListScreen(
                     fontSize = 18.sp,
                     color = Color.Black
                 )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+
+                if(flashcardState.isEmpty()) {
+                    Text(text = "No flashcards available")
+                } else {
+                    LazyVerticalStaggeredGrid(
+                        columns = StaggeredGridCells.Fixed(2),
+                        modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalItemSpacing = 16.dp
+                    ) {
+                        itemsIndexed(flashcardState) { index, flashcard ->
+
+                            val randomColor = Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat(), 1f)
+                            val randomHeight = (100..300).random().dp
+                            RandomColorBox(
+                                GridItem(
+                                    germanWord = flashcard.germanTranslation,
+                                    englishWord = flashcard.englishTranslation,
+                                    height = randomHeight,
+                                    color = randomColor
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
 

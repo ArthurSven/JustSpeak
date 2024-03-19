@@ -30,6 +30,15 @@ class FlashcardViewModel @Inject constructor(
         private val _createdBy = MutableStateFlow<String>("")
         val createdBy: StateFlow<String> = _createdBy
 
+    fun setCreatedBy(username: String) {
+        _createdBy.value = username
+        viewModelScope.launch {
+            getAllFlashcardsByUser(username)
+        }
+
+    }
+
+
         suspend fun getAllFlashcardsByUser(username: String) {
             viewModelScope.launch {
                 offlineFlashcardRepository.getAllFlashcardsByUsername(username).collect {
@@ -38,6 +47,14 @@ class FlashcardViewModel @Inject constructor(
                 }
             }
         }
+
+    init {
+        // Fetch flashcard data for the signed-in user when ViewModel is initialized
+        viewModelScope.launch {
+            getAllFlashcardsByUser(_createdBy.value)
+        }
+
+    }
 
 
     suspend fun insertFlashcard(flashcardLocal: FlashcardLocal) {
