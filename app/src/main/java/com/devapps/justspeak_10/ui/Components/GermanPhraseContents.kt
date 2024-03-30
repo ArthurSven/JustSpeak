@@ -148,9 +148,9 @@ fun GermanGreetingExpressionList() {
 fun getGermanIntroductories() : List<String> {
     return listOf(
     "Darf ich ... vorstellen?", "Das ist", "Wie heißt du/heißen Sie?", "Ich heiße",
-        "Wie ist dein/Ihr Name?", "Mein Name ist", "Ich bin ...", "Wia hoaßt du", "I hoaß",
-        "Wie häissisch", "Woher kommst du", "Ich komme aus ...", "Wohar chunsch", "Ich chume us",
-        "Wo wohnst du", "Ich wohne in..."
+        "Wie ist dein/Ihr Name?", "Mein Name ist", "Ich bin ...", "Wia hoaßt du", "Wie heissisch du"
+        , "Woher kommst du", "Ich komme aus ...", "Wohar chunsch", "Ich chume us", "Wo wohnst du",
+        "Ich wohne in..."
     )
 }
 
@@ -166,14 +166,64 @@ fun getEnglishIntroductories() : List<String> {
 }
 
 @Composable
+fun GermanIntroductionExpressionList() {
+    val german = getGermanIntroductories()
+    val english = getEnglishIntroductories()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+
+
+@Composable
 fun getGermanPhrases() : List<String> {
     return listOf(
         "Entschuldigung", "Sprechen Sie Englisch/Sprichst du Englisch", "Ja", "Nein", "Bitte",
         "Danke", "Gern geschehen", "Wie sagt man... auf deutsch", "Was ist das?",
         "Sprechen Sie bitte langsamer", "Leise bitte!", "Mein Deutsch ist begrenzt",
-        "Ich verstehe nicht", "Ich verstehe", "Wie kann ich..", "Alles in Ordnung", "Komm her",
+        "Ich verstehe nicht", "Ich verstehe", "Wie kann ich...", "Alles in Ordnung", "Komm her",
         "Hau ab"
     )
+}
+
+@Composable
+fun getEnglishPhrases() : List<String> {
+    return listOf(
+        "Excuse me", "Do you speak english", "Yes", "No", "Please", "Thanks", "Pleasure",
+        "How do you say... in german", "What is that?", "Speak slowly please", "Keep quiet!",
+        "My german is limited", "I do not understand", "I understand", "How can I...",
+        "Everything's alright", "Come here", "Get out!"
+    )
+}
+
+@Composable
+fun GermanBasicExpressionList() {
+    val german = getGermanPhrases()
+    val english = getEnglishPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
 }
 
 
@@ -181,5 +231,5 @@ fun getGermanPhrases() : List<String> {
 @Composable
 @Preview(showBackground = true)
 fun viewPhraseContents() {
-    GermanGreetingList()
+    GermanIntroductionExpressionList()
 }

@@ -43,8 +43,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
+import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
+import com.devapps.justspeak_10.ui.Components.GermanIntroductionExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
@@ -159,6 +162,9 @@ fun GermanPhraseNavigation(navController: NavController) {
         }
         composable(GermanIntroductionScreen.route) {
             GermanIntroductions()
+        }
+        composable(GermanExpressionScreen.route) {
+            GermanExpressions()
         }
     }
 }
@@ -306,6 +312,82 @@ fun GermanIntroductions() {
                     .height(10.dp)
             )
             GermanGoodbyeList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Expressions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            GermanGreetingExpressionList()
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Introduction phrases",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            GermanIntroductionExpressionList()
+        }
+    }
+}
+
+@Composable
+fun GermanExpressions() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(all = 10.dp)
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            Text(
+                text = "Expressions",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
+            Text(
+                text = "Expressions help us form common sentences we use in a language, below you " +
+                        "will find a list of common basic phrases you will often hear in your german" +
+                        "learning journey::"
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            GermanBasicExpressionList()
         }
     }
 }
