@@ -29,6 +29,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -174,7 +175,7 @@ fun GermanPhraseListLandingScreen(
     navController: NavController
 ) {
     val selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     val topics = listOf<PhraseListItem>(
         PhraseListItem(
@@ -190,7 +191,7 @@ fun GermanPhraseListLandingScreen(
             itemRoute = GermanExpressionScreen.route
         ),
         PhraseListItem(
-            itemTitle = "Eating out",
+            itemTitle = "Dinning and Eatery",
             itemDescription = "Image yourself at a nice cafe in Vienna... Learn to express yourself " +
                     "when you go out to buy or order a meal, common language used in context of food.",
             itemRoute = GermanEatingScreen.route

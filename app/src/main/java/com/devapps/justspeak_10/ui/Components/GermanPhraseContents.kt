@@ -226,6 +226,13 @@ fun GermanBasicExpressionList() {
     }
 }
 
+@Composable
+fun germanEatingPlaceList() : List<String> {
+    return listOf(
+        "das Restaurant", "die Imbissbude", "das EssenZimmer", "die Küche"
+    )
+}
+
 
 
 @Composable

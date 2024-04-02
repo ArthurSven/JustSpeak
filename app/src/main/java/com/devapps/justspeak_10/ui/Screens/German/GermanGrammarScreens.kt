@@ -94,6 +94,7 @@ import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
+import com.devapps.justspeak_10.ui.theme.offWhite
 import com.google.common.io.Files.append
 
 data class GrammarListItem(
@@ -431,248 +432,383 @@ fun GermanAdjectives() {
 
 @Composable
 fun GermanCases() {
-    ElevatedCard(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
     ) {
-        Column(
+        Spacer(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
-        ) {
+                .height(20.dp)
+        )
+        ElevatedCard(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 10.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(10.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp,
+                )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(all = 10.dp)
+                ) {
+                    Text(
+                        text = "Articles",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier
+                        .height(10.dp))
+                    Text(text = "Sentences in the German language fall into 4 different cases: Nominative, " +
+                            "Accusative, Dative and Genitive. Each case has a different emphasis depending" +
+                            " on the situation.")
+                    Spacer(modifier = Modifier
+                        .height(5.dp))
+                    Text(text = "Before we get into cases, we need to understand that german nouns have genders. " +
+                            " They can either be Masculine (der), Feminine (die) and neutral (das)." +
+                            " These are also known as articles")
+                    Spacer(modifier = Modifier
+                        .height(30.dp))
+                    Text("There two types of articles:")
+                    Spacer(modifier = Modifier
+                        .height(10.dp))
+                    TextsForArticles("Bestimmte Artikeln",
+                        "Definite articles: (Der, die, das). These are the english equivalent of (The).")
+                    Spacer(modifier = Modifier
+                        .height(5.dp))
+                    Text(text = " - Der Junge singt - The boy is singing.")
+                    Text(text = " - Die Frau tanzt  - The woman is dancing.")
+                    Text(text = " - Das Kind weint  - The child is crying.")
+                    Spacer(modifier = Modifier
+                        .height(15.dp))
+                    TextsForArticles("Unbestimmte Artikeln",
+                        "Indefinite articles(ein, eine, ein). These are the english equivalent of (A).")
+                    Spacer(modifier = Modifier
+                        .height(5.dp))
+                    Text(text = " - Ein Junge singt - A boy is singing.")
+                    Text(text = " - Eine Frau tanzt - A woman is dancing.")
+                    Text(text = " - Ein Kind weint  - A child is crying.")
+            }
+        }
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            Text(
-                text = "Articles",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Spacer(modifier = Modifier
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Cases",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier
                     .height(10.dp))
-            Text(text = "Sentences in the German language fall into 4 different cases: Nominative, " +
-                    "Accusative, Dative and Genitive. Each case has a different emphasis depending" +
-                    " on the situation.")
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "Before we get into cases, we need to understand that german nouns have genders. " +
-                    " They can either be Masculine (der), Feminine (die) and neutral (das)." +
-                    " These are also known as articles")
-            Spacer(modifier = Modifier
-                .height(30.dp))
-            Text("There two types of articles:")
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            TextsForArticles("Bestimmte Artikeln",
-                "Definite articles: (Der, die, das). These are the english equivalent of (The).")
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = " - Der Junge singt - The boy is singing.")
-            Text(text = " - Die Frau tanzt  - The woman is dancing.")
-            Text(text = " - Das Kind weint  - The child is crying.")
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            TextsForArticles("Unbestimmte Artikeln",
-                "Indefinite articles(ein, eine, ein). These are the english equivalent of (A).")
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = " - Ein Junge singt - A boy is singing.")
-            Text(text = " - Eine Frau tanzt - A woman is dancing.")
-            Text(text = " - Ein Kind weint  - A child is crying.")
-            Spacer(modifier = Modifier
-                .height(40.dp))
-            Text(
-                text = "Cases",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
+                Text(text = "With an understanding of articles, you can now grasp cases. German ")
+                Spacer(modifier = Modifier
+                    .height(10.dp))
+                CaseParagraph(
+                    "Nominativ (Nominative)",
+                    "This case shows the subject of the sentence or who the sentence is about.",
+                    "Die Sonne scheint (The sun shines)\n \n - Die Sonne is the subject as the " +
+                            "sentence is about the sun."
+                )
+                CaseParagraph(
+                    "Akkusativ (Accusative)",
+                    "This case shows the direct object of the sentence or what is directly " +
+                            "affected by the verb.",
+                    "Ich kaufe einen neuen Computer (I am buying a new computer)\n \n - den Computer is " +
+                            "the object as it is being bought. Ich is the subject."
+                )
+                CaseParagraph(
+                    "Dativ (Dative)",
+                    "This case shows the indirect object of a sentence or the item which is" +
+                            "indirectly affected.",
+                    "Ich habe dem Mann den Ball geworfen (I threw the ball to the man)\n \n - dem Mann" +
+                            " is the indirect object as the ball was thrown to him, den Ball was thrown " +
+                            "making the ball an object and I threw the ball making Ich the subject."
+                )
+                CaseParagraph(
+                    "Genitiv (Genitive)",
+                    "This case shows possession of something in a sentence",
+                    "Das Auto der Frau ist Kaputt (The woman's car is broken)\n \n - der Frau shows " +
+                            "ownership. The car belongs to the woman"
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp))
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(text = "With an understanding of articles, you can now grasp cases. German ")
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            CaseParagraph(
-                "Nominativ (Nominative)",
-                "This case shows the subject of the sentence or who the sentence is about.",
-                "Die Sonne scheint (The sun shines)\n \n - Die Sonne is the subject as the " +
-                        "sentence is about the sun."
-            )
-            CaseParagraph(
-                "Akkusativ (Accusative)",
-                "This case shows the direct object of the sentence or what is directly " +
-                        "affected by the verb.",
-                "Ich kaufe einen neuen Computer (I am buying a new computer)\n \n - den Computer is " +
-                        "the object as it is being bought. Ich is the subject."
-            )
-            CaseParagraph(
-                "Dativ (Dative)",
-                "This case shows the indirect object of a sentence or the item which is" +
-                        "indirectly affected.",
-                "Ich habe dem Mann den Ball geworfen (I threw the ball to the man)\n \n - dem Mann" +
-                        " is the indirect object as the ball was thrown to him, den Ball was thrown " +
-                        "making the ball an object and I threw the ball making Ich the subject."
-            )
-            CaseParagraph(
-                "Genitiv (Genitive)",
-                "This case shows possession of something in a sentence",
-                "Das Auto der Frau ist Kaputt (The woman's car is broken)\n \n - der Frau shows " +
-                        "ownership. The car belongs to the woman"
-            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 10.dp)
+            ) {
+                Text("With each case explained, below are tables showing how each article is written" +
+                        " with a particular case")
+                Spacer(modifier = Modifier
+                    .height(10.dp))
+                Text(text = "Definite articles",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black)
+                Spacer(modifier = Modifier
+                    .height(3.dp))
+                GermanDefiniteArticleTable()
+            }
+        }
+
             Spacer(modifier = Modifier
                 .height(20.dp))
-            Text("With each case explained, below are tables showing how each article is written" +
-                    " with a particular case")
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(text = "Definite articles",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color.Black)
-            Spacer(modifier = Modifier
-                .height(3.dp))
-            GermanDefiniteArticleTable()
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "Indefinite articles",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color.Black)
-            Spacer(modifier = Modifier
-                .height(3.dp))
-            GermanIndefiniteArticleTable()
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 10.dp)
+            ) {
+                Text(text = "Indefinite articles",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black)
+                Spacer(modifier = Modifier
+                    .height(3.dp))
+                GermanIndefiniteArticleTable()
+            }
+        }
             Spacer(modifier = Modifier
                 .height(10.dp))
         }
-    }
 }
 
 @Composable
 fun GermanNouns() {
-    ElevatedCard(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
-    ) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
+                .background(color = offWhite)
         ) {
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            Text(
-                text = "Nouns",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(
+            ElevatedCard(
                 modifier = Modifier
-                    .height(10.dp)
-            )
-            Text(
-                text = "Nouns are basically objects and things that we see and know. In German " +
-                    "nouns have genders which can get tricky for many english speakers as english " +
-                    "words do not have genders. It is important to learn each German noun with its " +
-                    "gender in oder to learn the genders easily. Another tip is to capitalise nouns." +
-                    " In this chapter, you will learn about significant nouns as well as tips and " +
-                    "tricks to remembering some noun genders."
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(text = "Most nouns end with en, el, er, ling, ent, ier, eur, ler as well as " +
-                    "nationalities, times of the day, seasons, days, months tend to be masculine")
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "Most nouns end with in, heit, kei, ung, tät, ion, age, ur, schaft, ei, " +
-                    "-ie, -anz, -enz as well as numbers tend to be feminine.")
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(
-                text = "People Nouns",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(5.dp)
-            )
-            GermanPeopleNounList()
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(
-                text = "Place Nouns",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(5.dp)
-            )
-            GermanPlaceNounList()
+                    .fillMaxWidth()
+                    .padding(all = 20.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(10.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp,
+                )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(all = 10.dp)
+                ) {
+                    Text(
+                        text = "Nouns",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp,
+                        color = Color.Black
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .height(10.dp)
+                    )
+                    Text(
+                        text = "Nouns are basically objects and things that we see and know. In German " +
+                                "nouns have genders which can get tricky for many english speakers as english " +
+                                "words do not have genders. It is important to learn each German noun with its " +
+                                "gender in oder to learn the genders easily. Another tip is to capitalise nouns." +
+                                " In this chapter, you will learn about significant nouns as well as tips and " +
+                                "tricks to remembering some noun genders."
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .height(20.dp)
+                    )
+                    Text(text = "Most nouns end with en, el, er, ling, ent, ier, eur, ler as well as " +
+                            "nationalities, times of the day, seasons, days, months tend to be masculine")
+                    Spacer(modifier = Modifier
+                        .height(5.dp))
+                    Text(text = "Most nouns end with in, heit, kei, ung, tät, ion, age, ur, schaft, ei, " +
+                            "-ie, -anz, -enz as well as numbers tend to be feminine.")
+                }
+            }
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            Text(
-                text = "Food and drink Nouns",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+            ElevatedCard(
                 modifier = Modifier
-                    .height(5.dp)
-            )
-            GermanFoodNounList()
+                    .fillMaxWidth()
+                    .padding(all = 20.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(10.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp,
+                )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(all = 10.dp)
+                ) {
+                    Text(
+                        text = "People Nouns",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = Color.Black
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .height(5.dp)
+                    )
+                    GermanPeopleNounList()
+                }
+            }
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            Text(
-                text = "Body Part Nouns",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+            ElevatedCard(
                 modifier = Modifier
-                    .height(5.dp)
-            )
-            GermanBodyPartNounList()
+                    .fillMaxWidth()
+                    .padding(all = 20.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(10.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp,
+                )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(all = 10.dp)
+                ) {
+                    Text(
+                        text = "Place Nouns",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = Color.Black
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .height(5.dp)
+                    )
+                    GermanPlaceNounList()
+                }
+            }
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            PronounTable()
+            ElevatedCard (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+            ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Food and drink Nouns",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                GermanFoodNounList()
+            }
         }
-    }
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+            ElevatedCard (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 20.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(10.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp,
+                )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(all = 10.dp)
+                ) {
+                    Text(
+                        text = "Body Part Nouns",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = Color.Black
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .height(5.dp)
+                    )
+                    GermanBodyPartNounList()
+                }
+            }
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+        }
+
 }
 
 @Composable
@@ -1241,11 +1377,8 @@ fun GermanPrepositions() {
     }
 }
 
-
-
-
 @Composable
 @Preview(showBackground = true)
-fun ViewGrammarScreens() {
-    GermanPrepositions()
+fun checkGrammarScreens() {
+    GermanCases()
 }
