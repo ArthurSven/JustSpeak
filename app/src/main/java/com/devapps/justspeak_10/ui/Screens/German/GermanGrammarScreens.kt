@@ -882,266 +882,455 @@ fun GermanPronouns() {
 
 @Composable
 fun GermanSentenceStructure() {
-    ElevatedCard(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
     ) {
-        Column(
+        Spacer(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
         ) {
-            Spacer(
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(
-                text = "Sentence Structure",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-            )
-            Text(text = "One of the most dreaded yet essential skills in German is the sentence " +
-                    "structure. Understanding basic German word order is a bridge to fluency and " +
-                    "speaking. In this chapter you will learn how sentences in German are structured" +
-                    " and how to do this easily."
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-            )
-            Text(text = "Basic declarative sentences have the same structure as english sentences. " +
-                    "They follow the Subject - verb - object sequence e.g. Ich komme heute (I am " +
-                    "coming today). Unlike in english where you use (I am), in German it is mostly " +
-                    "Subject and verb thus using (Ich komme) not (ich bin kommen) to say I am coming." +
-                    ""
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(40.dp)
-            )
-            Text(text = "Some sentences have separable verbs in them, the stem remains in the second" +
-                    " position while prefix goes to the end of the sentence e.g. \n \n -Ich schlafe im " +
-                    "Auto ein - (I fall asleep in the car)"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(text = "Some sentences have separable verbs in them, the stem remains in the second" +
-                    " position while prefix goes to the end of the sentence e.g. \n \n - Ich schlafe im Auto" +
-                    " ein - (I fall asleep in the car)"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
-            Text(text = "However this rule does not apply when the sentence has another verb at the" +
-                    " beginning or if it is part of a subordinate clause e.g. \n \n - Ich habe die " +
-                    "Briefe mitgebracht - (I brought the letters).\n \n" +
-                    "In the example above, there is haben which is a verb thus mitbringen (to bring " +
-                    "something along) has been pushed to the end.")
-            Text(text = "Another example would be:\n \n" +
-                    "Meine Mutter hat große Angst, deswegen hat sie die Reise abgelehnt - " +
-                    "(My mother is very afraid, that's why she denied)"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(30.dp)
-            )
-            Text(
-                text = "Sentences with clauses",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(text = "In German, a main clause can be joined with a subordinate clause or even a " +
-                    "main clause using connectives like aber, weil, wenn, obwohl, denn usw - (but, " +
-                    "because, if/when, although, because etc). \n \n In the case of a subordinate " +
-                    "clause, the verb in the subordinate clause usually goes to the end of the " +
-                    "sentence. Below are some examples of how connectives bridge main and " +
-                    "subordinate clauses:"
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(text = "Ich komme zu spät weil ich mein Zimmer aufräumen muss - (I come late " +
-                    "because I have to clean my room)\n \n" +
-                    "Ich habe es versucht die Aufgabe zu erledigen aber ich konnte es nicht machen " +
-                    "- (I tried to complete the task but I could not do it)\n \n" +
-                    "Wenn du zuhause bist, ruf mich an okay? - (When you are at home, call me " +
-                    "okay?)\n \n" +
-                    "Die Kinder verstehen nichts obwohl ich alles erklärt habe - (The children do " +
-                    "not understand anything although I explained everything)\n \n" +
-                    "Ich schlafe immer denn ich bin immer noch krank - (I am still sleeping because " +
-                    "I am still sick)")
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Sentence Structure",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "One of the most dreaded yet essential skills in German is the sentence " +
+                            "structure. Understanding basic German word order is a bridge to fluency and " +
+                            "speaking. In this chapter you will learn how sentences in German are structured" +
+                            " and how to do this easily."
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Basic declarative sentences have the same structure as english sentences. " +
+                            "They follow the Subject - verb - object sequence e.g. Ich komme heute (I am " +
+                            "coming today). Unlike in english where you use (I am), in German it is mostly " +
+                            "Subject and verb thus using (Ich komme) not (ich bin kommen) to say I am coming." +
+                            ""
+                )
+            }
 
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Sentences with separable verbs",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "Some sentences have separable verbs in them, the stem remains in the second" +
+                            " position while prefix goes to the end of the sentence e.g. \n \n -Ich schlafe im " +
+                            "Auto ein - (I fall asleep in the car)"
+                )
+
+            }
+        }
+
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Sentences with clauses",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "In German, a main clause can be joined with a subordinate clause or even a " +
+                            "main clause using connectives like aber, weil, wenn, obwohl, denn usw - (but, " +
+                            "because, if/when, although, because etc). \n \n In the case of a subordinate " +
+                            "clause, the verb in the subordinate clause usually goes to the end of the " +
+                            "sentence. Below are some examples of how connectives bridge main and " +
+                            "subordinate clauses:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(15.dp)
+                )
+                Text(
+                    text = "Ich komme zu spät weil ich mein Zimmer aufräumen muss - (I come late " +
+                            "because I have to clean my room)\n \n" +
+                            "Ich habe es versucht die Aufgabe zu erledigen aber ich konnte es nicht machen " +
+                            "- (I tried to complete the task but I could not do it)\n \n" +
+                            "Wenn du zuhause bist, ruf mich an okay? - (When you are at home, call me " +
+                            "okay?)\n \n" +
+                            "Die Kinder verstehen nichts obwohl ich alles erklärt habe - (The children do " +
+                            "not understand anything although I explained everything)\n \n" +
+                            "Ich schlafe immer denn ich bin immer noch krank - (I am still sleeping because " +
+                            "I am still sick)"
+                )
+            }
         }
     }
 }
 
 @Composable
 fun GermanTenses() {
-    ElevatedCard(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
     ) {
-        Column(
+        Spacer(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
         ) {
-            Spacer(
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "German Tenses",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Tenses are a key part of language learning. Tenses show the time of a given " +
+                            "sentence or a statement. In German, there are 6 tenses that are used to " +
+                            "show time of occurrence. In this chapter, you will learn about all 6 tenses" +
+                            ", how they work and examoles to make your learning much easier."
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(
-                text = "German Tenses",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(10.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Present Perfect Tense (Perfekt)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "he present perfect tense is used when a past event has its consequences in " +
+                            "the present time. In other words, when a verb in present tense has been " +
+                            "combined with a past participle. Examples of this tense are:\n" +
+                            "\n" +
+                            "Sie hat ihre Schlüssel verloren. (She has lost her keys)\n \n" +
+                            "Er hat seinen Rucksack vergessen. (He has forgotten his backpack)"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(
-                text = "Tenses are a key part of language learning. Tenses show the time of a given " +
-                        "sentence or a statement. In German, there are 6 tenses that are used to " +
-                        "show time of occurrence. In this chapter, you will learn about all 6 tenses" +
-                        ", how they work and examoles to make your learning much easier."
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Present Tense (Präsens)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(5.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Past simple (Imperfekt/Präteritum)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "The past simple tense is used to describe events that occurred in the past." +
+                            " Past simple is used quite a lot in written language and verb conjugation " +
+                            "changes. \n \n" +
+                            "Ich besuchte gestern meine Großeltern. (I visited my Grandma yesterday). \n \n" +
+                            "Letzten Sommer reisten wir nach Italien. (We travelled to Italy last summer"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(text = "The present tense is used when you want to describe something that is " +
-                    "happening at that particular time. Examples of this tense are:\n" +
-                    "\n" +
-                    "Ich spiele Fußball (I play football/ I am playing football).\n \n" +
-                    "Ich singe mit meinen Freunde. (I sing with my friends/I am singing with my " +
-                    "friends)."
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Present Perfect Tense (Perfekt)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(5.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Past Perfect (Plusquamperfekt)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "This is used to describe a past action that happened before another past " +
+                            "occurrence, this is very much equal to the english tense of past perfect. Below " +
+                            "are examples of sentences showing the past perfect tense in action: \n \n" +
+                            "Sie hatten das Konzert bereits gesehen, bevor ich ankam. (They had already seen" +
+                            " the concert before I arrived). \n \n Bevor sie ins Bett ging, hatte sie " +
+                            "bereits das Buch beendet. (She had finished the book before she went to bed.)"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(text = "he present perfect tense is used when a past event has its consequences in " +
-                    "the present time. In other words, when a verb in present tense has been " +
-                    "combined with a past participle. Examples of this tense are:\n" +
-                    "\n" +
-                    "Sie hat ihre Schlüssel verloren. (She has lost her keys)\n \n" +
-                    "Er hat seinen Rucksack vergessen. (He has forgotten his backpack)"
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Past simple (Imperfekt/Präteritum)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(5.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Future (Futur I)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "This tense is used to talk about the future or what will be done anytime " +
+                            "after the present. Below are some examples of the future tense being used in " +
+                            "context \n \n Du wirst es schaffen. (You will make/achieve it) \n \n" +
+                            "Sie werden in der Zukunft mehr über umweltfreundliche Technologien forschen. " +
+                            "(They will research more environmental friendly technologies in the future)"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(text = "The past simple tense is used to describe events that occurred in the past." +
-                    " Past simple is used quite a lot in written language and verb conjugation " +
-                    "changes. \n \n" +
-                    "Ich besuchte gestern meine Großeltern. (I visited my Grandma yesterday). \n \n" +
-                    "Letzten Sommer reisten wir nach Italien. (We travelled to Italy last summer"
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Past Perfect (Plusquamperfekt)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "This is used to describe a past action that happened before another past " +
-                    "occurrence, this is very much equal to the english tense of past perfect. Below " +
-                    "are examples of sentences showing the past perfect tense in action: \n \n" +
-                    "Sie hatten das Konzert bereits gesehen, bevor ich ankam. (They had already seen" +
-                    " the concert before I arrived). \n \n Bevor sie ins Bett ging, hatte sie " +
-                    "bereits das Buch beendet. (She had finished the book before she went to bed.)"
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Future (Futur I)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "This tense is used to talk about the future or what will be done anytime " +
-                    "after the present. Below are some examples of the future tense being used in " +
-                    "context \n \n Du wirst es schaffen. (You will make/achieve it) \n \n" +
-                    "Sie werden in der Zukunft mehr über umweltfreundliche Technologien forschen. " +
-                    "(They will research more environmental friendly technologies in the future)"
-            )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Future perfect (Futur II)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "This tense is used to describe an occurrence or event that will be achieved" +
-                    " or done at a specific time in the future or an even an occurrence that will be" +
-                    " past in the future. Below are some examples to give you better understanding " +
-                    "of this tense: \n \n Im Jahr 2030 werden wir viele Fortschritte in der Medizin " +
-                    "gemacht haben. (In 2030 we will have made many advances in medicine.) \n \n" +
-                    "Bis zum Ende des Jahres werden wir zehn Jahre zusammen verbracht haben. " +
-                    "(By the end of the year we will have spent ten years together.)")
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Future perfect (Futur II)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "This tense is used to describe an occurrence or event that will be achieved" +
+                            " or done at a specific time in the future or an even an occurrence that will be" +
+                            " past in the future. Below are some examples to give you better understanding " +
+                            "of this tense: \n \n Im Jahr 2030 werden wir viele Fortschritte in der Medizin " +
+                            "gemacht haben. (In 2030 we will have made many advances in medicine.) \n \n" +
+                            "Bis zum Ende des Jahres werden wir zehn Jahre zusammen verbracht haben. " +
+                            "(By the end of the year we will have spent ten years together.)"
+                )
+            }
         }
     }
 }
 
 @Composable
 fun GermanVerbsAndConjugation() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "German Verbs and Conjugation",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(text = "Verbs are the backbone of many languages, this includes German.Knowing the " +
+                        "most important verbs in a language can improve your ability to communicate and " +
+                        "express yourself much easily.\n \n German verbs are conjugated based on pronouns " +
+                        "thus you might notice some verb endings completely changing, some verbs have " +
+                        "the whole word completely changed.\n" +
+                        "\n" +
+                        "In German verbs can fall under two groups, regular verbs (weak) and irregular " +
+                        "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
+                        "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
+                        "stem due to conjugation.")
+            }
+        }
+
+    }
     ElevatedCard(
         modifier = Modifier
             .fillMaxSize()
@@ -1258,121 +1447,209 @@ fun GermanVerbsAndConjugation() {
 
 @Composable
 fun GermanPrepositions() {
-    ElevatedCard(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp,
-        )
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
     ) {
-        Column(
+        Spacer(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(all = 10.dp)
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
         ) {
-            Spacer(
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Prepositions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Prepositions connect a noun to the sentence body, they also determine the case" +
+                            " of the noun, article and can equally signal whether a noun is stationery " +
+                            "or moving. \n \n There are 4 groups of prepositions namely accusative, " +
+                            "dative, genitive and two-way:"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(
-                text = "Prepositions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Accusative Prepositions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "These are the prepositions that go with accusative case only. They usually" +
+                            "signal something is moving:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(3.dp)
+                )
+                GermanAccusativePrepositionsList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(
-                text = "Prepositions connect a noun to the sentence body, they also determine the case" +
-                        " of the noun, article and can equally signal whether a noun is stationery " +
-                        "or moving. \n \n There are 4 groups of prepositions namely accusative, " +
-                        "dative, genitive and two-way:"
-            )
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Accusative Prepositions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(5.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Dative Prepositions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "These are the prepositions that go with detive case only. They usually" +
+                        "signal something is stationary or not moving:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(3.dp)
+                )
+                GermanDativePrepositionsList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Text(text = "These are the prepositions that go with accusative case only. They usually" +
-                    "signal something is moving:"
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(3.dp)
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Genitive Prepositions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "These are the prepositions that go with genitive case only:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(3.dp)
+                )
+                GermanGenitivePrepositionsList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            GermanAccusativePrepositionsList()
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Dative Prepositions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
+        ) {
+            Column(
                 modifier = Modifier
-                    .height(5.dp)
-            )
-            Text(text = "These are the prepositions that go with detive case only. They usually" +
-                    "signal something is stationary or not moving:"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(3.dp)
-            )
-            GermanDativePrepositionsList()
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Genitive Prepositions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(5.dp)
-            )
-            Text(text = "These are the prepositions that go with genitive case only:"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(3.dp)
-            )
-            GermanGenitivePrepositionsList()
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Two way Prepositions",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(5.dp)
-            )
-            Text(text = "These are the prepositions that can either go with dative or accusative" +
-                    "case:"
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(3.dp)
-            )
-            GermanTwoWayPrepositionsList()
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Two way Prepositions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "These are the prepositions that can either go with dative or accusative" +
+                        "case:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(3.dp)
+                )
+                GermanTwoWayPrepositionsList()
+            }
         }
     }
 }
@@ -1380,5 +1657,5 @@ fun GermanPrepositions() {
 @Composable
 @Preview(showBackground = true)
 fun checkGrammarScreens() {
-    GermanCases()
+    GermanVerbsAndConjugation()
 }
