@@ -1317,23 +1317,24 @@ fun GermanVerbsAndConjugation() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                Text(text = "Verbs are the backbone of many languages, this includes German.Knowing the " +
-                        "most important verbs in a language can improve your ability to communicate and " +
-                        "express yourself much easily.\n \n German verbs are conjugated based on pronouns " +
-                        "thus you might notice some verb endings completely changing, some verbs have " +
-                        "the whole word completely changed.\n" +
-                        "\n" +
-                        "In German verbs can fall under two groups, regular verbs (weak) and irregular " +
-                        "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
-                        "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
-                        "stem due to conjugation.")
+                Text(
+                    text = "Verbs are the backbone of many languages, this includes German.Knowing the " +
+                            "most important verbs in a language can improve your ability to communicate and " +
+                            "express yourself much easily.\n \n German verbs are conjugated based on pronouns " +
+                            "thus you might notice some verb endings completely changing, some verbs have " +
+                            "the whole word completely changed.\n" +
+                            "\n" +
+                            "In German verbs can fall under two groups, regular verbs (weak) and irregular " +
+                            "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
+                            "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
+                            "stem due to conjugation."
+                )
             }
         }
 
-    }
     ElevatedCard(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(all = 10.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(10.dp),
@@ -1343,8 +1344,7 @@ fun GermanVerbsAndConjugation() {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
                 .padding(all = 10.dp)
         ) {
             Spacer(
@@ -1361,89 +1361,146 @@ fun GermanVerbsAndConjugation() {
                 modifier = Modifier
                     .height(10.dp)
             )
-            Text(text = "Verbs are the backbone of many languages, this includes German.Knowing the " +
-                    "most important verbs in a language can improve your ability to communicate and " +
-                    "express yourself much easily.\n \n German verbs are conjugated based on pronouns " +
-                    "thus you might notice some verb endings completely changing, some verbs have " +
-                    "the whole word completely changed.\n" +
-                    "\n" +
-                    "In German verbs can fall under two groups, regular verbs (weak) and irregular " +
-                    "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
-                    "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
-                    "stem due to conjugation.")
-            Spacer(modifier = Modifier
-                .height(40.dp))
             Text(
-                text = "Top 20 Verbs to know in German",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
+                text = "Verbs are the backbone of many languages, this includes German.Knowing the " +
+                        "most important verbs in a language can improve your ability to communicate and " +
+                        "express yourself much easily.\n \n German verbs are conjugated based on pronouns " +
+                        "thus you might notice some verb endings completely changing, some verbs have " +
+                        "the whole word completely changed.\n" +
+                        "\n" +
+                        "In German verbs can fall under two groups, regular verbs (weak) and irregular " +
+                        "verbs(Strong Verbs). \n \nRegular verbs are the verbs that do not completely change " +
+                        "even when conjugated. \n \nIrregular verbs are verbs that can change their whole " +
+                        "stem due to conjugation."
             )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            Text(text = "Make sure to learn the conjugations of all these verbs as you will " +
-                    "encounter these verbs frequently as you speak and learn more German."
+        }
+    }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            VerbTable()
-            Spacer(modifier = Modifier
-                .height(40.dp)
-            )
-            Text(
-                text = "Verb Conjugation",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Top 20 Verbs to know in German",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "Make sure to learn the conjugations of all these verbs as you will " +
+                            "encounter these verbs frequently as you speak and learn more German."
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                VerbTable()
+            }
+        }
             Spacer(
                 modifier = Modifier
-                    .height(10.dp)
+                    .height(20.dp)
             )
-            Text(
-                text = "Verb conjugation is when a verb changes its form in order to match the " +
-                    "pronoun. The pronoun and the verb can show the quantity of the subject of a " +
-                    "sentence whether there is one or more persons as subject of a sentence. Below " +
-                    "are tables showing conjugation of verbs haben (to have), sein (to be) and " +
-                    "können (to be able to, can) while in present tense:"
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
             )
-            Spacer(modifier = Modifier
-                .height(15.dp))
-            Text(
-                text = "Verb haben (to have)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            HabenConjugationTable()
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Verb Sein (to be)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            SeinConjugationTable()
-            Spacer(modifier = Modifier
-                .height(10.dp))
-            Text(
-                text = "Verb können (to be able to, can)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier
-                .height(5.dp))
-            KannConjugationTable()
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Verb Conjugation",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Verb conjugation is when a verb changes its form in order to match the " +
+                            "pronoun. The pronoun and the verb can show the quantity of the subject of a " +
+                            "sentence whether there is one or more persons as subject of a sentence. Below " +
+                            "are tables showing conjugation of verbs haben (to have), sein (to be) and " +
+                            "können (to be able to, can) while in present tense:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(15.dp)
+                )
+                Text(
+                    text = "Verb haben (to have)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                HabenConjugationTable()
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Verb Sein (to be)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                SeinConjugationTable()
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Verb können (to be able to, can)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                KannConjugationTable()
+
+            }
+        }
 
         }
     }
-}
 
 @Composable
 fun GermanPrepositions() {
