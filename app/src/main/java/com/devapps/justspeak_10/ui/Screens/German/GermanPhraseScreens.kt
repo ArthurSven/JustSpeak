@@ -169,8 +169,12 @@ fun GermanPhraseNavigation(navController: NavController) {
         composable(GermanExpressionScreen.route) {
             GermanExpressions()
         }
+        composable(GermanEatingScreen.route) {
+            GermanEating()
+        }
     }
 }
+
 
 @Composable
 fun GermanPhraseListLandingScreen(
@@ -316,6 +320,10 @@ fun GermanIntroductions() {
                     .fillMaxWidth()
                     .padding(all = 10.dp)
             ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
                 Text(
                     text = "Greetings",
                     fontWeight = FontWeight.Bold,
@@ -348,6 +356,10 @@ fun GermanIntroductions() {
                     .fillMaxWidth()
                     .padding(all = 10.dp)
             ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
                 Text(
                     text = "Goodbyes",
                     fontWeight = FontWeight.Bold,
@@ -380,6 +392,10 @@ fun GermanIntroductions() {
                     .fillMaxWidth()
                     .padding(all = 10.dp)
             ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
                 Text(
                     text = "Expressions",
                     fontWeight = FontWeight.Bold,
@@ -475,7 +491,22 @@ fun GermanExpressions() {
 }
 
 @Composable
+fun GermanEating() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun ViewPhraseScreens() {
-    GermanIntroductions()
+    GermanExpressions()
 }

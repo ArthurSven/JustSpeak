@@ -215,7 +215,7 @@ fun GermanBasicExpressionList() {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(500.dp)
     ) {
         items(german) { germanPhrases ->
             val index = german.indexOf(germanPhrases)
@@ -227,10 +227,46 @@ fun GermanBasicExpressionList() {
 }
 
 @Composable
-fun germanEatingPlaceList() : List<String> {
+fun germanEatingRestaurantPhraseList() : List<String> {
     return listOf(
-        "das Restaurant", "die Imbissbude", "das EssenZimmer", "die Küche"
+        "Einen Tisch für vier, bitte", "Ist dieser Platz frei?", "Die Speiserkarte, bitte",
+        "Ich möchte bestellen", "Ich hätte gern...", "Was würden Sie empfehlen",
+        "Nein, das habe ich nicht bestellt", "Hat es ihnen/dir geschmeckt", "Noch eins",
+        "Guten Appetite", "Prost", "Sonst noch was?", "Entschuldingen Sie bitte", "Zahlen, bitte",
+        "Könnte ich das einpacken lassen?", "Ich möchte eine Reservierung machen", "an Guadn",
+        "en Guete", "Kann ich mit Karte bezahlen?", "Kann ich mit Bargeld bezahlen?",
+        "Ich bezahle mit Karte", "Ich bezahle mit Bargeld"
     )
+}
+
+fun englishEatingRestaurantPhraseList() : List<String> {
+    return listOf(
+        "A table for four, please", "Is this seat free?", "Menu, please", "I would like to order",
+        "I would like...", "What would you recommend?", "Did you enjoy the food?", "One more",
+        "Have a nice meal", "Cheers!", "Anything else?", "Excuse me", "Bill please",
+        "Can I have this wrapped?", "I would like to make a reservation",
+        "Have a nice meal (Bavarian)", "Have a nice meal (Switzerland)", "Can I pay with a card?",
+        "Can I pay with cash?", "I will pay with a card", "I will pay with cash"
+    )
+}
+
+@Composable
+fun GermanRestaurantEatingPhraseList() {
+    val german = germanEatingRestaurantPhraseList()
+    val english = englishEatingRestaurantPhraseList()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
 }
 
 
