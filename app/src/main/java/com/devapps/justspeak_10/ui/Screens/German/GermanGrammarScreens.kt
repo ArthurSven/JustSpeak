@@ -1295,7 +1295,7 @@ fun GermanVerbsAndConjugation() {
         ElevatedCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 20.dp),
+                .padding(all = 10.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(10.dp),
             elevation = CardDefaults.cardElevation(
@@ -1331,7 +1331,9 @@ fun GermanVerbsAndConjugation() {
                 )
             }
         }
-
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
