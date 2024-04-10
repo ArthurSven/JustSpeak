@@ -242,7 +242,7 @@ fun germanEatingRestaurantPhraseList() : List<String> {
 fun englishEatingRestaurantPhraseList() : List<String> {
     return listOf(
         "A table for four, please", "Is this seat free?", "Menu, please", "I would like to order",
-        "I would like...", "What would you recommend?", "Did you enjoy the food?", "One more",
+        "I would like...", "What would you recommend?", "No, I did not order this", "Did you enjoy the food?", "One more",
         "Have a nice meal", "Cheers!", "Anything else?", "Excuse me", "Bill please",
         "Can I have this wrapped?", "I would like to make a reservation",
         "Have a nice meal (Bavarian)", "Have a nice meal (Switzerland)", "Can I pay with a card?",
@@ -251,7 +251,7 @@ fun englishEatingRestaurantPhraseList() : List<String> {
 }
 
 @Composable
-fun GermanRestaurantEatingPhraseList() {
+fun GermanEatingPhraseList() {
     val german = germanEatingRestaurantPhraseList()
     val english = englishEatingRestaurantPhraseList()
 
@@ -269,6 +269,45 @@ fun GermanRestaurantEatingPhraseList() {
     }
 }
 
+@Composable
+fun getGermanShoppingPhrases() : List<String> {
+    return listOf(
+        "Ich gehe einkaufen", "Wo kann ich .. finden?", "Wie viel kostet das?", "der Preis", "die Kleidung",
+        "das Geschäft", "Haben Sie...?", "Verkaufen Sie?", "Ich suche...", "Ich möchte ...", "Das ist teuer",
+        "Das ist billig", "Kann ich eine Quittung haben?", "auf welcher Stock kann ich ... finden",
+        "Wo finde ich ...", "Das gefällt mir", "Das gefällt mir nicht", "Probier es an"
+    )
+}
+
+@Composable
+fun getEnglishShoppingPhrases() : List<String> {
+    return listOf(
+        "I am going shopping", "Where can I find...?", "How much does this cost?", "The price",
+        "the clothes", "the shop", "Do you have...?", "Do you sell...?", "I am looking for...",
+        "I would like...", "That's expensive", "That's cheap", "Can I have a receipt?",
+        "On which floor can I find...?", "Where can I find...?", "I like that", "I don't like that",
+        "Try it on"
+    )
+}
+
+@Composable
+fun GermanShoppingList() {
+    val german = getGermanShoppingPhrases()
+    val english = getEnglishShoppingPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
 
 
 @Composable

@@ -25,7 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,11 +44,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
+import com.devapps.justspeak_10.ui.Components.GermanEatingPhraseList
 import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanIntroductionExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
+import com.devapps.justspeak_10.ui.Components.GermanShoppingList
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
 import com.devapps.justspeak_10.ui.destinations.GermanEmergencyScreen
@@ -197,9 +198,9 @@ fun GermanPhraseListLandingScreen(
             itemRoute = GermanExpressionScreen.route
         ),
         PhraseListItem(
-            itemTitle = "Dinning and Eatery",
-            itemDescription = "Image yourself at a nice cafe in Vienna... Learn to express yourself " +
-                    "when you go out to buy or order a meal, common language used in context of food.",
+            itemTitle = "Dining and Shopping",
+            itemDescription = "Imagine yourself at a nice cafe in Vienna... Learn to express yourself " +
+                    "when you go out shopping or to dine.",
             itemRoute = GermanEatingScreen.route
         ),
         PhraseListItem(
@@ -502,11 +503,111 @@ fun GermanEating() {
             modifier = Modifier
                 .height(20.dp)
         )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Dining and Shopping",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Dining and shopping are essential part of modern day life. Perhaps you" +
+                            " fancy a good dinner or a shopping spree in the German speaking world, this" +
+                            " section covers both dining out and shopping:"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Dining out",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanEatingPhraseList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Shopping",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanShoppingList()
+            }
+        }
     }
 }
 
 @Composable
 @Preview(showBackground = true)
 fun ViewPhraseScreens() {
-    GermanExpressions()
+    GermanEating()
 }
