@@ -309,6 +309,118 @@ fun GermanShoppingList() {
     }
 }
 
+@Composable
+fun getGermanEmergencyPhrases() : List<String> {
+    return listOf(
+        "Hilfe!", "Achtung!", "Beeilen Sie sich", "Beeil dich", "Sei Vorsichtig!", "Pass auf!",
+        "Können Sie mir helfen?", "Kannst du mir helfen?", "Wie kann ich Ihnen helfen?",
+        "Wie kann ich dir helfen?", "Was ist passiert?", "Ich habe einen Notfall", "Es gab einen Unfall"
+    )
+}
+
+@Composable
+fun getEnglishEmergencyPhrases() : List<String> {
+    return listOf(
+       "Help", "Attention!", "Hurry up (formal)", "Hurry up (informal)", "Be careful", "Take care",
+        "Can you help me? (formal)", "Can you help me? (informal)", "How can I help you? (formal)",
+        "How can I help you? (informal)", "What happened?", "I have an emergency",
+        "There was an accident"
+    )
+}
+
+@Composable
+fun GermanEmergencyList() {
+    val german = getGermanEmergencyPhrases()
+    val english = getEnglishEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanMedicalEmergencyPhrases() : List<String> {
+    return listOf(
+        "Ich bin krank", "Bring mich zum Krankenhaus", "Ich bin verletzt", "Ruf den KrankenWagen",
+        "Feuer!", "Ich habe eine Erkältung", "Sie ist in Ohnmacht gefallen", "Er ist tot",
+        "Ich brauche einen Arzt", "Ich habe mich verbrannt", "Ich habe mich geschnitten",
+        "Ist alles in Ordnung?"
+    )
+}
+
+@Composable
+fun getEnglishMedicalEmergencyPhrases() : List<String> {
+    return listOf(
+        "I am sick", "Take me to the hospital", "I am injured", "Call the ambulance", "Fire!",
+        "I have a cold", "She fainted", "He is dead", "I need a doctor", "I burned myself",
+        "I cut myself", "Is everything alright?"
+    )
+}
+
+@Composable
+fun GermanMedicalEmergencyList() {
+    val german = getGermanMedicalEmergencyPhrases()
+    val english = getEnglishMedicalEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanCrimeEmergencyPhrases() : List<String> {
+    return listOf(
+        "Ich wurde beraubt", "Mein Gepäck wurde gestohlen", "Ruf die Polizei", "Haltet den Dieb!",
+        "Meine Wohnung wurde eingebrochen", "Ich möchte ein Verbrechen melden"
+    )
+}
+
+@Composable
+fun getEnglishCrimeEmergencyPhrases() : List<String> {
+    return listOf(
+        "I was robbed", "My backpack was stolen", "Call the police", "Stop the thief!",
+        "My apartment was broken into", "I would like to report a crime"
+    )
+}
+
+@Composable
+fun GermanCrimeEmergencyList() {
+    val german = getGermanCrimeEmergencyPhrases()
+    val english = getEnglishCrimeEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+
 
 @Composable
 @Preview(showBackground = true)
