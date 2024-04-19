@@ -53,6 +53,7 @@ import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanIntroductionExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
+import com.devapps.justspeak_10.ui.Components.GermanQuestionStarterList
 import com.devapps.justspeak_10.ui.Components.GermanShoppingList
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
@@ -178,6 +179,9 @@ fun GermanPhraseNavigation(navController: NavController) {
         }
         composable(GermanEmergencyScreen.route) {
             GermanEmergency()
+        }
+        composable(GermanQuestionsScreen.route) {
+            GermanQuestion()
         }
     }
 }
@@ -777,7 +781,132 @@ fun GermanEmergency() {
 }
 
 @Composable
+fun GermanQuestion() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Questions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(text = "Questions are an essential aspect of language learning. Questions " +
+                        "enable you to ask for information regarding interests. Knowing how to ask" +
+                        " questions in German enables you to find out more about things you are " +
+                        "curious about")
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Common question starters",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "Below are some common words we use to form questions in German:")
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanQuestionStarterList()
+            }
+        }
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "How to form questions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "To form questions, we use the common question starters at the begiining" +
+                        " of the sentence. The sentence is then followed by a verb much like it is " +
+                        "in english:")
+            }
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun ViewPhraseScreens() {
-    GermanEmergency()
+    GermanQuestion()
 }

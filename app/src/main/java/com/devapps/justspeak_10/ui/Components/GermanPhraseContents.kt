@@ -420,6 +420,40 @@ fun GermanCrimeEmergencyList() {
     }
 }
 
+@Composable
+fun getGermanQuestionStarters() : List<String> {
+    return listOf(
+        "Was", "Wie", "Wo", "Wann", "Welche", "Wer", "Warum", "Wieso", "Woher", "Wohin", "Was für"
+    )
+}
+
+@Composable
+fun getEnglishQuestionStarters() : List<String> {
+    return listOf(
+        "What", "How", "When", "Which", "Who", "Why", "Why", "Where... from", "Where... to", "What " +
+                "kind of"
+    )
+}
+
+@Composable
+fun GermanQuestionStarterList() {
+    val german = getGermanQuestionStarters()
+    val english = getEnglishQuestionStarters()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
 
 
 @Composable
