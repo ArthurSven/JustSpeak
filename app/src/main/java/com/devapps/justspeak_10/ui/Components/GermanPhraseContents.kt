@@ -430,7 +430,7 @@ fun getGermanQuestionStarters() : List<String> {
 @Composable
 fun getEnglishQuestionStarters() : List<String> {
     return listOf(
-        "What", "How", "When", "Which", "Who", "Why", "Why", "Where... from", "Where... to", "What " +
+        "What", "How", "Where", "When", "Which", "Who", "Why", "Why", "Where... from", "Where... to", "What " +
                 "kind of"
     )
 }
@@ -454,7 +454,79 @@ fun GermanQuestionStarterList() {
     }
 }
 
+@Composable
+fun getGermanFormQuestions() : List<String> {
+    return listOf(
+        "Was ist das?", "Wie komme ich zum Bahnhof??", "Wo ist das Badezimmer?",
+        "Wann kommt der Bus an?", "Welche Mannschaft unterstützen Sie",
+        "Wer hat mein Pizza gegessen?", "Woher kommt er?", "Wohin geht Ihr?", "Was für ein Auto ist" +
+                " das?"
 
+    )
+}
+
+@Composable
+fun getEnglishFormQuestions() : List<String> {
+    return listOf(
+        "What's this/that?", "How do I get to the train station?", "Where is the bathroom",
+        "When does the bus arrive?", "Which team do you support?", "Who ate my pizza?",
+        "Where does he come from?", "Where are you guys going to?", "What kind of car is that?"
+    )
+}
+
+@Composable
+fun GermanFormQuestionList() {
+    val german = getGermanFormQuestions()
+    val english = getEnglishFormQuestions()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanVerbQuestions() : List<String> {
+    return listOf(
+        "Kannst du mir eine Nachricht schicken?", "Trinkst du auch Bier?", "Kommen Sie zur Party?",
+        "Arbeitest du bei IKEA?", "Bist du müde?", "Sind sie jetzt besser?"
+    )
+}
+
+@Composable
+fun getEnglishVerbQuestion() : List<String> {
+    return listOf(
+        "Can you send me a Message?", "Do you also drink beer?", "Are you coming to the party?",
+        "Do you work at IKEA?", "Are you tired?", "Are they better now?"
+    )
+}
+
+@Composable
+fun GermanVerbQuestionList() {
+    val german = getGermanVerbQuestions()
+    val english = getEnglishVerbQuestion()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
 
 @Composable
 @Preview(showBackground = true)

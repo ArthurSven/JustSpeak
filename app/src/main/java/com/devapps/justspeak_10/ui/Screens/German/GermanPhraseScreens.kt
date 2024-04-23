@@ -47,6 +47,7 @@ import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanCrimeEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanEatingPhraseList
 import com.devapps.justspeak_10.ui.Components.GermanEmergencyList
+import com.devapps.justspeak_10.ui.Components.GermanFormQuestionList
 import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
@@ -55,6 +56,7 @@ import com.devapps.justspeak_10.ui.Components.GermanMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.GermanQuestionStarterList
 import com.devapps.justspeak_10.ui.Components.GermanShoppingList
+import com.devapps.justspeak_10.ui.Components.GermanVerbQuestionList
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
 import com.devapps.justspeak_10.ui.destinations.GermanEmergencyScreen
@@ -786,7 +788,7 @@ fun GermanQuestion() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = Color.LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -868,6 +870,10 @@ fun GermanQuestion() {
                 GermanQuestionStarterList()
             }
         }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
         ElevatedCard(
             modifier = Modifier
                 .fillMaxWidth()
@@ -897,12 +903,63 @@ fun GermanQuestion() {
                     modifier = Modifier
                         .height(5.dp)
                 )
-                Text(text = "To form questions, we use the common question starters at the begiining" +
-                        " of the sentence. The sentence is then followed by a verb much like it is " +
-                        "in english:")
+                Text(text = "To form questions, we use the common question starters at the beginning" +
+                        " of the sentence. The sentence is usually followed by a verb much like it is " +
+                        "in english with which being the exception:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanFormQuestionList()
+
             }
         }
-    }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Forming questions with verbs",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "There are some instances where questions can be formed not wth the Ws" +
+                        " but verbs. In english this is equivalent to questions that start with does," +
+                        " do, are, will, etc. These questions start with the verb at the beginning:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanVerbQuestionList()
+            }
+        }
+            }
 }
 
 @Composable
