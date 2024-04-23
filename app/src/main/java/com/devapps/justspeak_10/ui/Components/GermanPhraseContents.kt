@@ -529,6 +529,63 @@ fun GermanVerbQuestionList() {
 }
 
 @Composable
+fun getGermanTimeEssentialPhrases() : List<String> {
+    return listOf(
+        "Entschuldigung, wie viel Uhr ist es?", "Wie spät ist es?", "Es ist ... Uhr", "die Zeit",
+        "Der Tag", "Das Jahr", "Gestern", "Heute", "Morgen", "Mittag", "Nachmittag", "Abend",
+        "Nacht", "Letztes Jahr", "Dieses Jahr", "Nächstes Jahr", "Diesen Monat", "Letzten Monat",
+        "Nächsten Monat"
+    )
+}
+
+@Composable
+fun geEnglishTimeEssentialPhrases() : List<String> {
+    return listOf(
+        "Excuse me, what time is it?", "What time is it (How late is it)", "It is ... 0'clock",
+        "The time", "The day", "The year", "Yesterday", "Today", "Tomorrow", "Midday", "Afternoon",
+        "Evening", "Night", "Last year", "This year", "Next year", "This month", "Last month",
+        "Next month"
+    )
+}
+
+@Composable
+fun GermanTimeEssentialsList() {
+    val german = getGermanTimeEssentialPhrases()
+    val english = geEnglishTimeEssentialPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanTime() : List<String> {
+    return listOf(
+        "Es ist ein Uhr", "Es is kurz nach zwei", "Fünf nach drei", "Zehn nach drei", "Viertel nach drei",
+        "zwanzig nach vier", "FÜnf vor halb sechs", "Halb sechs", "Fünf nach halb sechs",
+        "zwanzig vor sieben", "Viertel vor sieben", "zehn vor sieben", "Fünf vor sieben",
+        "kurz vor sieben"
+    )
+}
+
+@Composable
+fun getEnglishTime() : List<String> {
+    return listOf(
+        "01:00", "02:03", "03:05", "03:10", "03:15", "04:20", "05:25", "05:30", "05:35", "06:40",
+        "06:45", "06:50", "06:55", "06:57"
+    )
+}
+
+@Composable
 @Preview(showBackground = true)
 fun viewPhraseContents() {
     GermanIntroductionExpressionList()

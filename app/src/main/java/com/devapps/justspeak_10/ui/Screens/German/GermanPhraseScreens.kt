@@ -56,6 +56,7 @@ import com.devapps.justspeak_10.ui.Components.GermanMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.GermanQuestionStarterList
 import com.devapps.justspeak_10.ui.Components.GermanShoppingList
+import com.devapps.justspeak_10.ui.Components.GermanTimeEssentialsList
 import com.devapps.justspeak_10.ui.Components.GermanVerbQuestionList
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
@@ -136,7 +137,7 @@ fun GermanPhraseScreen(
             )
         )
         }
-    ) { it ->
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -185,6 +186,9 @@ fun GermanPhraseNavigation(navController: NavController) {
         composable(GermanQuestionsScreen.route) {
             GermanQuestion()
         }
+        composable(GermanTimeScreen.route) {
+            GermanTime()
+        }
     }
 }
 
@@ -196,7 +200,7 @@ fun GermanPhraseListLandingScreen(
     val selectedItemIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
-    val topics = listOf<PhraseListItem>(
+    val topics = listOf(
         PhraseListItem(
             itemTitle = "Introductions",
             itemDescription = "Learn to introduce yourself the german way. Distinguish the formal" +
@@ -963,7 +967,139 @@ fun GermanQuestion() {
 }
 
 @Composable
+fun GermanTime() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = Color.LightGray)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Telling the time",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "In the German speaking world, time is of essence. Time is taken very" +
+                            "seriously, that means try your best to be at least 5 minutes early. " +
+                            "This section teaches you how to read and tell time in German:"
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Essential phrases for time",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(text = "The following are phrases key to telling the time in German:")
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanTimeEssentialsList()
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "How to tell the time",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "The following are different examples of telling time in German:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun ViewPhraseScreens() {
-    GermanQuestion()
+    GermanTime()
 }
