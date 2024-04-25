@@ -586,6 +586,25 @@ fun getEnglishTime() : List<String> {
 }
 
 @Composable
+fun GermanTimeList() {
+    val german = getGermanTime()
+    val english = getEnglishTime()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun viewPhraseContents() {
     GermanIntroductionExpressionList()

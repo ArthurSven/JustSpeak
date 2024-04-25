@@ -57,8 +57,10 @@ import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.GermanQuestionStarterList
 import com.devapps.justspeak_10.ui.Components.GermanShoppingList
 import com.devapps.justspeak_10.ui.Components.GermanTimeEssentialsList
+import com.devapps.justspeak_10.ui.Components.GermanTimeList
 import com.devapps.justspeak_10.ui.Components.GermanVerbQuestionList
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.makeBulletedList
 import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
 import com.devapps.justspeak_10.ui.destinations.GermanEmergencyScreen
 import com.devapps.justspeak_10.ui.destinations.GermanExpressionScreen
@@ -1086,6 +1088,18 @@ fun GermanTime() {
                     modifier = Modifier
                         .height(5.dp)
                 )
+                val items = listOf<String>(
+                    "In german, if the time has the word nach, it is equivalent to the word past",
+                    "The word vor is equivalent to the word to: Viertel vor Neun (Quarter to nine)",
+                    "In german if the time is 8:30, it will not be halb acht rather halb neun",
+                    "easiest way to tell minutes is to say the number of the minutes then either " +
+                            "vor or nach and the the hour"
+                )
+                Text(text = makeBulletedList(items = items))
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
                 Text(
                     text = "The following are different examples of telling time in German:"
                 )
@@ -1093,6 +1107,7 @@ fun GermanTime() {
                     modifier = Modifier
                         .height(10.dp)
                 )
+                GermanTimeList()
             }
         }
     }
