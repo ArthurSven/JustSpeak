@@ -10,4 +10,6 @@ import com.devapps.justspeak_10.data.local.model.JournalEntry
 abstract class JustSpeakDatabase : RoomDatabase() {
 
     abstract fun flashcardDao() : FlashcardDao
+
+    abstract fun journalDao() : JournalDao
 }

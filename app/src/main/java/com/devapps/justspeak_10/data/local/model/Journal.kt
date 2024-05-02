@@ -16,7 +16,9 @@ data class Journal(
     @ColumnInfo("author")
     val author: String,
     @ColumnInfo("is_synced")
-    val isSynced: Boolean
+    var isSynced: Boolean,
+    @ColumnInfo(name = "remote_journal_id")
+    var remoteJournalId: String? = null
 )
 
 @Serializable
