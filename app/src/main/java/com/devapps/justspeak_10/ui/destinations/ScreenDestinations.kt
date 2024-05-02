@@ -142,6 +142,17 @@ object GermanTimeScreen : ScreenDestination {
     override val route = "german_time_screen"
 }
 
+object GermanQuizHomeScreen : ScreenDestination {
+    override val route = "german_quiz_home_screen"
+}
+
+object GermanGrammarQuizScreen : ScreenDestination {
+    override val route = "german_grammar_quiz_screen"
+}
+
+object GermanPhraseQuizScreen : ScreenDestination {
+    override val route = "german_grammar_quiz_screen"
+}
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }
