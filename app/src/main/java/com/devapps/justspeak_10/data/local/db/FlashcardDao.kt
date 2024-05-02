@@ -7,6 +7,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RoomDatabase
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
+import com.devapps.justspeak_10.data.local.model.Journal
+import com.devapps.justspeak_10.data.local.model.JournalEntry
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,10 +26,4 @@ interface FlashcardDao {
     @Delete
     suspend fun deleteFlashCard(flashcardLocal: FlashcardLocal)
 
-}
-
-@Database(entities = [FlashcardLocal::class], version = 1, exportSchema = false)
-abstract class JustSpeakDatabase : RoomDatabase() {
-
-    abstract fun flashcardDao() : FlashcardDao
 }

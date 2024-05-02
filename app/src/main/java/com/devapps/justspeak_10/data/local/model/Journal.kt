@@ -13,8 +13,10 @@ data class Journal(
     val journalName: String,
     @ColumnInfo("date_created")
     val date: String,
-    @ColumnInfo("äuthor")
-    val author: String
+    @ColumnInfo("author")
+    val author: String,
+    @ColumnInfo("is_synced")
+    val isSynced: Boolean
 )
 
 @Serializable
@@ -35,7 +37,9 @@ data class JournalEntry(
     @ColumnInfo("author")
     val author: String,
     @ColumnInfo("journal_id")
-    val journalId: Int
+    val journalId: Int,
+    @ColumnInfo("is_synced")
+    val isSynced: Boolean
 )
 
 @Serializable
