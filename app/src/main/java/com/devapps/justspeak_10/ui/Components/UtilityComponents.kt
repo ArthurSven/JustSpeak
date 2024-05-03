@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -172,7 +173,48 @@ fun getCurrentDate() : String {
 }
 
 @Composable
+fun QuizCard() {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+        ) {
+            Text(
+                text = "Grammar quizzes",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+            Spacer(
+                modifier = Modifier.height(5.dp)
+            )
+            Text(
+                text = "Test your knowledge and understanding on german grammar topics like verbs," +
+                    " nouns, adjectives, conjugation, etc",
+                textAlign = TextAlign.Justify
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+
+            }
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun CheckComponents() {
-
+QuizCard()
 }

@@ -18,17 +18,14 @@ interface OfflineJournalRepository {
 
     suspend fun editJournal(journal: Journal)
 
-    suspend fun deleteJournalById(journalId: Int)
+    suspend fun deleteJournal(journal: Journal)
 
-    suspend fun deleteJournalWithEntries(journal: Journal)
 }
 
 class OfflineJournalRepositoryImpl @Inject constructor(
     private val journalDao: JournalDao,
-    firestore: FirebaseFirestore
 ) : OfflineJournalRepository {
 
-    private val journalCollection = firestore.collection("journals")
     override suspend fun getMyJournals(username: String): Flow<List<Journal>> {
         return journalDao.getMyJournals(username)
     }
@@ -39,10 +36,6 @@ class OfflineJournalRepositoryImpl @Inject constructor(
 
     override suspend fun createJournal(journal: Journal) : Response {
         return try {
-            val documentRef = journalCollection.add(journal.toJournalNetwork()).await()
-
-            journal.remoteJournalId = documentRef.id
-            journal.isSynced = true
             val success = journalDao.createJournal(journal)
             Response.Success(success)
         } catch (e: Exception) {
@@ -54,12 +47,8 @@ class OfflineJournalRepositoryImpl @Inject constructor(
         journalDao.editJournal(journal)
     }
 
-    override suspend fun deleteJournalById(journalId: Int) {
-        journalDao.deleteJournalById(journalId)
-    }
-
-    override suspend fun deleteJournalWithEntries(journal: Journal) {
-        journalDao.deleteJournalWithEntries(journal)
+    override suspend fun deleteJournal(journal: Journal) {
+        return journalDao.deleteJournal(journal)
     }
 
     private fun Journal.toJournalNetwork() : Map<String, Any> {

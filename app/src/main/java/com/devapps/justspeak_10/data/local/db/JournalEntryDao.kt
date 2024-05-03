@@ -17,9 +17,6 @@ interface JournalEntryDao {
     @Query("SELECT * FROM journal_entry WHERE journal_id = :journalId ORDER BY date DESC")
      fun getJournalContent(journalId: Int) : Flow<List<JournalEntry>>
 
-    @Query("DELETE FROM journal_entry WHERE journal_id = :journalId")
-    suspend fun deleteJournalEntriesByJournalId(journalId: Int)
-
      @Delete
      suspend fun deleteJournalEntry(journalEntry: JournalEntry)
 

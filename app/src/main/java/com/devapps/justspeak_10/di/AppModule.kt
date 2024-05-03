@@ -71,8 +71,7 @@ object AppModule {
     @Singleton
     fun provideJournalRepository(
         db: JustSpeakDatabase,
-        firestore: FirebaseFirestore
     ) : OfflineJournalRepository {
-        return OfflineJournalRepositoryImpl(db.journalDao(), firestore)
+        return OfflineJournalRepositoryImpl(db.journalDao())
     }
 }

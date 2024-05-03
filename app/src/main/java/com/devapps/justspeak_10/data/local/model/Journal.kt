@@ -2,6 +2,7 @@ package com.devapps.justspeak_10.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -28,7 +29,15 @@ data class JournalNetwork(
     val author: String
 )
 
-@Entity(tableName = "journal_entry")
+@Entity(foreignKeys = [
+    ForeignKey(
+        entity = Journal::class,
+        parentColumns = ["journalId"],
+        childColumns = ["journal_id"],
+        onDelete = ForeignKey.CASCADE
+    )
+                      ],
+    tableName = "journal_entry")
 data class JournalEntry(
     @PrimaryKey(autoGenerate = true)
     val journalEntryId: Int = 0,

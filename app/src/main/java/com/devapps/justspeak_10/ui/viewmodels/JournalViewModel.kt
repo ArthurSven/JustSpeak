@@ -79,8 +79,8 @@ class JournalViewModel @Inject constructor(
         }
     }
 
-    suspend fun deleteJournalById(journalId: Int) {
-        offlineJournalRepository.deleteJournalById(journalId)
+    suspend fun deleteJournal(journal: Journal) {
+        offlineJournalRepository.deleteJournal(journal)
     }
 
     suspend fun editJournal(journal: Journal) {
