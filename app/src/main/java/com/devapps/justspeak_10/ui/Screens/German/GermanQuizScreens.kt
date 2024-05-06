@@ -231,7 +231,7 @@ fun GermanQuizHome(
         )
         Spacer(
             modifier = Modifier
-                .height(10.dp)
+                .height(8.dp)
         )
         LazyRow(content = {
             items(quizzes.size) { i ->
