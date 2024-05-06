@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -43,6 +44,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
@@ -53,8 +55,8 @@ import com.devapps.justspeak_10.ui.theme.AzureBlue
 
 data class QuizTabs(
     val title: String,
+    val description: String,
     val route: String,
-    val backgroundColor: Color
 )
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -146,7 +148,7 @@ fun GermanQuizNavigation(navController: NavController) {
     val germanQuizNavController = rememberNavController()
     NavHost(germanQuizNavController, startDestination = GermanQuizHomeScreen.route) {
         composable(GermanQuizHomeScreen.route) {
-
+            GermanQuizHome(navController = germanQuizNavController)
         }
         composable(GermanGrammarQuizScreen.route) {
 
@@ -158,21 +160,25 @@ fun GermanQuizNavigation(navController: NavController) {
 }
 
 @Composable
-fun GermanQuizHome() {
+fun GermanQuizHome(
+    navController: NavController
+) {
     val selectedItemIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
 
-    val items = listOf(
+    val quizzes = listOf(
         QuizTabs(
             title = "Grammar Quizes",
+            description = "Test your knowledge and understanding of German Grammar. Choose your grammar" +
+                    " topic and begin!",
             route = GermanGrammarQuizScreen.route,
-            backgroundColor = Color.Green
         ),
         QuizTabs(
             title = "Phrase Quizes",
+            description = "Test your knowledge and understanding on commonly used " +
+                    "phrases. Choose your phrase topic and begin!",
             route = GermanPhraseQuizScreen.route,
-            backgroundColor = AzureBlue
         )
     )
     Column(
@@ -182,10 +188,6 @@ fun GermanQuizHome() {
             .verticalScroll(rememberScrollState())
             .background(color = Color.LightGray)
     ) {
-        Spacer(
-            modifier = Modifier
-                .height(30.dp)
-        )
         ElevatedCard(
             modifier = Modifier
                 .fillMaxWidth()
@@ -201,10 +203,6 @@ fun GermanQuizHome() {
                     .fillMaxWidth()
                     .padding(all = 10.dp)
             ) {
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
                 Text(
                     text = "Quiz Section",
                     fontWeight = FontWeight.Bold,
@@ -221,7 +219,7 @@ fun GermanQuizHome() {
         }
         Spacer(
             modifier = Modifier
-                .height(10.dp)
+                .height(30.dp)
         )
         Text(
             text = "Quiz Categories",
@@ -235,12 +233,27 @@ fun GermanQuizHome() {
             modifier = Modifier
                 .height(10.dp)
         )
-
+        LazyRow(content = {
+            items(quizzes.size) { i ->
+                val quizTopic = quizzes[i]
+                QuizCard(
+                    selected = selectedItemIndex == i,
+                    quizHeading = quizTopic.title,
+                    quizDescription = quizTopic.description,
+                    onClick = {
+                        navController.navigate(quizTopic.route)
+                    }
+                )
+            }
+        },
+            modifier = Modifier
+                .padding(all = 10.dp))
     }
 }
 
 @Composable
 @Preview(showBackground = true)
 fun QuizPreview() {
-    GermanQuizHome()
+    val testNavController = rememberNavController()
+    GermanQuizHome(testNavController)
 }

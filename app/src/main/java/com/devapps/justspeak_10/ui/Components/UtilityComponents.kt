@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -173,11 +174,18 @@ fun getCurrentDate() : String {
 }
 
 @Composable
-fun QuizCard() {
+fun QuizCard(
+    selected: Boolean,
+    quizHeading: String,
+    quizDescription: String,
+    onClick: () -> Unit) {
     ElevatedCard(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 10.dp),
+            .width(280.dp)
+            .padding(all = 10.dp)
+            .clickable {
+                       onClick()
+            },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
@@ -190,7 +198,7 @@ fun QuizCard() {
                 .padding(all = 10.dp),
         ) {
             Text(
-                text = "Grammar quizzes",
+                text = quizHeading,
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
@@ -198,16 +206,18 @@ fun QuizCard() {
                 modifier = Modifier.height(5.dp)
             )
             Text(
-                text = "Test your knowledge and understanding on german grammar topics like verbs," +
-                    " nouns, adjectives, conjugation, etc",
-                textAlign = TextAlign.Justify
+                text = quizDescription,
+                textAlign = TextAlign.Left
             )
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-
+                Icon(
+                    imageVector = Icons.Filled.PlayArrow,
+                    contentDescription = "Go icon"
+                )
             }
         }
     }
@@ -216,5 +226,5 @@ fun QuizCard() {
 @Composable
 @Preview(showBackground = true)
 fun CheckComponents() {
-QuizCard()
+
 }
