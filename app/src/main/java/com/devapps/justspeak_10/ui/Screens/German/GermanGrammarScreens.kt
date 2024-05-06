@@ -99,7 +99,7 @@ import com.google.common.io.Files.append
 
 data class GrammarListItem(
 val itemTitle: String,
-    val itemRoute: String
+val itemRoute: String
 )
 
 @Composable

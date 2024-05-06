@@ -46,10 +46,26 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
+import com.devapps.justspeak_10.ui.destinations.GermanCaseQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
+import com.devapps.justspeak_10.ui.destinations.GermanNounQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanNounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPhraseQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanPrepositionQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanPrepositionScreen
+import com.devapps.justspeak_10.ui.destinations.GermanPronounQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanPronounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanQuizHomeScreen
+import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
+import com.devapps.justspeak_10.ui.destinations.GermanTenseQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
+import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
 
@@ -252,8 +268,71 @@ fun GermanQuizHome(
 }
 
 @Composable
+fun GermanGrammarQuiz() {
+
+    val germanGrammarNavController = rememberNavController()
+    NavHost(germanGrammarNavController, startDestination = G)
+}
+
+@Composable
+fun GermanGrammarQuizNavigation() {
+
+    val grammarQuizzes = listOf(
+        GrammarListItem(
+            itemTitle = "Adjectives Quiz",
+            itemRoute = GermanAdjectiveQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Cases Quiz",
+            itemRoute = GermanCaseQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Nouns Quiz",
+            itemRoute = GermanNounQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Prepositions Quiz",
+            itemRoute = GermanPrepositionQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Pronouns Quiz",
+            itemRoute = GermanPronounQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Sentence Structure Quiz",
+            itemRoute = GermanSentenceStructureQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Tenses Quiz",
+            itemRoute = GermanTenseQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Verbs and Conjugation Quiz",
+            itemRoute = GermanVerbConjugationQuizScreen.route
+        )
+    )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 5.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Spacer(modifier = Modifier
+            .height(20.dp))
+        Text(
+            text = "Grammar quiz",
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = Color.Black,
+            modifier = Modifier
+                .padding(all = 10.dp)
+        )
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun QuizPreview() {
     val testNavController = rememberNavController()
-    GermanQuizHome(testNavController)
+    GermanGrammarQuiz()
 }
