@@ -111,7 +111,7 @@ fun GrammarListItem(
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 5.dp)
+            .padding(top = 10.dp, start = 5.dp, end = 10.dp, bottom = 5.dp)
             .height(60.dp)
             .clickable {
                 onClick()
@@ -326,7 +326,8 @@ fun GermanGrammarItemScreen(navController: NavController) {
                         navController.navigate(listItem.itemRoute)
                     } )
             }
-        })
+        }
+        )
     }
 }
 

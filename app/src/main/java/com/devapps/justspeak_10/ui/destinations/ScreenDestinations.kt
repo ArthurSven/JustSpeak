@@ -151,7 +151,7 @@ object GermanGrammarQuizScreen : ScreenDestination {
 }
 
 object GermanPhraseQuizScreen : ScreenDestination {
-    override val route = "german_grammar_quiz_screen"
+    override val route = "german_phrase_quiz_screen"
 }
 
 //Quizzes

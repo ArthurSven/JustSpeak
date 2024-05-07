@@ -1,5 +1,8 @@
 package com.devapps.justspeak_10.ui.Screens.German
 
+import android.annotation.SuppressLint
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,22 +36,28 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
+import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarQuizScreen
@@ -68,6 +78,9 @@ import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
+import com.devapps.justspeak_10.ui.viewmodels.AuthViewModel
+import com.google.android.gms.auth.api.identity.Identity
+import kotlinx.coroutines.launch
 
 data class QuizTabs(
     val title: String,
@@ -162,12 +175,22 @@ fun GermanQuizScreen(
 @Composable
 fun GermanQuizNavigation(navController: NavController) {
     val germanQuizNavController = rememberNavController()
+    val context = LocalContext.current.applicationContext
+    val coroutineScope = rememberCoroutineScope()
+    val authViewModel = viewModel<AuthViewModel>()
+    val state by authViewModel.state.collectAsStateWithLifecycle()
+    val googleClientAuth by lazy {
+        GoogleClientAuth(
+            context,
+            oneTapClient = Identity.getSignInClient(context)
+        )
+    }
     NavHost(germanQuizNavController, startDestination = GermanQuizHomeScreen.route) {
         composable(GermanQuizHomeScreen.route) {
-            GermanQuizHome(navController = germanQuizNavController)
+            GermanQuizHome(germanQuizNavController)
         }
         composable(GermanGrammarQuizScreen.route) {
-
+            GermanGrammarQuiz(navController)
         }
         composable(GermanPhraseQuizScreen.route) {
 
@@ -180,7 +203,7 @@ fun GermanQuizHome(
     navController: NavController
 ) {
     val selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
+        mutableStateOf(0)
     }
 
     val quizzes = listOf(
@@ -267,17 +290,16 @@ fun GermanQuizHome(
     }
 }
 
+@SuppressLint("SuspiciousIndentation")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GermanGrammarQuiz() {
-
-    val germanGrammarNavController = rememberNavController()
-    NavHost(germanGrammarNavController, startDestination = G)
-}
-
-@Composable
-fun GermanGrammarQuizNavigation() {
-
-    val grammarQuizzes = listOf(
+fun GermanGrammarQuiz(
+    germanGrammarNavController: NavController
+) {
+    val selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
+    val quizList = listOf(
         GrammarListItem(
             itemTitle = "Adjectives Quiz",
             itemRoute = GermanAdjectiveQuizScreen.route
@@ -311,28 +333,38 @@ fun GermanGrammarQuizNavigation() {
             itemRoute = GermanVerbConjugationQuizScreen.route
         )
     )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 5.dp)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Spacer(modifier = Modifier
-            .height(20.dp))
-        Text(
-            text = "Grammar quiz",
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            color = Color.Black,
+        Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(all = 10.dp)
-        )
-    }
+                .background(color = Color.LightGray)
+        ) {
+            Text(text = "Grammar Quizzes",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Black)
+            Spacer(modifier = Modifier
+                .height(10.dp))
+            LazyColumn(content = {
+                items(quizList.size) {i->
+                    val listItem = quizList[i]
+                    GrammarListItem(
+                        selected = selectedItemIndex == i,
+                        listTitle = listItem.itemTitle,
+                        onClick = {
+                            germanGrammarNavController.navigate(listItem.itemRoute)
+                        } )
+                }
+            }
+            )
+        }
 }
+
+
 
 @Composable
 @Preview(showBackground = true)
 fun QuizPreview() {
     val testNavController = rememberNavController()
-    GermanGrammarQuiz()
+
 }
