@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +29,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -34,10 +39,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -53,6 +61,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
+import com.devapps.justspeak_10.ui.Components.Question
 import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
@@ -87,6 +96,7 @@ data class QuizTabs(
     val description: String,
     val route: String,
 )
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GermanQuizScreen(
@@ -190,10 +200,13 @@ fun GermanQuizNavigation(navController: NavController) {
             GermanQuizHome(germanQuizNavController)
         }
         composable(GermanGrammarQuizScreen.route) {
-            GermanGrammarQuiz(navController)
+            GermanGrammarQuiz(navController, germanQuizNavController)
         }
         composable(GermanPhraseQuizScreen.route) {
 
+        }
+        composable(GermanAdjectiveQuizScreen.route) {
+            GermanAdjectiveQuiz(germanQuizNavController)
         }
     }
 }
@@ -294,7 +307,8 @@ fun GermanQuizHome(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GermanGrammarQuiz(
-    germanGrammarNavController: NavController
+    germanGrammarNavController: NavController,
+    itemNavController: NavController
 ) {
     val selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
@@ -352,12 +366,120 @@ fun GermanGrammarQuiz(
                         selected = selectedItemIndex == i,
                         listTitle = listItem.itemTitle,
                         onClick = {
-                            germanGrammarNavController.navigate(listItem.itemRoute)
+                            itemNavController.navigate(listItem.itemRoute)
                         } )
                 }
             }
             )
         }
+}
+
+@Composable
+fun GermanAdjectiveQuiz(navController: NavController) {
+    var currentQuestionIndex = 0
+
+    val germanAdjectiveQuestions = listOf(
+        Question(
+            "1.",
+            "What's the German word for beautiful?",
+            listOf(
+                "Schon", "Schön", "Gut"
+            ),
+            "Schön",
+        ),
+        Question(
+            "2.",
+            "Der Hals ist ... (The neck ist long)",
+            listOf(
+                "Klein", "groß", "lang"
+            ),
+            "lang"
+        ),
+        Question(
+            "3.",
+            "Das ... Auto (The red car)",
+            listOf(
+                "roter", "rote", "rot"
+            ),
+            "rote"
+        ),
+        Question(
+            "4.",
+            "Hast du den ... Mann gesehen? (Have you seen the short man?)",
+            listOf(
+                "kleinen", "klein", "kleiner"
+            ),
+            "kleinen"
+        ),
+        Question(
+            "5.",
+            "What's the german word for slow",
+            listOf(
+                "Langsam", "Schnell", "Schlow"
+            ),
+            "Langsam"
+        )
+    )
+
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanAdjectiveQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanAdjectiveQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+        // LazyColumn to display questions
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanAdjectiveQuestions.size) { j ->
+                val adjectiveQuizList = germanAdjectiveQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${adjectiveQuizList.number} ${adjectiveQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+
+                // Display the options as radio buttons
+                adjectiveQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun GermanCaseQuiz() {
+
 }
 
 
@@ -366,5 +488,5 @@ fun GermanGrammarQuiz(
 @Preview(showBackground = true)
 fun QuizPreview() {
     val testNavController = rememberNavController()
-
+    GermanAdjectiveQuiz(testNavController)
 }
