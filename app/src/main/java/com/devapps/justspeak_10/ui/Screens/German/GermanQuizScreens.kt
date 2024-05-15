@@ -64,6 +64,10 @@ import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.Question
 import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.germanAdjectiveQuizQuestions
+import com.devapps.justspeak_10.ui.Components.germanCaseQuizQuestions
+import com.devapps.justspeak_10.ui.Components.germanNounQuizQuestions
+import com.devapps.justspeak_10.ui.Components.germanPrepositionQuestions
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
@@ -206,7 +210,17 @@ fun GermanQuizNavigation(navController: NavController) {
 
         }
         composable(GermanAdjectiveQuizScreen.route) {
-            GermanAdjectiveQuiz(germanQuizNavController)
+            GermanAdjectiveQuiz()
+        }
+        composable(GermanCaseQuizScreen.route) {
+            GermanCaseQuiz()
+        }
+
+        composable(GermanNounQuizScreen.route) {
+            GermanNounQuiz()
+        }
+        composable(GermanPrepositionQuizScreen.route) {
+            GermanPrepositionQuiz()
         }
     }
 }
@@ -375,51 +389,9 @@ fun GermanGrammarQuiz(
 }
 
 @Composable
-fun GermanAdjectiveQuiz(navController: NavController) {
-    var currentQuestionIndex = 0
+fun GermanAdjectiveQuiz() {
 
-    val germanAdjectiveQuestions = listOf(
-        Question(
-            "1.",
-            "What's the German word for beautiful?",
-            listOf(
-                "Schon", "Schön", "Gut"
-            ),
-            "Schön",
-        ),
-        Question(
-            "2.",
-            "Der Hals ist ... (The neck ist long)",
-            listOf(
-                "Klein", "groß", "lang"
-            ),
-            "lang"
-        ),
-        Question(
-            "3.",
-            "Das ... Auto (The red car)",
-            listOf(
-                "roter", "rote", "rot"
-            ),
-            "rote"
-        ),
-        Question(
-            "4.",
-            "Hast du den ... Mann gesehen? (Have you seen the short man?)",
-            listOf(
-                "kleinen", "klein", "kleiner"
-            ),
-            "kleinen"
-        ),
-        Question(
-            "5.",
-            "What's the german word for slow",
-            listOf(
-                "Langsam", "Schnell", "Schlow"
-            ),
-            "Langsam"
-        )
-    )
+    val germanAdjectiveQuestions = germanAdjectiveQuizQuestions()
 
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
@@ -447,7 +419,9 @@ fun GermanAdjectiveQuiz(navController: NavController) {
                 Text(
                     text = "${adjectiveQuizList.number} ${adjectiveQuizList.question}",
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
                 )
 
                 // Display the options as radio buttons
@@ -480,13 +454,191 @@ fun GermanAdjectiveQuiz(navController: NavController) {
 @Composable
 fun GermanCaseQuiz() {
 
+    val germanCaseQuestions = germanCaseQuizQuestions()
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanCaseQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanCaseQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+        // LazyColumn to display questions
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanCaseQuestions.size) { j ->
+                val caseQuizList = germanCaseQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${caseQuizList.number} ${caseQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                caseQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+    }
 }
 
+@Composable
+fun GermanNounQuiz() {
+    val germanNounQuestions = germanNounQuizQuestions()
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanNounQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanNounQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+        // LazyColumn to display questions
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanNounQuestions.size) { j ->
+                val nounQuizList = germanNounQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${nounQuizList.number} ${nounQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                nounQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun GermanPrepositionQuiz() {
+    val germanPrepositionQuestions = germanPrepositionQuestions()
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanPrepositionQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanPrepositionQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+        // LazyColumn to display questions
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanPrepositionQuestions.size) { j ->
+                val prepositionQuizList = germanPrepositionQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${prepositionQuizList.number} ${prepositionQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                prepositionQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+    }
+}
 
 
 @Composable
 @Preview(showBackground = true)
 fun QuizPreview() {
     val testNavController = rememberNavController()
-    GermanAdjectiveQuiz(testNavController)
+    GermanPrepositionQuiz()
 }

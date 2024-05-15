@@ -945,7 +945,7 @@ fun getGermanBodyPartNouns() : List<String> {
 @Composable
 fun getEnglishBodyPartNouns() : List<String> {
     return listOf(
-        "Eye", "Head", "Body", "Mouth", "Ear", "Hair", "Neck", "Arm", "Finger", "Chest", "Elbow",
+        "Eye", "Head", "Body", "Nose", "Mouth", "Ear", "Hair", "Neck", "Arm", "Finger", "Chest", "Elbow",
         "Bone", "Leg", "Foot", "Toe", "Skin", "Back"
     )
 }
