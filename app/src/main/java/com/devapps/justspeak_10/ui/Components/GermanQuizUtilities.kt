@@ -185,3 +185,78 @@ fun germanPrepositionQuestions() : List<Question> {
     )
 }
 
+fun germanPronounQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "Which pronoun is dative",
+            listOf(
+                "mich", "mir", "ich"
+            ),
+            "mir"
+        ),
+        Question(
+            "2",
+            "Which pronoun means 'me'",
+            listOf(
+                "mich", "mir", "ich"
+            ),
+            "mich"
+        ),
+        Question(
+            "3",
+            "What's the english equivalent for 'euch'",
+            listOf(
+                "you", "you (plural informal)", "you (plural formal)"
+            ),
+            "you (plural informal)"
+        ),
+        Question(
+            "4",
+            "What english word does ihnen correspond to",
+            listOf(
+                "You (plural formal)", "You (singular formal)", "them"
+            ),
+            "them"
+        ),
+        Question(
+            "5",
+            "Choose the correct set of pronouns",
+            listOf(
+                "ich dich dir", "du dich ihr", "Er ihn ihm"
+            ),
+            "Er ihn ihm"
+        )
+    )
+}
+
+fun germanSentenceQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "Ich gehe jetzt ins Bett ... ich bin müde - (I am going to bed because I am tired))",
+            listOf(
+                "weil", "denn", "aber"
+            ),
+            "denn"
+        ),
+        Question(
+            "2",
+            "Ich schlafe im Auto ...",
+            listOf(
+                "ein", "an", "dann"
+            ),
+            "ein"
+        ),
+        Question(
+            "3",
+            "Heute, komme ich nicht ... ich krank bin - (I am not coming today because I am sick)",
+            listOf(
+                "wenn", "denn", "weil"
+            ),
+            "weil"
+        )
+    )
+}
+
+

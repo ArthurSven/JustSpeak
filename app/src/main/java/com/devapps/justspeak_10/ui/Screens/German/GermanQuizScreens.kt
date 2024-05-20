@@ -71,6 +71,7 @@ import com.devapps.justspeak_10.ui.Components.germanAdjectiveQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanCaseQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanNounQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanPrepositionQuestions
+import com.devapps.justspeak_10.ui.Components.germanPronounQuestions
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
@@ -224,6 +225,9 @@ fun GermanQuizNavigation(navController: NavController) {
         }
         composable(GermanPrepositionQuizScreen.route) {
             GermanPrepositionQuiz()
+        }
+        composable(GermanPronounQuizScreen.route) {
+            GermanPronounQuiz()
         }
     }
 }
@@ -871,6 +875,132 @@ fun GermanPrepositionQuiz() {
             Text(text = "Submit")
         }
     }
+}
+
+@Composable
+fun GermanPronounQuiz() {
+    val germanPronounQuestions = germanPronounQuestions()
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanPronounQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanPronounQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanPronounQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanPronounQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanPronounQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanPronounQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanPronounQuestions.size) { j ->
+                val pronounQuizList = germanPronounQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${pronounQuizList.number} ${pronounQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                pronounQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != pronounQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${pronounQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanPronounQuestions.indices) {
+                    if (selectedOptions[i] == germanPronounQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
+}
+
+@Composable
+fun GermanSentenceQuiz() {
+
 }
 
 

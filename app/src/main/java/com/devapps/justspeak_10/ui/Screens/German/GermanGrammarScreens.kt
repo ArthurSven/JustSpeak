@@ -1023,17 +1023,15 @@ fun GermanSentenceStructure() {
                         .height(15.dp)
                 )
                 Text(
-                    text = "Ich komme zu spät weil ich mein Zimmer aufräumen muss - (I come late " +
-                            "because I have to clean my room)\n \n" +
-                            "Ich habe es versucht die Aufgabe zu erledigen aber ich konnte es nicht machen " +
-                            "- (I tried to complete the task but I could not do it)\n \n" +
-                            "Wenn du zuhause bist, ruf mich an okay? - (When you are at home, call me " +
-                            "okay?)\n \n" +
-                            "Die Kinder verstehen nichts obwohl ich alles erklärt habe - (The children do " +
-                            "not understand anything although I explained everything)\n \n" +
-                            "Ich schlafe immer denn ich bin immer noch krank - (I am still sleeping because " +
-                            "I am still sick)"
+                    text = "Ich komme zu spät, weil ich mein Zimmer aufräumen muss - (I come late because I have to clean my room)\n\n" +
+                            "Ich habe es versucht, die Aufgabe zu erledigen, aber ich konnte es nicht machen - (I tried to complete the task, but I could not do it)\n\n" +
+                            "Wenn du zuhause bist, ruf mich an, okay? - (When you are at home, call me, okay?)\n\n" +
+                            "Die Kinder verstehen nichts, obwohl ich alles erklärt habe - (The children do not understand anything although I explained everything)\n\n" +
+                            "Ich schlafe immer, denn ich bin immer noch krank - (I am still sleeping because I am still sick)\n\n" +
+                            "Explanation: 'denn' is a coordinating conjunction in German that means 'because'. It is used to provide a reason or explanation for something. Unlike 'weil', 'denn' does not change the word order of the sentence.\n" +
+                            "Example: Ich gehe ins Bett, denn ich bin müde. - (I am going to bed because I am tired.)"
                 )
+
             }
         }
     }
