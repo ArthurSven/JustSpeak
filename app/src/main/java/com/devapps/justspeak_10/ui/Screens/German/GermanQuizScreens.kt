@@ -398,6 +398,8 @@ fun GermanAdjectiveQuiz() {
 
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
 
     // Initialize the selection state with null values
     if (selectedOptions.size != germanAdjectiveQuestions.size) {
@@ -411,8 +413,30 @@ fun GermanAdjectiveQuiz() {
             .padding(all = 5.dp)
             .background(Color.LightGray)
     ) {
+        // Display score if available
+        score?.let {
+
+            if (it == germanAdjectiveQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanAdjectiveQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanAdjectiveQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanAdjectiveQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
         // LazyColumn to display questions
         LazyColumn(
+            modifier = Modifier
+                .weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
 
@@ -439,6 +463,9 @@ fun GermanAdjectiveQuiz() {
                             selected = selectedOptions[j] == option,
                             onClick = {
                                 selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
                             },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Color.Black,
@@ -448,8 +475,40 @@ fun GermanAdjectiveQuiz() {
                         Text(text = option)
                     }
                 }
+                if (showCorrectAnswers && selectedOptions[j] != adjectiveQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${adjectiveQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanAdjectiveQuestions.indices) {
+                    if (selectedOptions[i] == germanAdjectiveQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
         }
     }
 }
@@ -460,6 +519,8 @@ fun GermanCaseQuiz() {
     val germanCaseQuestions = germanCaseQuizQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
 
     // Initialize the selection state with null values
     if (selectedOptions.size != germanCaseQuestions.size) {
@@ -473,8 +534,30 @@ fun GermanCaseQuiz() {
             .padding(all = 5.dp)
             .background(Color.LightGray)
     ) {
+        // Display score if available
+        score?.let {
+
+            if (it == germanCaseQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanCaseQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanCaseQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanCaseQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
         // LazyColumn to display questions
         LazyColumn(
+            modifier = Modifier
+                .weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
 
@@ -501,6 +584,8 @@ fun GermanCaseQuiz() {
                             selected = selectedOptions[j] == option,
                             onClick = {
                                 selectedOptions[j] = option
+                                score = null
+                                showCorrectAnswers = false
                             },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Color.Black,
@@ -510,8 +595,40 @@ fun GermanCaseQuiz() {
                         Text(text = option)
                     }
                 }
+                if (showCorrectAnswers && selectedOptions[j] != caseQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${caseQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanCaseQuestions.indices) {
+                    if (selectedOptions[i] == germanCaseQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
         }
     }
 }
@@ -521,6 +638,8 @@ fun GermanNounQuiz() {
     val germanNounQuestions = germanNounQuizQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
 
     // Initialize the selection state with null values
     if (selectedOptions.size != germanNounQuestions.size) {
@@ -534,8 +653,30 @@ fun GermanNounQuiz() {
             .padding(all = 5.dp)
             .background(Color.LightGray)
     ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanNounQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanNounQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanNounQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanNounQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
         // LazyColumn to display questions
         LazyColumn(
+            modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
 
@@ -562,6 +703,8 @@ fun GermanNounQuiz() {
                             selected = selectedOptions[j] == option,
                             onClick = {
                                 selectedOptions[j] = option
+                                score = null
+                                showCorrectAnswers = false
                             },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Color.Black,
@@ -571,8 +714,40 @@ fun GermanNounQuiz() {
                         Text(text = option)
                     }
                 }
+                if (showCorrectAnswers && selectedOptions[j] != nounQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${nounQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanNounQuestions.indices) {
+                    if (selectedOptions[i] == germanNounQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
         }
     }
 }
@@ -600,11 +775,23 @@ fun GermanPrepositionQuiz() {
 
         // Display score if available
         score?.let {
-            Text(
-                text = "Your Score: $it/${germanPrepositionQuestions.size}",
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(16.dp)
-            )
+            
+            if (it == germanPrepositionQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanPrepositionQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanPrepositionQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanPrepositionQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
         }
 
         // LazyColumn to display questions
@@ -636,6 +823,9 @@ fun GermanPrepositionQuiz() {
                             selected = selectedOptions[j] == option,
                             onClick = {
                                 selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
                             },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Color.Black,

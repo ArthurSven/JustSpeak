@@ -60,7 +60,7 @@ fun germanCaseQuizQuestions() : List<Question> {
             "1",
             "Der, die das are examples of...",
             listOf(
-                "Definite articles", "Indefinite Articles",
+                "Definite Articles", "Indefinite Articles",
             ),
             "Definite Articles"
         ),
@@ -127,7 +127,7 @@ fun germanNounQuizQuestions() : List<Question> {
             "3",
             "Trinkst du gerne ...? (Do you like drinking coffee)",
             listOf(
-                "Cafe", "Tee", "kaffee"
+                "Cafe", "Tee", "Kaffee"
             ),
             "Kaffee"
         ),
