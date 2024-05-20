@@ -21,6 +21,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
@@ -579,6 +582,8 @@ fun GermanPrepositionQuiz() {
     val germanPrepositionQuestions = germanPrepositionQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
 
     // Initialize the selection state with null values
     if (selectedOptions.size != germanPrepositionQuestions.size) {
@@ -592,8 +597,19 @@ fun GermanPrepositionQuiz() {
             .padding(all = 5.dp)
             .background(Color.LightGray)
     ) {
+
+        // Display score if available
+        score?.let {
+            Text(
+                text = "Your Score: $it/${germanPrepositionQuestions.size}",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
         // LazyColumn to display questions
         LazyColumn(
+            modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
 
@@ -629,8 +645,40 @@ fun GermanPrepositionQuiz() {
                         Text(text = option)
                     }
                 }
+                if (showCorrectAnswers && selectedOptions[j] != prepositionQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${prepositionQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanPrepositionQuestions.indices) {
+                    if (selectedOptions[i] == germanPrepositionQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
         }
     }
 }
