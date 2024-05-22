@@ -2,6 +2,8 @@ package com.devapps.justspeak_10.ui.Screens.German
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -72,6 +74,9 @@ import com.devapps.justspeak_10.ui.Components.germanCaseQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanNounQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanPrepositionQuestions
 import com.devapps.justspeak_10.ui.Components.germanPronounQuestions
+import com.devapps.justspeak_10.ui.Components.germanSentenceQuestions
+import com.devapps.justspeak_10.ui.Components.germanTenseQuestions
+import com.devapps.justspeak_10.ui.Components.germanVerbConjugationQuestions
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
@@ -228,6 +233,15 @@ fun GermanQuizNavigation(navController: NavController) {
         }
         composable(GermanPronounQuizScreen.route) {
             GermanPronounQuiz()
+        }
+        composable(GermanSentenceStructureQuizScreen.route) {
+            GermanSentenceQuiz()
+        }
+        composable(GermanTenseQuizScreen.route) {
+            GermanTenseQuiz()
+        }
+        composable(GermanVerbConjugationQuizScreen.route) {
+            GermanVerbConjugationQuiz()
         }
     }
 }
@@ -1000,7 +1014,367 @@ fun GermanPronounQuiz() {
 
 @Composable
 fun GermanSentenceQuiz() {
+// Maintain selection state for each question
+    val germanSentenceQuestions = germanSentenceQuestions()
 
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanSentenceQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanSentenceQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanSentenceQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanSentenceQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanSentenceQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanSentenceQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanSentenceQuestions.size) { j ->
+                val sentenceQuizList = germanSentenceQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${sentenceQuizList.number} ${sentenceQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                sentenceQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != sentenceQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${sentenceQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanSentenceQuestions.indices) {
+                    if (selectedOptions[i] == germanSentenceQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
+}
+
+@Composable
+fun GermanTenseQuiz() {
+// Maintain selection state for each question
+    val germanTenseQuestions = germanTenseQuestions()
+
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanTenseQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanTenseQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanTenseQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanTenseQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanTenseQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanTenseQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanTenseQuestions.size) { j ->
+                val tenseQuizList = germanTenseQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${tenseQuizList.number} ${tenseQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                tenseQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != tenseQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${tenseQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanTenseQuestions.indices) {
+                    if (selectedOptions[i] == germanTenseQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
+}
+
+@Composable
+fun GermanVerbConjugationQuiz() {
+    val germanVerbConjugationQuestions = germanVerbConjugationQuestions()
+
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanVerbConjugationQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanVerbConjugationQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanVerbConjugationQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanVerbConjugationQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanVerbConjugationQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanVerbConjugationQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanVerbConjugationQuestions.size) { j ->
+                val verbQuizList = germanVerbConjugationQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${verbQuizList.number} ${verbQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                verbQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != verbQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${verbQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanVerbConjugationQuestions.indices) {
+                    if (selectedOptions[i] == germanVerbConjugationQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
 }
 
 

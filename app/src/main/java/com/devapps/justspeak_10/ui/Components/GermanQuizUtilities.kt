@@ -255,6 +255,113 @@ fun germanSentenceQuestions() : List<Question> {
                 "wenn", "denn", "weil"
             ),
             "weil"
+        ),
+        Question(
+            "4",
+            "Ich esse ... Apfel - (I am eating an apple)",
+            listOf(
+                "den", "einen", "eine"
+            ),
+            "einen"
+        ),
+        Question(
+            "5",
+            "How would you say 'I am coming'",
+            listOf(
+                "Ich kam", "Ich bin kommen", "Ich komme"
+            ),
+            "Ich komme"
+        )
+    )
+}
+
+fun germanTenseQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "What tense is this sentence - (Ich besuchte meine Oma)",
+            listOf(
+                "Past simple", "Present perfect", "Past perfect"
+            ),
+            "Past simple"
+        ),
+        Question(
+            "2",
+            "How would you write 'You will achieve it' in Futur I tense",
+            listOf(
+                "Du hast es geschafft", "Du wirst es schaffen", "Sie wird es schaffen"
+            ),
+            "Du wirst es schaffen"
+        ),
+        Question(
+            "3",
+            "Translate this sentence into the present perfect tense: 'I have visited my grandma.'",
+            listOf(
+                "Ich habe meine Oma besucht", "Ich besuche meine Oma", "Ich werde meine Oma besuchen"
+            ),
+            "Ich habe meine Oma besucht"
+        ),
+        Question(
+            "4",
+            "Bevor sie ins Bett ..., hatte sie bereits das Buch beendet",
+            listOf(
+                "gegangen ist", "ging", "geht"
+            ),
+            "ging"
+        ),
+        Question(
+            "5",
+            "What is the Futur II tense of this sentence: 'Er wird das Spiel gewinnen'?",
+            listOf(
+                "Er wird das Spiel gewonnen haben", "Er hat das Spiel gewinnen werden", "Er wird das Spiel gewinnen wird"
+            ),
+            "Er wird das Spiel gewonnen haben"
+        )
+    )
+}
+
+fun germanVerbConjugationQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "How would you conjugate: They have",
+            listOf(
+                "Sie haben", "Ihr habt", "er hat"
+            ),
+            "Sie haben"
+        ),
+        Question(
+            "2",
+            "... du mir bitte helfen? - (Can you please help me)",
+            listOf(
+                "Können", "Kannst", "Könnt"
+            ),
+            "Kannst"
+        ),
+        Question(
+            "3",
+            "Wo ... ich das Badezimmer? (Where do I find the bathroom)",
+            listOf(
+                "kann", "finde", "gehe"
+            ),
+            "finde"
+        ),
+        Question(
+            "4",
+            "Choose the correct pattern",
+            listOf(
+                "Wir sind, Ihr sind, Sie sind", "Wir sind, Ihr seid, Sie sind", "Wir seid, Ihr seid" +
+                        ", Sie seid"
+            ),
+            "Wir sind, Ihr seid, Sie sind"
+        ),
+        Question(
+            "5",
+            "What's the verb for - to stand",
+            listOf(
+                "standen", "gehen", "stehen"
+            ),
+            "stehen"
         )
     )
 }
