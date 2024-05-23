@@ -186,6 +186,30 @@ object GermanPrepositionQuizScreen : ScreenDestination {
 object GermanVerbConjugationQuizScreen : ScreenDestination {
     override val route = "german_verb_conjugation_quiz_screen"
 }
+
+object GermanIntroductionQuizScreen : ScreenDestination {
+    override val route = "german_introduction_quiz_screen"
+}
+
+object GermanExpressionQuizScreen : ScreenDestination {
+    override val route = "german_expression_quiz_screen"
+}
+
+object GermanEmergencyQuizScreen : ScreenDestination {
+    override val route = "german_emergency_quiz_screen"
+}
+
+object GermanDiningQuizScreen : ScreenDestination {
+    override val route = "german_dining_quiz_screen"
+}
+
+object GermanQuestionQuizScreen : ScreenDestination {
+    override val route = "german_question_quiz_screen"
+}
+
+object GermanTimeQuizScreen : ScreenDestination {
+    override val route = "german_time_quiz_screen"
+}
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }

@@ -366,4 +366,133 @@ fun germanVerbConjugationQuestions() : List<Question> {
     )
 }
 
+fun germanIntroductionQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "How would you greet someone at 18:00",
+            listOf(
+                "Guten Tag","Guten Abend","Guten Morgen"
+            ),
+            "Guten Abend"
+        ),
+        Question(
+            "2",
+            "How do you say 'See you soon' while on the phone",
+            listOf(
+                "Auf wiedersehen", "Bis morgen", "Auf wiederhören"
+            ),
+            "Auf wiederhören"
+        ),
+        Question(
+            "3",
+            "How do you say 'Bye' in Swiss German",
+            listOf(
+                "Ade", "Pfiad di", "Tschüß"
+            ),
+            "Ade"
+        ),
+        Question(
+            "4",
+            "How would you appropriately respond to 'Wie geht's dir?'",
+            listOf(
+                "Mir geht es gut", "Ich bin gut", "Einfach"
+            ),
+            "Mir geht es gut"
+        ),
+        Question(
+            "5",
+            "Woher kommst du",
+            listOf(
+                "Ich komme heute nicht", "Ich gehe nach Deutschland", "Ich komme aus der Schweiz"
+            ),
+            "Ich komme aus der Schweiz"
+        )
+    )
+}
 
+fun germanExpressionQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "How would you say 'I don't understand'",
+            listOf(
+                "Ich verstehe nicht", "Ich weiß nicht", "Ich kenne ihn nicht"
+            ),
+            "Ich verstehe nicht"
+        ),
+        Question(
+            "2",
+            "How would you say 'Speak more slowly please'",
+            listOf(
+                "Leise bitte!", "Sprechen Sie bitte langsamer", "Hau ab"
+            ),
+            "Sprechen Sie bitte langsamer"
+        ),
+        Question(
+            "3",
+            "How would you say 'My German is limited'",
+            listOf(
+                "Ich spreche nicht Deutsch", "Mein Deutsch ist begrenzt", "Mein Deutsch ist schlecht"
+            ),
+            "Mein Deutsch ist begrenzt"
+        ),
+        Question(
+            "4",
+            "How would you say 'Quiet please'",
+            listOf(
+                "Leise, bitte!", "Hau ab, bitte!", "Hör auf, bitte!"
+            ),
+            "Leise, bitte!"
+        ),
+        Question(
+            "5",
+            "Wie sagt man 'a boy' auf deutsch?",
+            listOf(
+                "Eine Junge", "Einer Junge", "Ein Junge"
+            ),
+            "Ein Junge"
+        ),
+    )
+}
+
+fun germanDiningQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "How would you request to pay with cash",
+            listOf(
+                "Ich bezahle mit Karte", "Ich bezahle mit Cash", "Ich bezahle mit Bargeld"
+            ),
+            "Ich bezahle mit Bargeld"
+        ),
+        Question(
+            "2",
+            "How would you politely ask for your food to be wrapped",
+            listOf(
+                "darf ich dass gewrapped lassen", "Könnte ich das einpacken lassen", "Pack das bitte"
+            ),
+            "Könnte ich das einpacken lassen"
+        ),
+        Question(
+            "3",
+            "How would you order Schnityel?",
+            listOf(
+                "Ich hätte gern Schnitzel", "Ich will Pommes mit Wurst", "Ich hätte gern Eis"
+            ),
+            "Ich hätte gern Schnitzel"
+        ),
+        Question(
+            "4",
+            "",
+            listOf(),
+            ""
+        ),
+        Question(
+            "5",
+            "",
+            listOf(),
+            ""
+        )
+    )
+}

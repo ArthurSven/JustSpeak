@@ -82,8 +82,12 @@ import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen
+import com.devapps.justspeak_10.ui.destinations.GermanDiningQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanEmergencyQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanExpressionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanGrammarQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
+import com.devapps.justspeak_10.ui.destinations.GermanIntroductionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanNounQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanNounScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPhraseQuizScreen
@@ -91,11 +95,13 @@ import com.devapps.justspeak_10.ui.destinations.GermanPrepositionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPrepositionScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPronounQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPronounScreen
+import com.devapps.justspeak_10.ui.destinations.GermanQuestionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanQuizHomeScreen
 import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTenseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
+import com.devapps.justspeak_10.ui.destinations.GermanTimeQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
@@ -216,7 +222,7 @@ fun GermanQuizNavigation(navController: NavController) {
             GermanGrammarQuiz(navController, germanQuizNavController)
         }
         composable(GermanPhraseQuizScreen.route) {
-
+            GermanPhraseQuiz(navController, germanQuizNavController)
         }
         composable(GermanAdjectiveQuizScreen.route) {
             GermanAdjectiveQuiz()
@@ -242,6 +248,13 @@ fun GermanQuizNavigation(navController: NavController) {
         }
         composable(GermanVerbConjugationQuizScreen.route) {
             GermanVerbConjugationQuiz()
+        }
+        //phrase navigation
+        composable(GermanIntroductionQuizScreen.route) {
+            GermanIntroductionQuiz()
+        }
+        composable(GermanExpressionQuizScreen.route) {
+            GermanExpressionQuiz()
         }
     }
 }
@@ -1377,6 +1390,69 @@ fun GermanVerbConjugationQuiz() {
     }
 }
 
+//German phrase Quiz screens
+@SuppressLint("SuspiciousIndentation")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GermanPhraseQuiz(
+    germanPhraseNavController: NavController,
+    itemNavController: NavController
+) {
+    val selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
+    val quizList = listOf(
+        GrammarListItem(
+            itemTitle = "Introductions Quiz",
+            itemRoute = GermanIntroductionQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Expressions Quiz",
+            itemRoute = GermanExpressionQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Dining and Shopping Quiz",
+            itemRoute = GermanDiningQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Emergencies Quiz",
+            itemRoute = GermanEmergencyQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Questions Quiz",
+            itemRoute = GermanQuestionQuizScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Time Quiz",
+            itemRoute = GermanTimeQuizScreen.route
+        )
+    )
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 10.dp)
+            .background(color = Color.LightGray)
+    ) {
+        Text(text = "Phrase Quizzes",
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp,
+            color = Color.Black)
+        Spacer(modifier = Modifier
+            .height(10.dp))
+        LazyColumn(content = {
+            items(quizList.size) {i->
+                val listItem = quizList[i]
+                GrammarListItem(
+                    selected = selectedItemIndex == i,
+                    listTitle = listItem.itemTitle,
+                    onClick = {
+                        itemNavController.navigate(listItem.itemRoute)
+                    } )
+            }
+        }
+        )
+    }
+}
 
 @Composable
 @Preview(showBackground = true)
