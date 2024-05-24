@@ -266,8 +266,8 @@ fun GermanQuizNavigation(navController: NavController) {
         composable(GermanQuestionQuizScreen.route) {
             GermanQuestionQuiz()
         }
-        composable(GermanTimeScreen.route) {
-
+        composable(GermanTimeQuizScreen.route) {
+            GermanTimeQuiz()
         }
     }
 }

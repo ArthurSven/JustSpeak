@@ -33,6 +33,7 @@ import com.devapps.justspeak_10.ui.Components.germanEmergencyQuestions
 import com.devapps.justspeak_10.ui.Components.germanExpressionQuestions
 import com.devapps.justspeak_10.ui.Components.germanIntroductionQuestions
 import com.devapps.justspeak_10.ui.Components.germanQuestionQuestions
+import com.devapps.justspeak_10.ui.Components.germanTimeQuestions
 import com.devapps.justspeak_10.ui.Components.germanVerbConjugationQuestions
 import com.devapps.justspeak_10.ui.theme.AzureBlue
 
@@ -621,6 +622,127 @@ fun GermanQuestionQuiz() {
                 var tempScore = 0
                 for (i in germanQuestionQuestions.indices) {
                     if (selectedOptions[i] == germanQuestionQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
+}
+
+@Composable
+fun GermanTimeQuiz() {
+    val germanTimeQuestions = germanTimeQuestions()
+
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != germanTimeQuestions .size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(germanTimeQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+
+        // Display score if available
+        score?.let {
+
+            if (it == germanTimeQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanTimeQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != germanTimeQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${germanTimeQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(germanTimeQuestions.size) { j ->
+                val timeQuizList = germanTimeQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${timeQuizList.number} ${timeQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                timeQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != timeQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${timeQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in germanTimeQuestions.indices) {
+                    if (selectedOptions[i] == germanTimeQuestions[i].correctAnswer) {
                         tempScore++
                     }
                 }

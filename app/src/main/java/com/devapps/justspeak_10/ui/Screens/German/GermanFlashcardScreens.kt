@@ -305,6 +305,9 @@ fun GermanAddFlashCard(
     val flashcardViewModel: FlashcardViewModel = hiltViewModel()
 
     val insetResultState by flashcardViewModel.insertResultState.collectAsState()
+    var insertionAttempted by remember {
+        mutableStateOf(false)
+    }
 
     Scaffold(
         containerColor = Color.White,
@@ -443,6 +446,7 @@ fun GermanAddFlashCard(
                                     coroutineScope.launch {
                                         flashcardViewModel.insertFlashcard(flashcardLocal)
                                     }
+                                    insertionAttempted = true
                                 } else {
                                     // Display a message if either of the fields is empty
                                     Toast.makeText(context, "Please fill in both German and English " +
@@ -460,18 +464,21 @@ fun GermanAddFlashCard(
                         ) {
                             Text(text = "Add flashcard")
                         }
-                        LaunchedEffect(insetResultState) {
-                            if (insetResultState.isSuccessful) {
-                                Toast.makeText(context, "Flashcard has successfully created",
-                                    Toast.LENGTH_LONG)
-                                    .show()
-                                flashcardViewModel.resetState()
-                                germanFlashcard = ""
-                                englishTrnslation = ""
-                            } else {
-                                Toast.makeText(context, "Failed to create flashcard: " +
-                                        "${insetResultState.error}",
-                                    Toast.LENGTH_LONG).show()
+                        LaunchedEffect(insetResultState, insertionAttempted) {
+                            if (insertionAttempted) {
+                                if (insetResultState.isSuccessful) {
+                                    Toast.makeText(context, "Flashcard has successfully created",
+                                        Toast.LENGTH_LONG)
+                                        .show()
+                                    flashcardViewModel.resetState()
+                                    germanFlashcard = ""
+                                    englishTrnslation = ""
+                                } else if (insetResultState.error != null){
+
+                                    Toast.makeText(context, "Failed to create flashcard: " +
+                                            "${insetResultState.error}",
+                                        Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }

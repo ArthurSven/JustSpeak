@@ -589,3 +589,48 @@ fun germanQuestionQuestions() : List<Question> {
         )
     )
 }
+
+fun germanTimeQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "Kurz vor drei",
+            listOf(
+                "3:03", "2:58", "2:50"
+            ),
+            "2:58"
+        ),
+        Question(
+            "2",
+            "Halb acht",
+            listOf(
+                "7:30", "8:30", "9:30"
+            ),
+            "7:30"
+        ),
+        Question(
+            "3",
+            "Viertel nach vier",
+            listOf(
+                "4:45", "4:15", "3:45"
+            ),
+            "4:15"
+        ),
+        Question(
+            "4",
+            "Entschuldigung, wie viel ... ist es? (Excuse me, what time is it?)",
+            listOf(
+                "Uhr", "Zeit", "spät"
+            ),
+            "Uhr"
+        ),
+        Question(
+            "5",
+            "zehn nach sechs",
+            listOf(
+                "10:06", "06:10", "6:50"
+            ),
+            "06:10"
+        )
+    )
+}
