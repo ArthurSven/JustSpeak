@@ -484,15 +484,108 @@ fun germanDiningQuestions() : List<Question> {
         ),
         Question(
             "4",
-            "",
-            listOf(),
-            ""
+            "How would you ask for the price of an item?",
+            listOf(
+                "Ich möchte das hier haben", "Was ist das", "Wie viel kostet das"
+            ),
+            "Wie viel kostet das"
         ),
         Question(
             "5",
-            "",
-            listOf(),
-            ""
+            "How would you ask for a receipt",
+            listOf(
+                "Kann ich eine Quittung haben", "Darf ich ein Rezept haben?", "Rechnung, bitte"
+            ),
+            "Kann ich eine Quittung haben"
+        )
+    )
+}
+
+fun germanEmergencyQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "How would you yell 'Hurry up!'",
+            listOf(
+                "Beeil dich!", "Fast!", "Pass auf!"
+            ),
+            "Beeil dich!"
+        ),
+        Question(
+            "2",
+            "How would you politely ask for help",
+            listOf(
+                "Hilf mir!", "Können Sie mir helfen?", "Mach schnell!"
+            ),
+            "Können Sie mir helfen?"
+        ),
+        Question(
+            "3",
+            "There was an accident",
+            listOf(
+                "Es gab einen Notfall", "Es gibt einen Unfall", "Es gab einen Unfall"
+            ),
+            "Es gab einen Unfall"
+        ),
+        Question(
+            "4",
+            "I am injured",
+            listOf(
+                "Ich bin verletzt", "Es tut mir weh", "Auweia"
+            ),
+            "Ich bin verletzt"
+        ),
+        Question(
+            "5",
+            "Ich möchte ein Verbrechen melden",
+            listOf(
+                "I would like to report a missing person", "I would like to report a crime",
+                "I would like to make a statement"
+            ),
+            "I would like to report a crime"
+        )
+    )
+}
+
+fun germanQuestionQuestions() : List<Question> {
+    return listOf(
+        Question(
+            "1",
+            "... lachst du? (Why are you laughing)",
+            listOf(
+                "Was", "Wo", "Warum"
+            ),
+            "Warum"
+        ),
+        Question(
+            "2",
+            "... ist dein Name? (What's your name)",
+            listOf(
+                "Wie", "Was", "Wer"
+            ),
+            "Wie"
+        ),
+        Question(
+            "3",
+            "... ... ein Haus ist das? (What kind of house is that)",
+            listOf("Was", "Was für", "Wo"),
+            "Was für"
+        ),
+        Question(
+            "4",
+            "How would you ask someone 'where they are going'?",
+            listOf(
+                "Wohin gehst du", "Wo gehst du", "Woher gehst du"
+            ),
+            "Wohin gehst du"
+        ),
+        Question(
+            "5",
+            "Translate 'Can you send me a message' to german",
+            listOf(
+                "Schick mir eine Nachricht", "Sende mich eine Nachricht", "Kannst du mir eine Nachricht schicken"
+            ),
+            "Kannst du mir eine Nachricht schicken"
         )
     )
 }

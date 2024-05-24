@@ -102,6 +102,7 @@ import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTenseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTenseScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTimeQuizScreen
+import com.devapps.justspeak_10.ui.destinations.GermanTimeScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
@@ -255,6 +256,18 @@ fun GermanQuizNavigation(navController: NavController) {
         }
         composable(GermanExpressionQuizScreen.route) {
             GermanExpressionQuiz()
+        }
+        composable(GermanDiningQuizScreen.route) {
+            GermanDiningQuiz()
+        }
+        composable(GermanEmergencyQuizScreen.route) {
+            GermanEmergencyQuiz()
+        }
+        composable(GermanQuestionQuizScreen.route) {
+            GermanQuestionQuiz()
+        }
+        composable(GermanTimeScreen.route) {
+
         }
     }
 }
