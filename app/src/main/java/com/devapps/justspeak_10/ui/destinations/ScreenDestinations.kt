@@ -210,6 +210,26 @@ object GermanQuestionQuizScreen : ScreenDestination {
 object GermanTimeQuizScreen : ScreenDestination {
     override val route = "german_time_quiz_screen"
 }
+
+object GermanJournalScreen : ScreenDestination {
+    override val route = "german_journal_screen"
+}
+
+object GermanJournalHomeScreen : ScreenDestination {
+    override val route = "german_journal_home_screen"
+}
+
+object GermanJournalCreateScreen : ScreenDestination {
+    override val route = "german_journal_create_screen"
+}
+
+object GermanJournalReadScreen : ScreenDestination {
+    override val route = "german_journal_read_screen"
+}
+
+object GermanJournalEditScreen : ScreenDestination {
+    override val route = "german_journal_edit_screen"
+}
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }

@@ -78,6 +78,7 @@ import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 import com.devapps.justspeak_10.ui.Screens.German.GermanGrammarScreen
 import com.devapps.justspeak_10.ui.destinations.GermanFlashCardScreen
+import com.devapps.justspeak_10.ui.destinations.GermanJournalScreen
 import com.devapps.justspeak_10.ui.destinations.Start
 import com.devapps.justspeak_10.ui.theme.offWhite
 
@@ -171,6 +172,18 @@ fun GermanNavigation(startNavController: NavController) {
                         Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
                     }
                 })
+        }
+        composable(GermanJournalScreen.route) {
+            GermanJournalScreen(
+                germanJournalNavController = germanNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
@@ -286,6 +299,11 @@ fun GermanHomeContent(
                                 cardTitle = "Grammar",
                                 cardIcon = R.drawable.grammar,
                                 cardRoute = GermanGrammarScreen.route
+                            ),
+                            CardItem(
+                                cardTitle = "Journal",
+                                cardIcon = R.drawable.journal,
+                                cardRoute = GermanJournalScreen.route
                             ),
                             CardItem(
                                 cardTitle = "Phrases",
