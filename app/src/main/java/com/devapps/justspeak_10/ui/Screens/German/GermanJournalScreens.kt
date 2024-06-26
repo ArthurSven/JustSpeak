@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -155,8 +156,22 @@ fun GermanJournalHome() {
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.LightGray)
+            .padding(10.dp)
     ) {
+        Text(text = "Journeys on JustSpeak",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
 
 
     }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun showJournalScreens() {
+    GermanJournalHome()
 }

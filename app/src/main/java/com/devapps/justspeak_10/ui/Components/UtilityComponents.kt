@@ -224,6 +224,11 @@ fun QuizCard(
 }
 
 @Composable
+fun BlogCard() {
+
+}
+
+@Composable
 @Preview(showBackground = true)
 fun CheckComponents() {
 

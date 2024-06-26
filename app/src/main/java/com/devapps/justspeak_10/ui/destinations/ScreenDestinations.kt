@@ -230,6 +230,36 @@ object GermanJournalReadScreen : ScreenDestination {
 object GermanJournalEditScreen : ScreenDestination {
     override val route = "german_journal_edit_screen"
 }
+
+//Chichewa navigation
+
+object ChichewaNavigation : ScreenDestination {
+    override val route = "chichewa-navigation"
+}
+
+object ChichewaHomeScreen : ScreenDestination {
+    override val route = "chichewa_home_screen"
+}
+
+object ChichewaGrammarScreen : ScreenDestination {
+    override val route = "chichewa_grammar_screen"
+}
+
+object ChichewaPhraseScreen : ScreenDestination {
+    override val route = "chichewa_phrase_screen"
+}
+
+object ChichewaQuizScreen : ScreenDestination {
+    override val route = "chichewa_quiz_screen"
+}
+
+object ChichewaTriviaScreen : ScreenDestination {
+    override val route = "chichewa_trivia_screen"
+}
+
+object ChichewaFlashcardScreen : ScreenDestination {
+    override val route = "chichewa_flashcard_screen"
+}
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }
