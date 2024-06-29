@@ -76,11 +76,6 @@ import com.devapps.justspeak_10.ui.Components.SeinConjugationTable
 import com.devapps.justspeak_10.ui.Components.TextsForArticles
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.VerbTable
-import com.devapps.justspeak_10.ui.Components.getEnglishAdjectives
-import com.devapps.justspeak_10.ui.Components.getGermanAdjectiveExamples
-import com.devapps.justspeak_10.ui.Components.getGermanAdjectives
-import com.devapps.justspeak_10.ui.Components.getGermanLetters
-import com.devapps.justspeak_10.ui.Components.getGermanSounds
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen

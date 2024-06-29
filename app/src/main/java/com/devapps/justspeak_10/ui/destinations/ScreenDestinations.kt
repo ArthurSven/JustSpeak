@@ -260,6 +260,31 @@ object ChichewaTriviaScreen : ScreenDestination {
 object ChichewaFlashcardScreen : ScreenDestination {
     override val route = "chichewa_flashcard_screen"
 }
+
+object ChichewaGrammarItemScreen : ScreenDestination {
+    override val route = "chichewa_grammar_item_screen"
+}
+
+object ChichewaAlphabetScreen : ScreenDestination {
+    override val route = "chichewa_alphabet_screen"
+}
+
+object ChichewaAdjectiveScreen : ScreenDestination {
+    override val route = "chichewa_adjective_screen"
+}
+
+object ChichewaNounScreen : ScreenDestination {
+    override val route = "chichewa_noun_screen"
+}
+
+object ChichewaNumbersScreen : ScreenDestination {
+    override val route = "chichewa_numbers_screen"
+}
+
+object ChichewaPronounScreen : ScreenDestination {
+    override val route = "chichewa_pronoun_screen"
+}
+
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }
