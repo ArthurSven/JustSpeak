@@ -176,10 +176,10 @@ fun ChichewaGrammarNavigation(grammarNavController: NavController) {
             ChichewaAlphabet()
         }
         composable(ChichewaAdjectiveScreen.route) {
-            GermanAdjectives()
+            ChichewaAdjectives()
         }
         composable(ChichewaNounScreen.route) {
-            GermanNouns()
+            ChichewaNouns()
         }
         composable(ChichewaNumbersScreen.route) {
             GermanNouns()
