@@ -153,6 +153,37 @@ fun ChichewaPeopleNounList() {
     }
 }
 
+fun getChichewaPlaceNouns() : List<String> {
+    return listOf(
+        "Nyumba", "Mzinda", "Dziko", "Mudzi", "Nyanja", "Nyanja ya nchele", "Mtsinje", "Phiri",
+        "Tchire", "Nkhalango", "Nsewu", "Tchalitchi", "Mzikiti", "Chipatala"
+    )
+}
+
+fun getEnglischPlaceNouns() : List<String> {
+    return listOf(
+        "House", "City", "Country", "Village", "lake", "Ocean", "River", "Mountain", "Bush", "Forest",
+        "Road", "Church", "Mosque", "Hospital"
+    )
+}
+
+@Composable
+fun ChichewaPlaceNounsList() {
+    val chichewa = getChichewaPlaceNouns()
+    val englisch = getEnglischPlaceNouns()
+    LazyColumn(
+        modifier = Modifier
+            .height(350.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
 @Composable
 @Preview(showBackground = true)
 fun TiwoneNawo() {

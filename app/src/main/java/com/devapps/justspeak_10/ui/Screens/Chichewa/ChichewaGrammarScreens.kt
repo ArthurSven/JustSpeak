@@ -45,6 +45,7 @@ import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.ChichewaAdjectiveList
 import com.devapps.justspeak_10.ui.Components.ChichewaAlphabetList
 import com.devapps.justspeak_10.ui.Components.ChichewaPeopleNounList
+import com.devapps.justspeak_10.ui.Components.ChichewaPlaceNounsList
 import com.devapps.justspeak_10.ui.Components.ChichewaVowelsList
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetList
 import com.devapps.justspeak_10.ui.Components.UserBar
@@ -424,6 +425,66 @@ fun ChichewaNouns() {
                     .height(10.dp)
                 )
                 ChichewaPeopleNounList()
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Place nouns",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier
+                    .height(10.dp)
+                )
+                ChichewaPlaceNounsList()
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Food and drink nouns",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier
+                    .height(10.dp)
+                )
+                ChichewaPlaceNounsList()
             }
         }
     }
