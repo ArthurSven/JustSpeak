@@ -184,6 +184,39 @@ fun ChichewaPlaceNounsList() {
     }
 }
 
+fun getChichewaFoodAndDrinkNouns() : List<String> {
+    return listOf(
+        "Chakudya", "Zokumwa", "Madzi", "Nyama", "Masamba", "Zipaso", "Nthochi", "Nsomba", "Nkhuku",
+        "Mbatatesi", "Nyemba", "Anyezi", "Mpunga", "Dzungu", "Chinangwa", "Ufa", "Mbale", "Kapu",
+        "Nsuzi", "Nteza", "Chimanga", "Mowa", "Foloko", "Spuni", "Mpeni"
+    )
+}
+
+fun getEnglischFoodAndDrinkNouns() : List<String> {
+    return listOf(
+        "Food", "Drinks", "Water", "Meat", "Vegetables", "Fruits", "Bananas", "Fish", "Chicken",
+        "Potatoes", "Beans", "Onions", "Rice", "Pumpkin", "Cassava", "Flour", "Plate", "Cup", "Soup",
+         "Groundnuts", "Maize", "Beer", "Fork", "Spoon", "Knife"
+    )
+}
+
+@Composable
+fun ChichewaFoodAndDrinksList() {
+    val chichewa = getChichewaFoodAndDrinkNouns()
+    val englisch = getEnglischFoodAndDrinkNouns()
+    LazyColumn(
+        modifier = Modifier
+            .height(350.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
 @Composable
 @Preview(showBackground = true)
 fun TiwoneNawo() {

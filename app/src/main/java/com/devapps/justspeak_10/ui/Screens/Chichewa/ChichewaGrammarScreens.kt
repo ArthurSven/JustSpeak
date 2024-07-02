@@ -44,6 +44,7 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.ChichewaAdjectiveList
 import com.devapps.justspeak_10.ui.Components.ChichewaAlphabetList
+import com.devapps.justspeak_10.ui.Components.ChichewaFoodAndDrinksList
 import com.devapps.justspeak_10.ui.Components.ChichewaPeopleNounList
 import com.devapps.justspeak_10.ui.Components.ChichewaPlaceNounsList
 import com.devapps.justspeak_10.ui.Components.ChichewaVowelsList
@@ -392,7 +393,9 @@ fun ChichewaNouns() {
                         .height(20.dp)
                 )
                 Text(text = "Nouns are objects and things we interact with. In this section you will" +
-                        " learn basic nouns you will constantly encounter in chichewa."
+                        " learn basic nouns you will constantly encounter in chichewa. Some essential" +
+                        " nouns have been skipped as they are basicslly derived from english such as" +
+                        " Apozi which is Apples in english."
                 )
 
             }
@@ -484,7 +487,7 @@ fun ChichewaNouns() {
                 Spacer(modifier = Modifier
                     .height(10.dp)
                 )
-                ChichewaPlaceNounsList()
+                ChichewaFoodAndDrinksList()
             }
         }
     }
