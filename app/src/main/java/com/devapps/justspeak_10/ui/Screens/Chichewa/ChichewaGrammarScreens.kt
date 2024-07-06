@@ -44,9 +44,16 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.ChichewaAdjectiveList
 import com.devapps.justspeak_10.ui.Components.ChichewaAlphabetList
+import com.devapps.justspeak_10.ui.Components.ChichewaBodyPartsNounList
+import com.devapps.justspeak_10.ui.Components.ChichewaEatingConjugation
 import com.devapps.justspeak_10.ui.Components.ChichewaFoodAndDrinksList
+import com.devapps.justspeak_10.ui.Components.ChichewaNumbersList
 import com.devapps.justspeak_10.ui.Components.ChichewaPeopleNounList
 import com.devapps.justspeak_10.ui.Components.ChichewaPlaceNounsList
+import com.devapps.justspeak_10.ui.Components.ChichewaPrefixesList
+import com.devapps.justspeak_10.ui.Components.ChichewaPronounList
+import com.devapps.justspeak_10.ui.Components.ChichewaSayingConjugation
+import com.devapps.justspeak_10.ui.Components.ChichewaVerbList
 import com.devapps.justspeak_10.ui.Components.ChichewaVowelsList
 import com.devapps.justspeak_10.ui.Components.GermanAlphabetList
 import com.devapps.justspeak_10.ui.Components.UserBar
@@ -69,6 +76,7 @@ import com.devapps.justspeak_10.ui.destinations.ChichewaHomeScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaNounScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaNumbersScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaPronounScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaVerbScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAlphabetScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseScreen
@@ -184,14 +192,19 @@ fun ChichewaGrammarNavigation(grammarNavController: NavController) {
             ChichewaNouns()
         }
         composable(ChichewaNumbersScreen.route) {
-            GermanNouns()
+           ChichewaNumbers()
         }
 
-        composable(GermanPronounScreen.route) {
-            GermanPronouns()
+        composable(ChichewaPronounScreen.route) {
+            ChichewaPronouns()
+        }
+
+        composable(ChichewaVerbScreen.route) {
+            ChichewaVerbs()
         }
     }
 }
+
 
 @Composable
 fun ChichewaGrammarItemScreen(navController: NavController) {
@@ -219,6 +232,10 @@ fun ChichewaGrammarItemScreen(navController: NavController) {
         GrammarListItem(
             itemTitle = "Pronouns",
             itemRoute = ChichewaPronounScreen.route
+        ),
+        GrammarListItem(
+            itemTitle = "Verbs",
+            itemRoute = ChichewaVerbScreen.route
         )
     )
     Column(
@@ -490,11 +507,356 @@ fun ChichewaNouns() {
                 ChichewaFoodAndDrinksList()
             }
         }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Body parts",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier
+                    .height(10.dp)
+                )
+                ChichewaBodyPartsNounList()
+            }
+        }
     }
 }
 
 @Composable
+fun ChichewaNumbers() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Numbers",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Numbers in chichewa are not too complex to understand, many of the numbers" +
+                            " here are used in spoken form. However the arabic numerals and the english numbers" +
+                            " are understood throughout Malawi. "
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                ChichewaNumbersList()
+            }
+        }
+    }
+}
+
+@Composable
+fun ChichewaPronouns() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Pronouns",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Pronouns are used in chichewa to replace the nouns used in sentences. " +
+                            "They show who or what the subject, object and indirect object is."
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                ChichewaPronounList()
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Prefixes",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Prefixes are used to show subject of the sentence. Prefixes regularly " +
+                            "are positioned a the beginning of the verb to show what the subject of " +
+                            "the sentence e.g. \n \nNdikubwera which means I am coming. Ndi is a prefix " +
+                            "that matches I while kubwera is the verb for to come"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                ChichewaPrefixesList()
+            }
+        }
+    }
+}
+
+@Composable
+fun ChichewaVerbs() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Verbs",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Verbs are words hat describe the action being done by a subject of a" +
+                            " sentence. Below is a list of commonly used verbs in Chichewa"
+                )
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                ChichewaVerbList()
+            }
+        }
+        Spacer(modifier = Modifier
+            .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Text(
+                    text = "Verb conjugation",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Verb conjugation shows how verbs are used with pronouns. This section " +
+                            "will show you how to apply chichewa verbs with pronouns in sentences " +
+                            "using verb kudya (to eat) and kunena (to say)"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Kudya (to eat)",
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                ChichewaEatingConjugation()
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Kunena (to say)",
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                ChichewaSayingConjugation()
+            }
+        }
+    }
+}
+@Composable
 @Preview(showBackground = true)
 fun ViewChichewaGrammarScreens() {
-    ChichewaNouns()
+    ChichewaVerbs()
 }

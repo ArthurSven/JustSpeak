@@ -217,8 +217,229 @@ fun ChichewaFoodAndDrinksList() {
     }
 }
 
+fun getChichewaBodyPartsNouns() : List<String> {
+    return listOf(
+        "Maso", "Mutu", "Thupi", "Mphuno", "Kamwa", "Khutu", "Tsitsi", "Khosi", "Nkono", "Chifuwa",
+        "Fupa", "Mwendo", "Phazi", "Chala", "Chala chakuphazi", "Khungu", "Nsana"
+    )
+}
+
+fun getEnglischBodyPartsNouns() : List<String> {
+    return listOf(
+        "Eyes", "Head", "Body", "Nose", "Mouth", "Ear", "Hair", "Neck", "Arm", "Chest", "Bone", "Leg",
+         "Foot", "Finger", "Toe", "Skin", "Back"
+    )
+}
+
+@Composable
+fun ChichewaBodyPartsNounList() {
+    val chichewa = getChichewaBodyPartsNouns()
+    val englisch = getEnglischBodyPartsNouns()
+    LazyColumn(
+        modifier = Modifier
+            .height(350.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getChichewaNumbers() : List<String> {
+    return listOf(
+        "Chimodzi", "Ziwiri", "Zitatu", "Zinayi", "Zisano", "Zisano ndi chimodzi", "Zisano ndi ziwiri"
+        , "Zisano ndi zitatu", "Zisano ndi zinayi", "Khumi", "Khumi ndi chimodzi", "Khumi ndi ziwiri",
+        "Khumi ndi zitatu", "Khumi ndi anayi", "Khumi ndi asanu", "Khumi ndi zisanu ndi chimodzi",
+        "Khumi ndi zisanu ndi ziwiri", "Khumi ndi zisanu ndi zitatu", "Khumi ndi zisanu ndi anayi",
+        "Makumi awiri"
+    )
+}
+
+fun getEnglischNumbers() : List<String> {
+    return listOf(
+        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven",
+        "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen",
+         "Twenty"
+    )
+}
+
+@Composable
+fun ChichewaNumbersList() {
+    val chichewa = getChichewaNumbers()
+    val englisch = getEnglischNumbers()
+    LazyColumn(
+        modifier = Modifier
+            .height(400.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getChichewaPronouns() : List<String> {
+    return listOf(
+        "Ine", "Iwe", "Inu", "Iwo/Awo", "Iye", "Ife"
+    )
+}
+
+fun getEnglischPronouns() : List<String> {
+    return listOf(
+        "I/me", "You (informal)", "You (formal or plural)", "They/them", "He/She", "We/Us"
+    )
+}
+
+@Composable
+fun ChichewaPronounList() {
+    val chichewa = getChichewaPronouns()
+    val englisch = getEnglischPronouns()
+    LazyColumn(
+        modifier = Modifier
+            .height(200.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getChichewaPrefixes() : List<String> {
+    return listOf(
+        "Ndi", "U", "Mu", "A", "Ti"
+    )
+}
+
+fun getEnglischPrefixes() : List<String> {
+    return listOf(
+        "I", "You (informal)", "You (formal/plural)", "He/She/They", "We"
+    )
+}
+
+@Composable
+fun ChichewaPrefixesList() {
+    val chichewa = getChichewaPrefixes()
+    val englisch = getEnglischPrefixes()
+    LazyColumn(
+        modifier = Modifier
+            .height(180.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getChichewaVerbs() : List<String> {
+    return listOf(
+        "Kudya", "Kumwa", "Kugona", "Kudzuka", "kupita", "Kubwera", "Kuyenda", "Kukhala",
+        "Kukhala ndi", "Kulandila", "Kupeleka/Kupasa", "Kuwona", "Kununkhisa", "Kuyenera", "Kunena",
+        "kulankhula", "Kumva", "Kupeza", "Kufunsa", "Kukonda", "Kuloledwa", "Kulola", "Kuyendesa",
+        "Kusiya", "Kukana", "Kuyimilila", "Kuphika", "Kupanga", "Kuyamba", "Kumaliza", "Kuphunzira",
+         "Kutseka", "Kutsegula", "Kulemba", "Kuwerenga", "Kugula", "Kugulisa", "Kufuna", "Kuwuza"
+    )
+}
+
+fun getEnglischVerbs() : List<String> {
+    return listOf(
+        "To eat", "To drink", "To sleep", "To wake up", "To go", "To come", "To walk",
+        "To sit/to be/to become", "To have", "To receive/to get", "To give", "To see", "To smell",
+        "should/must", "To say", "To speak", "To hear/listen", "to find", "to ask", "to like/love",
+         "to be allowed", "to allow", "to drive", "to stop/to leave", "to deny", "to stand up",
+         "To cook", "To make/to do", "To start", "To finish", "To learn", "To close", "To open",
+        "To write", "To read", "To buy", "To sell", "To want", "To tell"
+    )
+}
+
+@Composable
+fun ChichewaVerbList() {
+    val chichewa = getChichewaVerbs()
+    val englisch = getEnglischVerbs()
+    LazyColumn(
+        modifier = Modifier
+            .height(400.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getKudyaConjugation() : List<String> {
+    return listOf(
+        "Ndikudya", "Ukudya", "Mukudya", "Akudya", "Tikudya"
+    )
+}
+
+fun getEatingConjugation() : List<String> {
+    return listOf(
+        "I am eating", "You are eating", "You are eating (formal/plural)", "He/She/They is/are eating",
+         "We are eating"
+    )
+}
+
+@Composable
+fun ChichewaEatingConjugation() {
+    val chichewa = getKudyaConjugation()
+    val englisch = getEatingConjugation()
+    LazyColumn(
+        modifier = Modifier
+            .height(160.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
+
+fun getKunenaConjugation() : List<String> {
+    return listOf(
+        "Ndikunena", "Ukunena", "Mukunena", "Akunena", "Tikunena"
+    )
+}
+
+fun getSayingConjugation() : List<String> {
+    return listOf(
+        "I am saying", "You are saying (informal)", "You are saying (formal/plural)", "They are saying",
+         "We are saying"
+    )
+}
+
+@Composable
+fun ChichewaSayingConjugation() {
+    val chichewa = getKunenaConjugation()
+    val englisch = getSayingConjugation()
+    LazyColumn(
+        modifier = Modifier
+            .height(160.dp)
+    ) {
+        items(chichewa) { letter ->
+            val index = chichewa.indexOf(letter)
+            val chizungu = if (index < englisch.size) englisch[index] else ""
+
+            NounItem(germanNoun = letter, englishNoun = chizungu)
+        }
+    }
+}
 @Composable
 @Preview(showBackground = true)
 fun TiwoneNawo() {
-    ChichewaPeopleNounList()
+    ChichewaEatingConjugation()
 }

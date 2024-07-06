@@ -806,7 +806,7 @@ fun NounItem(germanNoun: String, englishNoun: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(30.dp)
+            .height(40.dp)
     ) {
         Text(
             text = germanNoun,

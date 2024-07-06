@@ -285,6 +285,39 @@ object ChichewaPronounScreen : ScreenDestination {
     override val route = "chichewa_pronoun_screen"
 }
 
+object ChichewaVerbScreen : ScreenDestination {
+    override val route: String = "chichewa_verb_screen"
+}
+
+//Chichewa phrase screens
+
+object ChichewaPhraseListScreen : ScreenDestination {
+    override val route: String = "chichewa_phrase_list_screen"
+}
+
+object ChichewaIntroductionScreen : ScreenDestination {
+    override val route: String = "chichewa_introduction_screen"
+}
+
+object ChichewaExpressionScreen : ScreenDestination {
+    override val route: String = "chichewa_expression_screen"
+}
+
+object ChichewaEatingScreen : ScreenDestination {
+    override val route: String = "chichewa_eating_screen"
+}
+
+object ChichewaEmergencyScreen : ScreenDestination {
+    override val route: String = "chichewa_emergency_screen"
+}
+
+object ChichewaQuestionScreen : ScreenDestination {
+    override val route: String = "chichewa_question_screen"
+}
+object ChichewaTimeScreen : ScreenDestination {
+    override val route: String = "chichewa_time_screen"
+}
+
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }
