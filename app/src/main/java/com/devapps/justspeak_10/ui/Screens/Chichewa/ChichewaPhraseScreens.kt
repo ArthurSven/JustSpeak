@@ -42,6 +42,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.ChichewaDiningPhraseList
 import com.devapps.justspeak_10.ui.Components.ChichewaExpressionList
 import com.devapps.justspeak_10.ui.Components.ChichewaGoodbyeList
 import com.devapps.justspeak_10.ui.Components.ChichewaGreetingsList
@@ -586,7 +587,7 @@ fun ChichewaDiningAndEating() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "Goodbyes",
+                    text = "Dining",
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color.Black
@@ -595,43 +596,7 @@ fun ChichewaDiningAndEating() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                ChichewaGoodbyeList()
-            }
-        }
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-        ElevatedCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(10.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 10.dp,
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 10.dp)
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .height(20.dp)
-                )
-                Text(
-                    text = "Introduction phrases",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Black
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                ChichewaIntroductionPhraseList()
+                ChichewaDiningPhraseList()
             }
         }
     }

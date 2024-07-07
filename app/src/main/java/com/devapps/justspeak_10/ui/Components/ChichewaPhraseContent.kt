@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 fun getChichewaGreetings() : List<String> {
@@ -123,7 +124,7 @@ fun getEnglischExpressionList() : List<String> {
     return listOf(
         "Sorry/Excuse me", "May I ask?", "I need some help", "Help me", "Yes", "No", "Maybe", "Thank you",
          "Thank you", "How do you say... in chichewa?", "What is this?", "What is that?", "Speak slowly, please",
-         "Keep quiet", "I understand little chichewa", "I understand", "I do not understand", "Everything's fine",
+         "Keep quiet", "Please", "I understand little chichewa", "I understand", "I do not understand", "Everything's fine",
          "Come here", "Get out!"
     )
 }
@@ -136,7 +137,7 @@ fun ChichewaExpressionList() {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(400.dp)
     ) {
         items(chichewaGreetings) { chichewaGreeting ->
             val index = chichewaGreetings.indexOf(chichewaGreeting)
@@ -182,4 +183,65 @@ fun ChichewaShoppingList() {
             PhraseComponent(chichewaGreeting, englishGreeting)
         }
     }
+}
+
+fun getChichewaDiningPhrases() : List<String> {
+    return listOf(
+        "Kudya", "Ndimafuna tebulo la anthu awiri", "Tikhoza kukhala apa?", "Ndiwone nawo menu", "Muli ndi chan?",
+         "Mudya chan?", "Mumwa chan?", "Ine ndufuna ...", "Ndidya...", "Ndimwa...", "Apapa chabwino ndi chiti?",
+         "Iyayi sindinayitanise izi", "Zilibwino?", "Onjezelani", "Chiliponso china ngati?", "Ndufuna ndilipile",
+         "Ndilipila ndi card", "Ndilipila ndi cash", "Mundibwelesele billu"
+    )
+}
+
+fun getEnglischDiningPhrases() : List<String> {
+    return listOf(
+        "To eat", "A table for two", "Can we sit here?", "May I see the menu?", "What do you have?", "What will you eat?",
+         "What will you drink?", "I want ...", "I will eat...", "I will drink ...", "What can you recommend here?", "No, I didn't order this",
+         "Is everything good?", "Add more", "Anything else?", "I would like to pay", "I will pay with a card", "I will pay with cash",
+         "Bring me the bill"
+    )
+}
+
+@Composable
+fun ChichewaDiningPhraseList() {
+    val chichewa = getChichewaDiningPhrases()
+    val english = getEnglischDiningPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            PhraseComponent(chichewaGreeting, englishGreeting)
+        }
+    }
+}
+
+fun getChichewaGeneralEmergencies() : List<String> {
+    return listOf(
+        "Ndithandizeni!", "Bwino!", "Samalani!", "Changu!", "Fulumilani!", "Mungandithandizeko?",
+        "Ungandithandizeko?", "Ndikuthandizeni bwanji?", "Chachitika ndi chan?", "Kwachitika ngozi",
+        "Kwachitika zadzidzidzi"
+    )
+}
+
+fun getEnglischGeneralEmergencies() : List<String> {
+    return listOf(
+        "Help me!", "Careful!", "Take care!", "Hurry up!", "Hurry up!", "May you please help me?",
+        "Can you please help me? (informal)", "How may I help you?", "What happened?", "An accident happened",
+         "An emergency happned"
+    )
+}
+
+
+
+@Composable
+@Preview(showBackground = true)
+fun Tiwoneseni() {
+    ChichewaDiningPhraseList()
 }
