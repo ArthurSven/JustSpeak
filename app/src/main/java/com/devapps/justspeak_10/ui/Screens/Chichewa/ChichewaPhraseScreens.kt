@@ -44,15 +44,20 @@ import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.ui.Components.ChichewaDiningPhraseList
 import com.devapps.justspeak_10.ui.Components.ChichewaExpressionList
+import com.devapps.justspeak_10.ui.Components.ChichewaGeneralEmergencyList
 import com.devapps.justspeak_10.ui.Components.ChichewaGoodbyeList
 import com.devapps.justspeak_10.ui.Components.ChichewaGreetingsList
 import com.devapps.justspeak_10.ui.Components.ChichewaIntroductionPhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.ChichewaShoppingList
 import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
+import com.devapps.justspeak_10.ui.Components.GermanCrimeEmergencyList
+import com.devapps.justspeak_10.ui.Components.GermanEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanIntroductionExpressionList
+import com.devapps.justspeak_10.ui.Components.GermanMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Screens.German.GermanEating
@@ -188,7 +193,7 @@ fun ChichewaPhraseNavigation(navController: NavController) {
             ChichewaDiningAndEating()
         }
         composable(ChichewaEmergencyScreen.route) {
-            GermanEmergency()
+            ChichewaEmergency()
         }
         composable(ChichewaQuestionScreen.route) {
             GermanQuestion()
@@ -601,3 +606,168 @@ fun ChichewaDiningAndEating() {
         }
     }
 }
+
+@Composable
+fun ChichewaEmergency() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Emergencies",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Emergencies can occur without warning, however you should not be caught " +
+                            "off guard when it happens. Below you will learn general emergency " +
+                            "phrases as well as medical and crime related"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "General Emergencies",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                ChichewaGeneralEmergencyList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Medical Emergencies",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                ChichewaMedicalEmergencyList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Crime Emergencies",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                GermanCrimeEmergencyList()
+            }
+        }
+    }
+}
+

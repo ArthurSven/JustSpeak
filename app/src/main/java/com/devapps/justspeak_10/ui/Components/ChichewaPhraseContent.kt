@@ -234,8 +234,62 @@ fun getEnglischGeneralEmergencies() : List<String> {
     return listOf(
         "Help me!", "Careful!", "Take care!", "Hurry up!", "Hurry up!", "May you please help me?",
         "Can you please help me? (informal)", "How may I help you?", "What happened?", "An accident happened",
-         "An emergency happned"
+         "An emergency happened"
     )
+}
+
+@Composable
+fun ChichewaGeneralEmergencyList() {
+    val chichewa = getChichewaGeneralEmergencies()
+    val english = getEnglischGeneralEmergencies()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            PhraseComponent(chichewaGreeting, englishGreeting)
+        }
+    }
+}
+
+fun getChichewaMedicalEmergency() : List<String> {
+    return listOf(
+        "Ndadwala", "Kandisiyeni ku chipatala", "Ndapwetekeka", "Imbilani amblansi", "Moto!",
+        "Ndili ndi chinfine", "Wakomoka", "Wamwalira", "Ndufuna dotolo/dokotala", "Ndaziwotcha",
+         "Ndazicheka", "Muli bwino bwino?"
+    )
+}
+
+fun getEnglischMedicalEmergency() : List<String> {
+    return listOf(
+        "I am sick", "Take me to the hospital", "I am injured", "Call an ambulance", "Fire!",
+        "I have a cold", "She/He has fainted", "He/She has died", "I need a doctor", "I have burned myself",
+         "I have cut myself", "Are you alright?"
+    )
+}
+
+@Composable
+fun ChichewaMedicalEmergencyList() {
+    val chichewa = getChichewaMedicalEmergency()
+    val english = getEnglischMedicalEmergency()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            PhraseComponent(chichewaGreeting, englishGreeting)
+        }
+    }
 }
 
 
