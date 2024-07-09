@@ -765,7 +765,7 @@ fun ChichewaEmergency() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanCrimeEmergencyList()
+                ChichewaMedicalEmergencyList()
             }
         }
     }

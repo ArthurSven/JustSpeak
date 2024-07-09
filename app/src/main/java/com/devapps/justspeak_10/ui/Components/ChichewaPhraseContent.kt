@@ -292,6 +292,38 @@ fun ChichewaMedicalEmergencyList() {
     }
 }
 
+fun getChichewaCrimeEmergency() : List<String> {
+    return listOf(
+        "Ndabeledwa", "Chikwama changa chabedwa", "Imbilani apolisi", "Mugwireni wakubayo!",
+        "Nyumba yanga yabeledwa", "Ndufuna ndizapange lipoti m'landu"
+    )
+}
+
+fun getEnglischCrimeEmergency() : List<String> {
+    return listOf(
+        "I have been robbed", "My bag has been stolen", "Call the police.", "Catch that thief",
+        "My house has been broken into"
+    )
+}
+@Composable
+fun ChichewaCrimePhraseList() {
+    val chichewa = getChichewaCrimeEmergency()
+    val english = getEnglischCrimeEmergency()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            PhraseComponent(chichewaGreeting, englishGreeting)
+        }
+    }
+}
+
 
 
 @Composable
