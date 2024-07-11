@@ -302,7 +302,7 @@ fun getChichewaCrimeEmergency() : List<String> {
 fun getEnglischCrimeEmergency() : List<String> {
     return listOf(
         "I have been robbed", "My bag has been stolen", "Call the police.", "Catch that thief",
-        "My house has been broken into"
+        "My house has been broken into", "I would like to report a crime"
     )
 }
 @Composable
@@ -324,10 +324,109 @@ fun ChichewaCrimePhraseList() {
     }
 }
 
+fun getChichewaQuestionKeyWords() : List<String> {
+    return listOf(
+        "Chani", "Mwa", "Wa", "Mu", "U", "Kodi", "liti", "Ndani", "bwanji", "Chifukwa", "Si", "Kuti"
+    )
+}
 
+fun getEnglischEquivalentKeyWords() : List<String> {
+    return listOf(
+        "What", "Have you (formal)", "Have you (informal)", "Can you (formal)", "Can you (informal)", "So",
+        "When", "Who", "What/How", "Why", "Isn't", "Where"
+    )
+}
+
+@Composable
+fun ChichewaKeyWordList() {
+    val chichewa = getChichewaQuestionKeyWords()
+    val english = getEnglischEquivalentKeyWords()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            NounItem(chichewaGreeting, englishGreeting)
+
+        }
+    }
+}
+
+fun getChichewaQuestionPhrases() : List<String> {
+    return listOf(
+        "Mwapanga chani?", "Mwawonako munthu atadusa apa?", "Wabwera nthawi yanji?",
+        "Umaphika Nsima?", "Kodi munayamba ntchito liti?", "Munyamuka liti?",
+         "Zatheka bwanji?", "Chifukwa chani mwapanga zimenezo?", "Si choncho?", "Ukupita kuti?"
+    )
+}
+
+fun getEnglischQuestionPhrases() : List<String> {
+    return listOf(
+        "What have you done?", "Have you seen anyone pass by here?", "What time did you arrive?",
+        "Do you cook Nsima?", "So when did you start working?", "When are you starting off?",
+        "How did that happen?", "Why did you do that?", "Isn't that so?", "Where are you going to?"
+    )
+}
+
+@Composable
+fun ChichewaQuestionsList() {
+    val chichewa = getChichewaQuestionPhrases()
+    val english = getEnglischQuestionPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+            PhraseComponent(chichewaGreeting, englishGreeting)
+
+        }
+    }
+}
+
+fun getChichewaDays() : List<String> {
+    return listOf(
+        "Tsiku", "Lolemba", "Lachiwiri", "Lachitatu", "Lachinayi", "Lachisanu", "Loweluka", "Lamulungu"
+    )
+}
+
+fun getEnglischDays() : List<String> {
+    return listOf(
+        "Day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    )
+}
+
+@Composable
+fun ChichewaDaysList() {
+    val chichewa = getChichewaDays()
+    val english = getEnglischDays()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(330.dp)
+    ) {
+        items(chichewa) { chichewaGreeting ->
+            val index = chichewa.indexOf(chichewaGreeting)
+            val englishGreeting = if (index < english.size) english[index] else ""
+
+           NounItem(chichewaGreeting, englishGreeting)
+
+        }
+    }
+}
 
 @Composable
 @Preview(showBackground = true)
 fun Tiwoneseni() {
-    ChichewaDiningPhraseList()
+    ChichewaDaysList()
 }

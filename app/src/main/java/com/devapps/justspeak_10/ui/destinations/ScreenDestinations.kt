@@ -318,6 +318,61 @@ object ChichewaTimeScreen : ScreenDestination {
     override val route: String = "chichewa_time_screen"
 }
 
+//chichewa quiz screens
+object ChichewaQuizHomeScreen : ScreenDestination {
+    override val route: String = "chichewa_home_quiz_screen"
+
+}
+object ChichewaGrammarQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_grammar_quiz_screen"
+}
+
+object ChichewaPhraseQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_phrase_quiz_screen"
+}
+
+object ChichewaAdjectiveQuizScreen : ScreenDestination {
+    override val route = "chichewa_adjective_quiz_screen"
+}
+
+object ChichewaNounQuizScreen : ScreenDestination {
+    override val route = "chichewa_noun_quiz_screen"
+}
+
+object ChichewaNumbersQuizScreen : ScreenDestination {
+    override val route = "chichewa_numbers_quiz_screen"
+}
+
+object ChichewaPronounQuizScreen : ScreenDestination {
+    override val route = "chichewa_pronoun_quiz_screen"
+}
+
+object ChichewaVerbQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_verb_quiz_screen"
+}
+object ChichewaIntroductionQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_introduction_quiz_screen"
+}
+
+object ChichewaExpressionQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_expression_quiz_screen"
+}
+
+object ChichewaEatingQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_eating_quiz_screen"
+}
+
+object ChichewaEmergencyQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_emergency_quiz_screen"
+}
+
+object ChichewaQuestionQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_question_quiz_screen"
+}
+object ChichewaTimeQuizScreen : ScreenDestination {
+    override val route: String = "chichewa_time_quiz_screen"
+}
+
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }

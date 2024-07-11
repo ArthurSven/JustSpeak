@@ -35,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -42,13 +43,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.ChichewaCrimePhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaDaysList
 import com.devapps.justspeak_10.ui.Components.ChichewaDiningPhraseList
 import com.devapps.justspeak_10.ui.Components.ChichewaExpressionList
 import com.devapps.justspeak_10.ui.Components.ChichewaGeneralEmergencyList
 import com.devapps.justspeak_10.ui.Components.ChichewaGoodbyeList
 import com.devapps.justspeak_10.ui.Components.ChichewaGreetingsList
 import com.devapps.justspeak_10.ui.Components.ChichewaIntroductionPhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaKeyWordList
 import com.devapps.justspeak_10.ui.Components.ChichewaMedicalEmergencyList
+import com.devapps.justspeak_10.ui.Components.ChichewaQuestionsList
 import com.devapps.justspeak_10.ui.Components.ChichewaShoppingList
 import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanCrimeEmergencyList
@@ -196,10 +201,10 @@ fun ChichewaPhraseNavigation(navController: NavController) {
             ChichewaEmergency()
         }
         composable(ChichewaQuestionScreen.route) {
-            GermanQuestion()
+            ChichewaQuestion()
         }
         composable(ChichewaTimeScreen.route) {
-            GermanTime()
+            ChichewaTime()
         }
     }
 }
@@ -240,7 +245,7 @@ fun ChichewaPhraseListLandingScreen(
         PhraseListItem(
             itemTitle = "Questions",
             itemDescription = "Learning how to ask and structure questions is a key component when" +
-                    " it comes to speaking German",
+                    " it comes to speaking Chichewa",
             itemRoute = ChichewaQuestionScreen.route
         ),
         PhraseListItem(
@@ -765,9 +770,288 @@ fun ChichewaEmergency() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                ChichewaMedicalEmergencyList()
+                ChichewaCrimePhraseList()
             }
         }
     }
 }
 
+@Composable
+fun ChichewaQuestion() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Questions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Questions form an essential part of a language. They allow people to " +
+                            "acquire pieces of information from others. This section focuses on how " +
+                            "questions are formed and example questions in chichewa"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(text = "Question key words",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "In chichewa, questions can be formulated in different ways, below" +
+                        " is a list of words to look out for to be able to tell if it is a question" +
+                        " or not. Many of these can be added as prefixes to verbs:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(15.dp)
+                )
+                ChichewaKeyWordList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(text = "Example Questions",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                Text(
+                    text = "This section has a set of example sentences and how the keywords above " +
+                            "can be used in sentences:"
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(15.dp)
+                )
+                ChichewaQuestionsList()
+            }
+        }
+    }
+}
+
+@Composable
+fun ChichewaTime() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = offWhite)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Days, Months and Time",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "This section covers on time related vocabulary in chichewa, below you will" +
+                            " find lists of days, months and a few phrases on telling the time."
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Days (Masiku)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(5.dp)
+                )
+                ChichewaDaysList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Months (Miyezi) and time (Nthawi)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                Text(
+                    text = "Months in Chichewa are the same as in English, sometimes they are " +
+                        "pronounced with a corruption but generally the same as english, thus no months" +
+                        " list."
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(7.dp)
+                )
+                Text(
+                    text = "Telling the time in chichewa is similar to the way it is done in English"
+                )
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+    }
+}
+
+
+@Composable
+@Preview(showBackground = true)
+fun ChichewaScreensPreview() {
+    ChichewaQuestion()
+}
