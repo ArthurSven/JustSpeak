@@ -1,5 +1,6 @@
 package com.devapps.justspeak_10.ui.Screens.Chichewa
 
+import com.devapps.justspeak_10.ui.Components.getChichewaAdjectiveQuizQuestions
 import com.devapps.justspeak_10.ui.Screens.German.GrammarListItem
 import com.devapps.justspeak_10.ui.Screens.German.QuizTabs
 import com.devapps.justspeak_10.ui.destinations.ChichewaAdjectiveQuizScreen
@@ -14,9 +15,6 @@ import com.devapps.justspeak_10.ui.destinations.ChichewaPronounQuizScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaQuestionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaQuizHomeScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaTimeQuizScreen
-
-package com.devapps.justspeak_10.ui.Screens.German
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -78,6 +76,7 @@ import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.QuizCard
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Components.chichewaNounQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanAdjectiveQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanCaseQuizQuestions
 import com.devapps.justspeak_10.ui.Components.germanNounQuizQuestions
@@ -86,6 +85,7 @@ import com.devapps.justspeak_10.ui.Components.germanPronounQuestions
 import com.devapps.justspeak_10.ui.Components.germanSentenceQuestions
 import com.devapps.justspeak_10.ui.Components.germanTenseQuestions
 import com.devapps.justspeak_10.ui.Components.germanVerbConjugationQuestions
+import com.devapps.justspeak_10.ui.destinations.ChichewaVerbQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanDiningQuizScreen
@@ -99,9 +99,6 @@ import com.devapps.justspeak_10.ui.destinations.GermanPhraseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPrepositionQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanPronounQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanQuestionQuizScreen
-import com.devapps.justspeak_10.ui.destinations.GermanQuizHomeScreen
-import com.devapps.justspeak_10.ui.destinations.GermanSentenceStructureQuizScreen
-import com.devapps.justspeak_10.ui.destinations.GermanTenseQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanTimeQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanVerbConjugationQuizScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
@@ -212,43 +209,42 @@ fun ChichewaQuizNavigation(navController: NavController) {
             ChichewaQuizHome(chichewaQuizNavController)
         }
         composable(ChichewaGrammarQuizScreen.route) {
-            GermanGrammarQuiz(navController, chichewaQuizNavController)
+            ChichewaGrammarQuiz(navController, chichewaQuizNavController)
         }
         composable(ChichewaPhraseQuizScreen.route) {
-            GermanPhraseQuiz(navController, chichewaQuizNavController)
+            ChichewaPhraseQuiz(navController, chichewaQuizNavController)
         }
         composable(ChichewaAdjectiveQuizScreen.route) {
-            GermanAdjectiveQuiz()
+            ChichewaAdjectiveQuiz()
         }
-
         composable(ChichewaNounQuizScreen.route) {
-            GermanNounQuiz()
-        }
-        composable(GermanPrepositionQuizScreen.route) {
-            GermanPrepositionQuiz()
+            ChichewaNounQuiz()
         }
         composable(ChichewaPronounQuizScreen.route) {
-            GermanPronounQuiz()
+            ChichewaPronounQuiz()
+        }
+        composable(ChichewaVerbQuizScreen.route) {
+            ChichewaVerbConjugationQuiz()
         }
 
         //phrase navigation
         composable(ChichewaIntroductionQuizScreen.route) {
-            GermanIntroductionQuiz()
+
         }
         composable(ChichewaExpressionQuizScreen.route) {
-            GermanExpressionQuiz()
+
         }
         composable(ChichewaEatingQuizScreen.route) {
-            GermanDiningQuiz()
+
         }
         composable(ChichewaEmergencyQuizScreen.route) {
-            GermanEmergencyQuiz()
+
         }
         composable(ChichewaQuestionQuizScreen.route) {
-            GermanQuestionQuiz()
+
         }
         composable(ChichewaTimeQuizScreen.route) {
-            GermanTimeQuiz()
+
         }
     }
 }
@@ -264,7 +260,7 @@ fun ChichewaQuizHome(
     val quizzes = listOf(
         QuizTabs(
             title = "Grammar Quizes",
-            description = "Test your knowledge and understanding of German Grammar. Choose your grammar" +
+            description = "Test your knowledge and understanding of Chichewa Grammar. Choose your grammar" +
                     " topic and begin!",
             route = GermanGrammarQuizScreen.route,
         ),
@@ -348,8 +344,8 @@ fun ChichewaQuizHome(
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GermanGrammarQuiz(
-    germanGrammarNavController: NavController,
+fun ChichewaGrammarQuiz(
+    chichewaGrammarNavController: NavController,
     itemNavController: NavController
 ) {
     val selectedItemIndex by rememberSaveable {
@@ -358,35 +354,19 @@ fun GermanGrammarQuiz(
     val quizList = listOf(
         GrammarListItem(
             itemTitle = "Adjectives Quiz",
-            itemRoute = GermanAdjectiveQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Cases Quiz",
-            itemRoute = GermanCaseQuizScreen.route
+            itemRoute = ChichewaAdjectiveQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Nouns Quiz",
-            itemRoute = GermanNounQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Prepositions Quiz",
-            itemRoute = GermanPrepositionQuizScreen.route
+            itemRoute = ChichewaNounQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Pronouns Quiz",
-            itemRoute = GermanPronounQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Sentence Structure Quiz",
-            itemRoute = GermanSentenceStructureQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Tenses Quiz",
-            itemRoute = GermanTenseQuizScreen.route
+            itemRoute = ChichewaPronounQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Verbs and Conjugation Quiz",
-            itemRoute = GermanVerbConjugationQuizScreen.route
+            itemRoute = ChichewaVerbQuizScreen.route
         )
     )
     Column(
@@ -417,9 +397,9 @@ fun GermanGrammarQuiz(
 }
 
 @Composable
-fun GermanAdjectiveQuiz() {
+fun ChichewaAdjectiveQuiz() {
 
-    val germanAdjectiveQuestions = germanAdjectiveQuizQuestions()
+    val chichewaAdjectiveQuestions = getChichewaAdjectiveQuizQuestions()
 
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
@@ -427,9 +407,9 @@ fun GermanAdjectiveQuiz() {
     var showCorrectAnswers by remember { mutableStateOf(false) }
 
     // Initialize the selection state with null values
-    if (selectedOptions.size != germanAdjectiveQuestions.size) {
+    if (selectedOptions.size != chichewaAdjectiveQuestions.size) {
         selectedOptions.clear()
-        selectedOptions.addAll(List(germanAdjectiveQuestions.size) { null })
+        selectedOptions.addAll(List(chichewaAdjectiveQuestions.size) { null })
     }
 
     Column(
@@ -441,16 +421,16 @@ fun GermanAdjectiveQuiz() {
         // Display score if available
         score?.let {
 
-            if (it == germanAdjectiveQuestions.size) {
+            if (it == chichewaAdjectiveQuestions.size) {
                 Text(
-                    text = "Your Score: $it/${germanAdjectiveQuestions.size}",
+                    text = "Your Score: $it/${chichewaAdjectiveQuestions.size}",
                     color = Color.Magenta,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
-            } else if (it != germanAdjectiveQuestions.size) {
+            } else if (it != chichewaAdjectiveQuestions.size) {
                 Text(
-                    text = "Your Score: $it/${germanAdjectiveQuestions.size}",
+                    text = "Your Score: $it/${chichewaAdjectiveQuestions.size}",
                     fontSize = 20.sp,
                     color = Color.Red,
                     fontWeight = FontWeight.Bold
@@ -465,8 +445,8 @@ fun GermanAdjectiveQuiz() {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
 
-            items(germanAdjectiveQuestions.size) { j ->
-                val adjectiveQuizList = germanAdjectiveQuestions[j]
+            items(chichewaAdjectiveQuestions.size) { j ->
+                val adjectiveQuizList = chichewaAdjectiveQuestions[j]
                 // Display the current question
                 Text(
                     text = "${adjectiveQuizList.number} ${adjectiveQuizList.question}",
@@ -516,8 +496,8 @@ fun GermanAdjectiveQuiz() {
         Button(
             onClick = {
                 var tempScore = 0
-                for (i in germanAdjectiveQuestions.indices) {
-                    if (selectedOptions[i] == germanAdjectiveQuestions[i].correctAnswer) {
+                for (i in chichewaAdjectiveQuestions.indices) {
+                    if (selectedOptions[i] == chichewaAdjectiveQuestions[i].correctAnswer) {
                         tempScore++
                     }
                 }
@@ -539,128 +519,8 @@ fun GermanAdjectiveQuiz() {
 }
 
 @Composable
-fun GermanCaseQuiz() {
-
-    val germanCaseQuestions = germanCaseQuizQuestions()
-    // Maintain selection state for each question
-    val selectedOptions = remember { mutableStateListOf<String?>() }
-    var score by remember { mutableStateOf<Int?>(null) }
-    var showCorrectAnswers by remember { mutableStateOf(false) }
-
-    // Initialize the selection state with null values
-    if (selectedOptions.size != germanCaseQuestions.size) {
-        selectedOptions.clear()
-        selectedOptions.addAll(List(germanCaseQuestions.size) { null })
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 5.dp)
-            .background(Color.LightGray)
-    ) {
-        // Display score if available
-        score?.let {
-
-            if (it == germanCaseQuestions.size) {
-                Text(
-                    text = "Your Score: $it/${germanCaseQuestions.size}",
-                    color = Color.Magenta,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            } else if (it != germanCaseQuestions.size) {
-                Text(
-                    text = "Your Score: $it/${germanCaseQuestions.size}",
-                    fontSize = 20.sp,
-                    color = Color.Red,
-                    fontWeight = FontWeight.Bold
-
-                )
-            }
-        }
-        // LazyColumn to display questions
-        LazyColumn(
-            modifier = Modifier
-                .weight(1f),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-
-            items(germanCaseQuestions.size) { j ->
-                val caseQuizList = germanCaseQuestions[j]
-                // Display the current question
-                Text(
-                    text = "${caseQuizList.number} ${caseQuizList.question}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-
-                // Display the options as radio buttons
-                caseQuizList.options.forEach { option ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(
-                            selected = selectedOptions[j] == option,
-                            onClick = {
-                                selectedOptions[j] = option
-                                score = null
-                                showCorrectAnswers = false
-                            },
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = Color.Black,
-                                unselectedColor = Color.Gray
-                            )
-                        )
-                        Text(text = option)
-                    }
-                }
-                if (showCorrectAnswers && selectedOptions[j] != caseQuizList.correctAnswer) {
-                    Text(
-                        text = "Correct Answer: ${caseQuizList.correctAnswer}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        color = Color.Red,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-        }
-        // Submit Button
-        Button(
-            onClick = {
-                var tempScore = 0
-                for (i in germanCaseQuestions.indices) {
-                    if (selectedOptions[i] == germanCaseQuestions[i].correctAnswer) {
-                        tempScore++
-                    }
-                }
-                score = tempScore
-                showCorrectAnswers = true
-            },
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = AzureBlue
-            ),
-            shape = RoundedCornerShape(0.dp)
-        ) {
-            Text(text = "Submit")
-        }
-    }
-}
-
-@Composable
-fun GermanNounQuiz() {
-    val germanNounQuestions = germanNounQuizQuestions()
+fun ChichewaNounQuiz() {
+    val germanNounQuestions = chichewaNounQuizQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
@@ -778,7 +638,7 @@ fun GermanNounQuiz() {
 }
 
 @Composable
-fun GermanPrepositionQuiz() {
+fun ChichewaVerbConjugationQuiz() {
     val germanPrepositionQuestions = germanPrepositionQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
@@ -899,7 +759,7 @@ fun GermanPrepositionQuiz() {
 }
 
 @Composable
-fun GermanPronounQuiz() {
+fun ChichewaPronounQuiz() {
     val germanPronounQuestions = germanPronounQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
@@ -1388,7 +1248,7 @@ fun GermanVerbConjugationQuiz() {
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GermanPhraseQuiz(
+fun ChichewaPhraseQuiz(
     germanPhraseNavController: NavController,
     itemNavController: NavController
 ) {
@@ -1452,5 +1312,5 @@ fun GermanPhraseQuiz(
 @Preview(showBackground = true)
 fun QuizPreview() {
     val testNavController = rememberNavController()
-    GermanPrepositionQuiz()
+
 }
