@@ -85,6 +85,9 @@ import com.devapps.justspeak_10.ui.Components.germanPronounQuestions
 import com.devapps.justspeak_10.ui.Components.germanSentenceQuestions
 import com.devapps.justspeak_10.ui.Components.germanTenseQuestions
 import com.devapps.justspeak_10.ui.Components.germanVerbConjugationQuestions
+import com.devapps.justspeak_10.ui.Components.getChichewaPronounQuizQuestions
+import com.devapps.justspeak_10.ui.Components.getChichewaVerbQuizQuestions
+import com.devapps.justspeak_10.ui.destinations.ChichewaHomeScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaVerbQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAdjectiveQuizScreen
 import com.devapps.justspeak_10.ui.destinations.GermanCaseQuizScreen
@@ -151,7 +154,7 @@ fun ChichewaQuizScreen(
             },
             navigationIcon = {
                 IconButton(
-                    onClick = { chichewaQuizNavController.navigate(GermanHomeScreen.route)
+                    onClick = { chichewaQuizNavController.navigate(ChichewaHomeScreen.route)
                     }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -262,13 +265,13 @@ fun ChichewaQuizHome(
             title = "Grammar Quizes",
             description = "Test your knowledge and understanding of Chichewa Grammar. Choose your grammar" +
                     " topic and begin!",
-            route = GermanGrammarQuizScreen.route,
+            route = ChichewaGrammarQuizScreen.route,
         ),
         QuizTabs(
             title = "Phrase Quizes",
             description = "Test your knowledge and understanding on commonly used " +
                     "phrases. Choose your phrase topic and begin!",
-            route = GermanPhraseQuizScreen.route,
+            route = ChichewaPhraseQuizScreen.route,
         )
     )
     Column(
@@ -639,7 +642,7 @@ fun ChichewaNounQuiz() {
 
 @Composable
 fun ChichewaVerbConjugationQuiz() {
-    val germanPrepositionQuestions = germanPrepositionQuestions()
+    val germanPrepositionQuestions = getChichewaVerbQuizQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
@@ -760,7 +763,7 @@ fun ChichewaVerbConjugationQuiz() {
 
 @Composable
 fun ChichewaPronounQuiz() {
-    val germanPronounQuestions = germanPronounQuestions()
+    val germanPronounQuestions = getChichewaPronounQuizQuestions()
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
