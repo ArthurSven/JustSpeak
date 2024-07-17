@@ -129,6 +129,18 @@ fun ChichewaNavigation(startNavController: NavController) {
                 }
             )
         }
+        composable(ChichewaFlashcardScreen.route) {
+            ChichewaFlashScreen(
+                chichewaNavController,
+                userData = googleClientAuth.getSignedInUser(),
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                )
+        }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
                 googleClientAuth.signOut()

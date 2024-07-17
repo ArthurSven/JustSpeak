@@ -373,6 +373,14 @@ object ChichewaTimeQuizScreen : ScreenDestination {
     override val route: String = "chichewa_time_quiz_screen"
 }
 
+object ChichewaFlashcardListScreen : ScreenDestination {
+    override val route: String = "chichewa_flashcard_screen"
+}
+
+object ChichewaAddFlashcardScreen : ScreenDestination {
+    override val route: String = "chichewa_add_flashcard_screen"
+}
+
 object Signout : ScreenDestination {
     override val route = "signout_user"
 }

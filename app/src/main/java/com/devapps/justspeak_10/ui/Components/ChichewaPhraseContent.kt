@@ -11,16 +11,20 @@ import androidx.compose.ui.unit.dp
 
 fun getChichewaGreetings() : List<String> {
     return listOf(
-        "Bho!", "Wadzuka bwanji?", "Mwadzuka bwanji?", "Uli bwanji?", "Muli bwanji",
-        "Waswera bwanji?", "Mwaswera bwanji?", "Ugone bwino", "Mugone bwino"
+        "Bho!", "Wadzuka bwanji?", "Mwadzuka bwanji?", "Ndadzuka bwino", "Tadzuka bwino", "Uli bwanji",
+        "Muli bwanji", "Ndilibwino", "Tilibwino", "Waswera bwanji?", "Mwaswera bwanji?", "Ndaswera bwino",
+        "Taswera bwino", "Chonchobe", "Sindilibwino", "kaya inu?", "Kaya iwe?", "Ugone bwino", "Mugone bwino"
     )
 }
 
 fun getEnglischGreetings() : List<String> {
     return listOf(
-        "Hey!", "How are you? (morning)", "How are you? (morning) - formal", "How are you? (midday)",
-        "How are you? (midday) - formal", "How are you? (evening)", "How are you? (evening) - formal",
-         "Goodnight", "Goodnight - formal"
+        "Hey!", "How are you? (morning)", "How are you? (morning) - formal", "I am doing fine (morning)",
+        "We are doing fine (morning)", "How are you? (midday)", "How are you? (midday) - formal",
+        "I am doing fine (midday)", "We are doing fine (midday)", "How are you? (evening)",
+        "How are you? (evening) - formal", "I am doing good (evening)", "We are doing good (evening)",
+        "So and so", "I am not fine", "And you? (formal)", "And you? (informal)", "Goodnight",
+        "Goodnight - formal"
     )
 }
 
@@ -32,7 +36,7 @@ fun ChichewaGreetingsList() {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(400.dp)
     ) {
         items(chichewaGreetings) { chichewaGreeting ->
             val index = chichewaGreetings.indexOf(chichewaGreeting)
@@ -428,5 +432,5 @@ fun ChichewaDaysList() {
 @Composable
 @Preview(showBackground = true)
 fun Tiwoneseni() {
-    ChichewaDaysList()
+    ChichewaGreetingsList()
 }

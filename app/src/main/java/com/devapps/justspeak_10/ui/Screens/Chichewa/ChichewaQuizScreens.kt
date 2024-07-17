@@ -85,6 +85,10 @@ import com.devapps.justspeak_10.ui.Components.germanPronounQuestions
 import com.devapps.justspeak_10.ui.Components.germanSentenceQuestions
 import com.devapps.justspeak_10.ui.Components.germanTenseQuestions
 import com.devapps.justspeak_10.ui.Components.germanVerbConjugationQuestions
+import com.devapps.justspeak_10.ui.Components.getChichewaDiningShoppingQuizQuestions
+import com.devapps.justspeak_10.ui.Components.getChichewaEmergencyQuizQuestions
+import com.devapps.justspeak_10.ui.Components.getChichewaExpressionQuiz
+import com.devapps.justspeak_10.ui.Components.getChichewaIntroductionQuiz
 import com.devapps.justspeak_10.ui.Components.getChichewaPronounQuizQuestions
 import com.devapps.justspeak_10.ui.Components.getChichewaVerbQuizQuestions
 import com.devapps.justspeak_10.ui.destinations.ChichewaHomeScreen
@@ -232,22 +236,16 @@ fun ChichewaQuizNavigation(navController: NavController) {
 
         //phrase navigation
         composable(ChichewaIntroductionQuizScreen.route) {
-
+            ChichewaIntroductionQuiz()
         }
         composable(ChichewaExpressionQuizScreen.route) {
-
+            ChichewaExpressionQuiz()
         }
         composable(ChichewaEatingQuizScreen.route) {
-
+            ChichewaEatingDiningQuiz()
         }
         composable(ChichewaEmergencyQuizScreen.route) {
-
-        }
-        composable(ChichewaQuestionQuizScreen.route) {
-
-        }
-        composable(ChichewaTimeQuizScreen.route) {
-
+            ChichewaEmergencyQuiz()
         }
     }
 }
@@ -403,6 +401,128 @@ fun ChichewaGrammarQuiz(
 fun ChichewaAdjectiveQuiz() {
 
     val chichewaAdjectiveQuestions = getChichewaAdjectiveQuizQuestions()
+
+    // Maintain selection state for each question
+    val selectedOptions = remember { mutableStateListOf<String?>() }
+    var score by remember { mutableStateOf<Int?>(null) }
+    var showCorrectAnswers by remember { mutableStateOf(false) }
+
+    // Initialize the selection state with null values
+    if (selectedOptions.size != chichewaAdjectiveQuestions.size) {
+        selectedOptions.clear()
+        selectedOptions.addAll(List(chichewaAdjectiveQuestions.size) { null })
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 5.dp)
+            .background(Color.LightGray)
+    ) {
+        // Display score if available
+        score?.let {
+
+            if (it == chichewaAdjectiveQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${chichewaAdjectiveQuestions.size}",
+                    color = Color.Magenta,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            } else if (it != chichewaAdjectiveQuestions.size) {
+                Text(
+                    text = "Your Score: $it/${chichewaAdjectiveQuestions.size}",
+                    fontSize = 20.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+
+                )
+            }
+        }
+        // LazyColumn to display questions
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+            items(chichewaAdjectiveQuestions.size) { j ->
+                val adjectiveQuizList = chichewaAdjectiveQuestions[j]
+                // Display the current question
+                Text(
+                    text = "${adjectiveQuizList.number} ${adjectiveQuizList.question}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                // Display the options as radio buttons
+                adjectiveQuizList.options.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedOptions[j] == option,
+                            onClick = {
+                                selectedOptions[j] = option
+                                // Reset score and showCorrectAnswers state when an option is changed
+                                score = null
+                                showCorrectAnswers = false
+                            },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.Black,
+                                unselectedColor = Color.Gray
+                            )
+                        )
+                        Text(text = option)
+                    }
+                }
+                if (showCorrectAnswers && selectedOptions[j] != adjectiveQuizList.correctAnswer) {
+                    Text(
+                        text = "Correct Answer: ${adjectiveQuizList.correctAnswer}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        // Submit Button
+        Button(
+            onClick = {
+                var tempScore = 0
+                for (i in chichewaAdjectiveQuestions.indices) {
+                    if (selectedOptions[i] == chichewaAdjectiveQuestions[i].correctAnswer) {
+                        tempScore++
+                    }
+                }
+                score = tempScore
+                showCorrectAnswers = true
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = AzureBlue
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            Text(text = "Submit")
+        }
+    }
+}
+
+@Composable
+fun ChichewaEmergencyQuiz() {
+
+    val chichewaAdjectiveQuestions = getChichewaEmergencyQuizQuestions()
 
     // Maintain selection state for each question
     val selectedOptions = remember { mutableStateListOf<String?>() }
@@ -883,9 +1003,9 @@ fun ChichewaPronounQuiz() {
 }
 
 @Composable
-fun GermanSentenceQuiz() {
+fun ChichewaEatingDiningQuiz() {
 // Maintain selection state for each question
-    val germanSentenceQuestions = germanSentenceQuestions()
+    val germanSentenceQuestions = getChichewaDiningShoppingQuizQuestions()
 
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
@@ -1005,9 +1125,9 @@ fun GermanSentenceQuiz() {
 }
 
 @Composable
-fun GermanTenseQuiz() {
+fun ChichewaExpressionQuiz() {
 // Maintain selection state for each question
-    val germanTenseQuestions = germanTenseQuestions()
+    val germanTenseQuestions = getChichewaExpressionQuiz()
 
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
@@ -1127,8 +1247,8 @@ fun GermanTenseQuiz() {
 }
 
 @Composable
-fun GermanVerbConjugationQuiz() {
-    val germanVerbConjugationQuestions = germanVerbConjugationQuestions()
+fun ChichewaIntroductionQuiz() {
+    val germanVerbConjugationQuestions = getChichewaIntroductionQuiz()
 
     val selectedOptions = remember { mutableStateListOf<String?>() }
     var score by remember { mutableStateOf<Int?>(null) }
@@ -1261,27 +1381,19 @@ fun ChichewaPhraseQuiz(
     val quizList = listOf(
         GrammarListItem(
             itemTitle = "Introductions Quiz",
-            itemRoute = GermanIntroductionQuizScreen.route
+            itemRoute = ChichewaIntroductionQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Expressions Quiz",
-            itemRoute = GermanExpressionQuizScreen.route
+            itemRoute = ChichewaExpressionQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Dining and Shopping Quiz",
-            itemRoute = GermanDiningQuizScreen.route
+            itemRoute = ChichewaEatingQuizScreen.route
         ),
         GrammarListItem(
             itemTitle = "Emergencies Quiz",
-            itemRoute = GermanEmergencyQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Questions Quiz",
-            itemRoute = GermanQuestionQuizScreen.route
-        ),
-        GrammarListItem(
-            itemTitle = "Time Quiz",
-            itemRoute = GermanTimeQuizScreen.route
+            itemRoute = ChichewaEmergencyQuizScreen.route
         )
     )
     Column(

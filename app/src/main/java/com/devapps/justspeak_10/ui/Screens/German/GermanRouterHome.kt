@@ -173,18 +173,6 @@ fun GermanNavigation(startNavController: NavController) {
                     }
                 })
         }
-        composable(GermanJournalScreen.route) {
-            GermanJournalScreen(
-                germanJournalNavController = germanNavController,
-                userData = googleClientAuth.getSignedInUser(),
-                onSignOut = {
-                    coroutineScope.launch {
-                        googleClientAuth.signOut()
-                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            )
-        }
         composable(Signout.route) {
             LaunchedEffect(Unit) {
                 googleClientAuth.signOut()
@@ -299,11 +287,6 @@ fun GermanHomeContent(
                                 cardTitle = "Grammar",
                                 cardIcon = R.drawable.grammar,
                                 cardRoute = GermanGrammarScreen.route
-                            ),
-                            CardItem(
-                                cardTitle = "Journal",
-                                cardIcon = R.drawable.journal,
-                                cardRoute = GermanJournalScreen.route
                             ),
                             CardItem(
                                 cardTitle = "Phrases",
