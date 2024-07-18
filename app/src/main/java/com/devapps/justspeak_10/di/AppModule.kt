@@ -5,10 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.devapps.justspeak_10.JustSpeakApplication
 import com.devapps.justspeak_10.data.local.Repository.OfflineFlashcardRepository
-import com.devapps.justspeak_10.data.local.Repository.OfflineJournalRepository
-import com.devapps.justspeak_10.data.local.Repository.OfflineJournalRepositoryImpl
 import com.devapps.justspeak_10.data.local.Repository.OfflineflashcardRepositoryImpl
-import com.devapps.justspeak_10.data.local.db.FlashcardDao
 import com.devapps.justspeak_10.data.local.db.JustSpeakDatabase
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -65,13 +62,5 @@ object AppModule {
         firestore: FirebaseFirestore
     ): OfflineFlashcardRepository {
         return OfflineflashcardRepositoryImpl(db.flashcardDao(), firestore)
-    }
-
-    @Provides
-    @Singleton
-    fun provideJournalRepository(
-        db: JustSpeakDatabase,
-    ) : OfflineJournalRepository {
-        return OfflineJournalRepositoryImpl(db.journalDao())
     }
 }

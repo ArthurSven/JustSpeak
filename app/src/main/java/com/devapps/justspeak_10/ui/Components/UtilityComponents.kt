@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -184,7 +185,7 @@ fun QuizCard(
             .width(280.dp)
             .padding(all = 10.dp)
             .clickable {
-                       onClick()
+                onClick()
             },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(10.dp),
@@ -224,12 +225,46 @@ fun QuizCard(
 }
 
 @Composable
-fun BlogCard() {
+fun TriviaCard(
+    title: String,
+    fact: String
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(10.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp,
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier
+                .height(10.dp)
+            )
+            Text(
+                text = fact
+            )
 
+        }
+    }
 }
 
 @Composable
 @Preview(showBackground = true)
 fun CheckComponents() {
-
+    TriviaCard(
+        "Germany has 16 states",
+        "The federal republic of Germany is composed of 16 federal states namely Bavaria, Baden," +
+                " Hesse, Meckpomm")
 }

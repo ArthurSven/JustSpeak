@@ -23,6 +23,13 @@ android {
         }
     }
 
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+            isIncludeAndroidResources = true
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -66,6 +73,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.10.3")
     implementation("androidx.test.ext:junit-ktx:1.2.1")
     implementation("androidx.compose.ui:ui-test-junit4-android:1.6.8")
+    implementation("com.google.ar:core:1.44.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -123,6 +131,18 @@ dependencies {
     // Mockito dependencies
     testImplementation("org.mockito:mockito-core:5.0.0")
     androidTestImplementation("org.mockito:mockito-android:5.0.0")
+
+    //Add Robolectric
+
+        // Other dependencies...
+
+        // Add Robolectric
+        testImplementation("org.robolectric:robolectric:4.7.3")
+        testImplementation("androidx.test:core:1.6.1")
+        testImplementation("androidx.test:runner:1.6.1")
+        testImplementation("androidx.test.ext:junit:1.2.1")
+        testImplementation("androidx.test.ext:truth:1.6.0")
+
 
 
 }

@@ -7,8 +7,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RoomDatabase
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
-import com.devapps.justspeak_10.data.local.model.Journal
-import com.devapps.justspeak_10.data.local.model.JournalEntry
 import kotlinx.coroutines.flow.Flow
 
 @Dao
