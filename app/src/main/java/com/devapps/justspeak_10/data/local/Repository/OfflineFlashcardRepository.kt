@@ -12,13 +12,17 @@ interface OfflineFlashcardRepository {
 
     suspend fun getAllFlashcardsByUsername(username: String) : Flow<List<FlashcardLocal>>
 
-    suspend fun getUnSyncedFlashcards() : List<FlashcardLocal>
+   // suspend fun getUnSyncedFlashcards() : List<FlashcardLocal>
 
     suspend fun createFlashcard(flashcardLocal: FlashcardLocal) : Response
 
     suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal)
 
-    suspend fun syncUnsyncedFlashcards()
+    fun getFlashcardById(flashcardId: Int) : Flow<FlashcardLocal>
+
+    suspend fun updateFlashcard(flashcardLocal: FlashcardLocal) : Response
+
+//    suspend fun syncUnsyncedFlashcards()
 }
 
 class OfflineflashcardRepositoryImpl @Inject constructor(
@@ -33,16 +37,12 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
         return flashcardDao.getFlashcardsByUsername(username)
     }
 
-    override suspend fun getUnSyncedFlashcards(): List<FlashcardLocal> {
-        return flashcardDao.getUnsyncedFlashcards()
-    }
+//    override suspend fun getUnSyncedFlashcards(): List<FlashcardLocal> {
+//        return flashcardDao.getUnsyncedFlashcards()
+//    }
 
     override suspend fun createFlashcard(flashcardLocal: FlashcardLocal) : Response {
         return try {
-            val docReference = flashcardCollection.add(flashcardLocal.toFlashCardNetwork()).await()
-            // Update the local flashcard with the remote ID and mark as synced
-            flashcardLocal.remoteId = docReference.id
-            flashcardLocal.isSynced = true
             val success = flashcardDao.createFlashcard(flashcardLocal)
             Response.Success(success)
         } catch (e: Exception) {
@@ -54,24 +54,37 @@ class OfflineflashcardRepositoryImpl @Inject constructor(
         flashcardDao.deleteFlashCard(flashcardLocal)
     }
 
-    override suspend fun syncUnsyncedFlashcards() {
-        val unsyncedFlashcards = flashcardDao.getUnsyncedFlashcards()
+    override fun getFlashcardById(flashcardId: Int): Flow<FlashcardLocal> {
+        return flashcardDao.getFlashcardById(flashcardId)
+    }
 
-        unsyncedFlashcards.forEach {unsyncedFlashcard ->
-            try {
-                val docReference = flashcardCollection.add(unsyncedFlashcard.toFlashCardNetwork()).await()
-
-                // Update the local flashcard with the remote ID and mark as synced
-                unsyncedFlashcard.remoteId = docReference.id
-                unsyncedFlashcard.isSynced = true
-                flashcardDao.createFlashcard(unsyncedFlashcard)
-            } catch (e: Exception) {
-                // Handle synchronization failure, e.g., log an error
-                // You might want to implement retry or error handling based on your app's requirements
-                e.printStackTrace()
-            }
+    override suspend fun updateFlashcard(flashcardLocal: FlashcardLocal) : Response{
+        return try {
+            val success = flashcardDao.updateFlashcard(flashcardLocal)
+            Response.Success(success)
+        } catch (e: Exception) {
+            return Response.Error(e)
         }
     }
+
+//    override suspend fun syncUnsyncedFlashcards() {
+//        val unsyncedFlashcards = flashcardDao.getUnsyncedFlashcards()
+//
+//        unsyncedFlashcards.forEach {unsyncedFlashcard ->
+//            try {
+//                val docReference = flashcardCollection.add(unsyncedFlashcard.toFlashCardNetwork()).await()
+//
+//                // Update the local flashcard with the remote ID and mark as synced
+//                unsyncedFlashcard.remoteId = docReference.id
+//                unsyncedFlashcard.isSynced = true
+//                flashcardDao.createFlashcard(unsyncedFlashcard)
+//            } catch (e: Exception) {
+//                // Handle synchronization failure, e.g., log an error
+//                // You might want to implement retry or error handling based on your app's requirements
+//                e.printStackTrace()
+//            }
+//        }
+//    }
 
     private fun FlashcardLocal.toFlashCardNetwork() : Map<String, Any> {
         return mapOf(

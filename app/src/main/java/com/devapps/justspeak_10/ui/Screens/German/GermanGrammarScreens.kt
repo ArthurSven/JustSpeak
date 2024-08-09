@@ -432,7 +432,6 @@ fun GermanCases() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -620,7 +619,6 @@ fun GermanNouns() {
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .background(color = offWhite)
         ) {
             Spacer(
                 modifier = Modifier
@@ -882,7 +880,6 @@ fun GermanSentenceStructure() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -1038,7 +1035,6 @@ fun GermanTenses() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -1280,7 +1276,6 @@ fun GermanVerbsAndConjugation() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -1504,7 +1499,6 @@ fun GermanPrepositions() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier

@@ -52,9 +52,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
@@ -63,6 +65,7 @@ import com.devapps.justspeak_10.ui.Components.RandomColorBox
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getCurrentDate
 import com.devapps.justspeak_10.ui.destinations.ChichewaAddFlashcardScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaEditFlashcardScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaHomeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
@@ -116,6 +119,24 @@ fun ChichewaFlashScreen(
                         Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
                     }
                 })
+        }
+        composable(ChichewaEditFlashcardScreen.route+"/{flashcardId}",
+            arguments = listOf(navArgument("flashcardId") { type = NavType.IntType })
+        ){ backStackEntry ->
+            val arguments = requireNotNull(backStackEntry.arguments)
+            val flashcardId = arguments.getInt("flashcardId")
+                ChichewaEditFlashCard(
+                    germanAddFlashcardNavController = flashCardNavController,
+                    homeNaviController = germanFlashcardNavController,
+                    userData = userData,
+                    flashcardId = flashcardId,
+                    onSignOut = {
+                        coroutineScope.launch {
+                            googleClientAuth.signOut()
+                            Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
         }
     }
 }
@@ -267,7 +288,15 @@ fun ChichewaFlashcardListScreen(
                                     englishWord = flashcard.englishTranslation,
                                     height = randomHeight,
                                     color = randomColor
-                                )
+                                ),
+                                onEdit = {
+                                    chichewaFlashcardListNavController.navigate(ChichewaEditFlashcardScreen.route+"/${flashcard.flashcardId}")
+                                },
+                                onDelete = {
+                                    coroutineScope.launch {
+                                        flashcardViewModel.deleteFlashcard(flashcard)
+                                    }
+                                }
                             )
                         }
                     }
@@ -290,6 +319,8 @@ fun ChichewaAddFlashCard(
     val showMenu = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val showDeleteDialog = remember { mutableStateOf(false) }
+    val flashcardToDelete = remember { mutableStateOf<FlashcardLocal?>(null) }
 
     val googleAuthUiClient by lazy {
         GoogleClientAuth(
@@ -485,3 +516,226 @@ fun ChichewaAddFlashCard(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ChichewaEditFlashCard(
+    germanAddFlashcardNavController: NavController,
+    homeNaviController: NavController,
+    userData: UserData?,
+    flashcardId: Int,
+    onSignOut: () -> Unit
+) {
+    val showMenu = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val showDeleteDialog = remember { mutableStateOf(false) }
+    val flashcardToDelete = remember { mutableStateOf<FlashcardLocal?>(null) }
+
+    val googleAuthUiClient by lazy {
+        GoogleClientAuth(
+            context = context,
+            oneTapClient = Identity.getSignInClient(context)
+        )
+    }
+
+    val username = googleAuthUiClient.getSignedInUser()?.username.toString()
+    val flashcardViewModel: FlashcardViewModel = hiltViewModel()
+    
+    val flashcard by remember {
+        flashcardViewModel.getFlashcardById(flashcardId)
+    }.collectAsState(initial = null)
+
+    val insetResultState by flashcardViewModel.insertResultState.collectAsState()
+    var insertionAttempted by remember {
+        mutableStateOf(false)
+    }
+
+    // Populate the input fields when the flashcard is loaded
+
+
+    Scaffold(
+        containerColor = Color.White,
+        topBar = { CenterAlignedTopAppBar(title = { Text(
+            "JustSpeak",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold)
+        },
+            actions = {
+                IconButton(onClick = { showMenu.value = true}) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = null,
+                        tint = AzureBlue
+                    )
+                }
+                DropdownMenu(
+                    expanded = showMenu.value,
+                    onDismissRequest = {
+                        showMenu.value = false
+                    },
+                    modifier = Modifier
+                        .background(color = Color.White)
+                        .width(80.dp)) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(text = "Logout",
+                                color = Color.Black)
+                        },
+                        onClick = {
+                            germanAddFlashcardNavController.navigate(Signout.route)
+                            onSignOut()
+                        },
+                        modifier = Modifier
+                            .background(color = Color.White))
+                }
+            },
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        germanAddFlashcardNavController.navigate(com.devapps.justspeak_10.ui.destinations.ChichewaFlashcardListScreen.route)
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "exit button",
+                        tint = AzureBlue)
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.White,
+                titleContentColor = AzureBlue
+            )
+        )
+        }
+    ) { it ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .background(color = Color.LightGray)
+        ) {
+
+            var germanFlashcard by remember {
+                mutableStateOf("")
+            }
+            var englishTrnslation by remember {
+                mutableStateOf("")
+            }
+            var currentDate = getCurrentDate()
+
+            LaunchedEffect(flashcard) {
+                flashcard?.let {
+                    germanFlashcard = it.germanTranslation
+                    englishTrnslation = it.englishTranslation
+                }
+            }
+
+            UserBar(userData)
+            Column(
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 10.dp)
+                        .background(color = Color.White),
+                    shape = RoundedCornerShape(15.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = Color.White)
+                            .padding(all = 16.dp)
+                    ) {
+                        Text(
+                            text = "Update your Flashcard",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = Color.Black
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(30.dp)
+                        )
+                        OutlinedTextField(
+                            value = germanFlashcard,
+                            onValueChange = { germanFlashcard = it},
+                            label = {
+                                Text(text = "Chichewa")
+                            }
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(10.dp)
+                        )
+                        OutlinedTextField(
+                            value = englishTrnslation,
+                            onValueChange = { englishTrnslation = it},
+                            label = {
+                                Text(text = "English translation")
+                            }
+                        )
+                        Spacer(modifier = Modifier
+                            .height(15.dp)
+                        )
+                        Button(
+                            onClick = {
+                                if(germanFlashcard.isNotEmpty() && englishTrnslation.isNotEmpty()) {
+                                    val flashcardLocal = FlashcardLocal(
+                                        flashcardId = flashcardId,
+                                        germanTranslation = germanFlashcard,
+                                        englishTranslation = englishTrnslation,
+                                        creator = username,
+                                        dateCreated = currentDate
+                                    )
+                                    coroutineScope.launch {
+                                        flashcardViewModel.updateFlashcard(flashcardLocal)
+                                    }
+                                    insertionAttempted = true
+                                } else {
+                                    // Display a message if either of the fields is empty
+                                    Toast.makeText(context, "Please fill in both German and English " +
+                                            "translations.", Toast.LENGTH_SHORT).show()
+                                }
+                            },
+                            modifier = Modifier
+                                .width(310.dp)
+                                .height(40.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Blue,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text(text = "Update flashcard")
+                        }
+                        LaunchedEffect(insetResultState, insertionAttempted) {
+                            if (insertionAttempted) {
+                                if (insetResultState.isSuccessful) {
+                                    Toast.makeText(context, "Flashcard has successfully updated",
+                                        Toast.LENGTH_LONG)
+                                        .show()
+                                    flashcardViewModel.resetState()
+                                    germanFlashcard = ""
+                                    englishTrnslation = ""
+                                } else if (insetResultState.error != null){
+
+                                    Toast.makeText(context, "Failed to update flashcard: " +
+                                            "${insetResultState.error}",
+                                        Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

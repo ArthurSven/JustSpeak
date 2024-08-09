@@ -320,7 +320,6 @@ fun ChichewaAdjectives() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -374,7 +373,6 @@ fun ChichewaNouns() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -546,7 +544,6 @@ fun ChichewaNumbers() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -618,7 +615,6 @@ fun ChichewaPronouns() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -730,7 +726,6 @@ fun ChichewaVerbs() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier

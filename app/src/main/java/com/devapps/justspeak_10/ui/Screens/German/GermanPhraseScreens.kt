@@ -278,7 +278,6 @@ fun GermanIntroductions() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -515,7 +514,6 @@ fun GermanEating() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier
@@ -630,7 +628,6 @@ fun GermanEmergency() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
     ) {
         Spacer(
             modifier = Modifier

@@ -7,7 +7,9 @@ import com.devapps.justspeak_10.data.local.model.FlashcardLocal
 import com.devapps.justspeak_10.utils.InsertFlashcardResult
 import com.devapps.justspeak_10.utils.InsertFlashcardState
 import com.devapps.justspeak_10.utils.Response
+import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,6 +31,9 @@ class FlashcardViewModel @Inject constructor(
 
         private val _createdBy = MutableStateFlow<String>("")
         val createdBy: StateFlow<String> = _createdBy
+
+    private val _updateResultState = MutableStateFlow(InsertFlashcardState())
+    val updateResultState = _updateResultState.asStateFlow()
 
     fun setCreatedBy(username: String) {
         _createdBy.value = username
@@ -89,9 +94,51 @@ class FlashcardViewModel @Inject constructor(
             }
         }
 
+    fun onUpdateResult(result: InsertFlashcardResult) {
+        _updateResultState.update {
+            it.copy(
+                isSuccessful = result.errorMessage == null,
+                error =result.errorMessage
+            )
+        }
+    }
+
     fun resetState() {
         _insertResultState.update {
             InsertFlashcardState()
+        }
+    }
+
+    suspend fun deleteFlashcard(flashcardLocal: FlashcardLocal) {
+        offlineFlashcardRepository.deleteFlashcard(flashcardLocal)
+    }
+
+    fun getFlashcardById(flashcardId: Int): Flow<FlashcardLocal?> {
+        return offlineFlashcardRepository.getFlashcardById(flashcardId)
+    }
+
+    suspend fun updateFlashcard(flashcardLocal: FlashcardLocal) {
+
+        viewModelScope.launch {
+            val result = offlineFlashcardRepository.updateFlashcard(flashcardLocal)
+            when(result) {
+                is Response.Error -> {
+                    onUpdateResult(
+                        InsertFlashcardResult(
+                            data = flashcardLocal,
+                            errorMessage = result.error.message
+                        )
+                    )
+                }
+                is Response.Success -> {
+                    onUpdateResult(
+                        InsertFlashcardResult(
+                            data = flashcardLocal,
+                            errorMessage = null
+                        )
+                    )
+                }
+            }
         }
     }
 

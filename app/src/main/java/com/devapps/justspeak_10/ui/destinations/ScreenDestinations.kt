@@ -118,6 +118,10 @@ object GermanPhraseListScreen : ScreenDestination {
     override val route = "german_phrase_list_screen"
 }
 
+object GermanEditFlashcardScreen : ScreenDestination {
+    override val route: String = "german_edit_flashcard_screen"
+}
+
 object GermanIntroductionScreen : ScreenDestination {
     override val route = "german_introduction_screen"
 }
@@ -379,6 +383,10 @@ object ChichewaFlashcardListScreen : ScreenDestination {
 
 object ChichewaAddFlashcardScreen : ScreenDestination {
     override val route: String = "chichewa_add_flashcard_screen"
+}
+
+object ChichewaEditFlashcardScreen : ScreenDestination {
+    override val route: String = "chichewa_edit_flashcard_screen"
 }
 
 object Signout : ScreenDestination {

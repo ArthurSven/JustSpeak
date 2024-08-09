@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -54,9 +55,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.devapps.justspeak_10.data.local.model.FlashcardLocal
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
@@ -64,7 +67,10 @@ import com.devapps.justspeak_10.ui.Components.GridItem
 import com.devapps.justspeak_10.ui.Components.RandomColorBox
 import com.devapps.justspeak_10.ui.Components.UserBar
 import com.devapps.justspeak_10.ui.Components.getCurrentDate
+import com.devapps.justspeak_10.ui.Screens.Chichewa.ChichewaEditFlashCard
+import com.devapps.justspeak_10.ui.destinations.ChichewaEditFlashcardScreen
 import com.devapps.justspeak_10.ui.destinations.GermanAddFlashcardScreen
+import com.devapps.justspeak_10.ui.destinations.GermanEditFlashcardScreen
 import com.devapps.justspeak_10.ui.destinations.GermanFlashcardListScreen
 import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
@@ -110,15 +116,33 @@ fun GermanFlashScreen(
         }
         composable(GermanAddFlashcardScreen.route) {
           GermanAddFlashCard(
-              germanAddFlashcardNavController = flashCardNavController,
+              flashCardNavController,
               germanFlashcardNavController,
-              userData = userData,
+              userData,
               onSignOut = {
                   coroutineScope.launch {
                       googleClientAuth.signOut()
                       Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
                   }
               })
+        }
+        composable(
+            GermanEditFlashcardScreen.route+"/{flashcardId}",
+            arguments = listOf(navArgument("flashcardId") { type = NavType.IntType })
+        ){ backStackEntry ->
+            val flashcardId = backStackEntry.arguments?.getInt("flashcardId") ?: 0
+            GermanEditFlashCard(
+                germanAddFlashcardNavController = flashCardNavController,
+                homeNaviController = germanFlashcardNavController,
+                userData = userData,
+                flashcardId = flashcardId,
+                onSignOut = {
+                    coroutineScope.launch {
+                        googleClientAuth.signOut()
+                        Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
     }
 }
@@ -147,6 +171,9 @@ fun GermanFlashcardListScreen(
     val username = googleAuthClient.getSignedInUser()?.username.toString()
 
     val flashcardState by remember { flashcardViewModel.userFlashcards }.collectAsState(emptyList())
+    val showDeleteDialog = remember { mutableStateOf(false) }
+
+
 
     Scaffold(
         containerColor = Color.White,
@@ -270,7 +297,15 @@ fun GermanFlashcardListScreen(
                                     englishWord = flashcard.englishTranslation,
                                     height = randomHeight,
                                     color = randomColor
-                                )
+                                ),
+                                onEdit = {
+                                    germanFlashcardListNavController.navigate(GermanEditFlashcardScreen.route+"/${flashcard.flashcardId}")
+                                },
+                                onDelete = {
+                                    coroutineScope.launch {
+                                        flashcardViewModel.deleteFlashcard(flashcard)
+                                    }
+                                }
                             )
                         }
                     }
@@ -477,6 +512,230 @@ fun GermanAddFlashCard(
 
                                     Toast.makeText(context, "Failed to create flashcard: " +
                                             "${insetResultState.error}",
+                                        Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GermanEditFlashCard(
+    germanAddFlashcardNavController: NavController,
+    homeNaviController: NavController,
+    userData: UserData?,
+    flashcardId: Int,
+    onSignOut: () -> Unit
+) {
+    val showMenu = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val showDeleteDialog = remember { mutableStateOf(false) }
+    val flashcardToDelete = remember { mutableStateOf<FlashcardLocal?>(null) }
+
+    val googleAuthUiClient by lazy {
+        GoogleClientAuth(
+            context = context,
+            oneTapClient = Identity.getSignInClient(context)
+        )
+    }
+
+    val username = googleAuthUiClient.getSignedInUser()?.username.toString()
+    val flashcardViewModel: FlashcardViewModel = hiltViewModel()
+
+    val flashcard by remember {
+        flashcardViewModel.getFlashcardById(flashcardId)
+    }.collectAsState(initial = null)
+
+    val updateResultState by flashcardViewModel.updateResultState.collectAsState()
+    var insertionAttempted by remember {
+        mutableStateOf(false)
+    }
+
+    // Populate the input fields when the flashcard is loaded
+
+
+    Scaffold(
+        containerColor = Color.White,
+        topBar = { CenterAlignedTopAppBar(title = { Text(
+            "JustSpeak",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold)
+        },
+            actions = {
+                IconButton(onClick = { showMenu.value = true}) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = null,
+                        tint = AzureBlue
+                    )
+                }
+                DropdownMenu(
+                    expanded = showMenu.value,
+                    onDismissRequest = {
+                        showMenu.value = false
+                    },
+                    modifier = Modifier
+                        .background(color = Color.White)
+                        .width(80.dp)) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(text = "Logout",
+                                color = Color.Black)
+                        },
+                        onClick = {
+                            germanAddFlashcardNavController.navigate(Signout.route)
+                            onSignOut()
+                        },
+                        modifier = Modifier
+                            .background(color = Color.White))
+                }
+            },
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        germanAddFlashcardNavController.navigate(GermanFlashcardListScreen.route)
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "exit button",
+                        tint = AzureBlue)
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.White,
+                titleContentColor = AzureBlue
+            )
+        )
+        }
+    ) { it ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .background(color = Color.LightGray)
+        ) {
+
+            var germanFlashcard by remember {
+                mutableStateOf("")
+            }
+            var englishTrnslation by remember {
+                mutableStateOf("")
+            }
+            var currentDate = getCurrentDate()
+
+            LaunchedEffect(flashcard) {
+                flashcard?.let {
+                    germanFlashcard = it.germanTranslation
+                    englishTrnslation = it.englishTranslation
+                }
+            }
+
+            UserBar(userData)
+            Column(
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 10.dp)
+                        .background(color = Color.White),
+                    shape = RoundedCornerShape(15.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = Color.White)
+                            .padding(all = 16.dp)
+                    ) {
+                        Text(
+                            text = "Update your Flashcard",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = Color.Black
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(30.dp)
+                        )
+                        OutlinedTextField(
+                            value = germanFlashcard,
+                            onValueChange = { germanFlashcard = it},
+                            label = {
+                                Text(text = "Chichewa")
+                            }
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .height(10.dp)
+                        )
+                        OutlinedTextField(
+                            value = englishTrnslation,
+                            onValueChange = { englishTrnslation = it},
+                            label = {
+                                Text(text = "English translation")
+                            }
+                        )
+                        Spacer(modifier = Modifier
+                            .height(15.dp)
+                        )
+                        Button(
+                            onClick = {
+                                if(germanFlashcard.isNotEmpty() && englishTrnslation.isNotEmpty()) {
+                                    val flashcardLocal = FlashcardLocal(
+                                        flashcardId = flashcardId,
+                                        germanTranslation = germanFlashcard,
+                                        englishTranslation = englishTrnslation,
+                                        creator = username,
+                                        dateCreated = currentDate
+                                    )
+                                    coroutineScope.launch {
+                                        flashcardViewModel.updateFlashcard(flashcardLocal)
+                                    }
+                                    insertionAttempted = true
+                                } else {
+                                    // Display a message if either of the fields is empty
+                                    Toast.makeText(context, "Please fill in both German and English " +
+                                            "translations.", Toast.LENGTH_SHORT).show()
+                                }
+                            },
+                            modifier = Modifier
+                                .width(310.dp)
+                                .height(40.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Blue,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text(text = "Update flashcard")
+                        }
+                        LaunchedEffect(updateResultState, insertionAttempted) {
+                            if (insertionAttempted) {
+                                if (updateResultState.isSuccessful) {
+                                    Toast.makeText(context, "Flashcard has been updated successfully",
+                                        Toast.LENGTH_LONG)
+                                        .show()
+                                    flashcardViewModel.resetState()
+                                    germanFlashcard = ""
+                                    englishTrnslation = ""
+                                } else if (updateResultState.error != null){
+
+                                    Toast.makeText(context, "Failed to update flashcard: " +
+                                            "${updateResultState.error}",
                                         Toast.LENGTH_LONG).show()
                                 }
                             }

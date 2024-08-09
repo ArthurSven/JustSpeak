@@ -34,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -80,17 +81,8 @@ import com.devapps.justspeak_10.ui.destinations.ChichewaIntroductionScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaPhraseListScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaQuestionScreen
 import com.devapps.justspeak_10.ui.destinations.ChichewaTimeScreen
-import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
-import com.devapps.justspeak_10.ui.destinations.GermanEmergencyScreen
-import com.devapps.justspeak_10.ui.destinations.GermanExpressionScreen
-import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
-import com.devapps.justspeak_10.ui.destinations.GermanIntroductionScreen
-import com.devapps.justspeak_10.ui.destinations.GermanPhraseListScreen
-import com.devapps.justspeak_10.ui.destinations.GermanQuestionsScreen
-import com.devapps.justspeak_10.ui.destinations.GermanTimeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
-import com.devapps.justspeak_10.ui.theme.offWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -292,7 +284,7 @@ fun ChichewaIntroductions() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -496,7 +488,7 @@ fun ChichewaDiningAndEating() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -618,7 +610,7 @@ fun ChichewaEmergency() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -782,7 +774,7 @@ fun ChichewaQuestion() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -918,7 +910,7 @@ fun ChichewaTime() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = offWhite)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
