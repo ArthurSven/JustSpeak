@@ -675,7 +675,7 @@ fun GermanEditFlashCard(
                             value = germanFlashcard,
                             onValueChange = { germanFlashcard = it},
                             label = {
-                                Text(text = "Chichewa")
+                                Text(text = "German")
                             }
                         )
                         Spacer(
