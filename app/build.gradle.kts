@@ -32,7 +32,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -75,7 +76,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("com.google.firebase:firebase-auth:22.3.0")
-    implementation("com.google.firebase:firebase-firestore:24.10.3")
     implementation("androidx.test.ext:junit-ktx:1.2.1")
     implementation("androidx.compose.ui:ui-test-junit4-android:1.5.0")
     implementation("com.google.ar:core:1.44.0")
@@ -101,7 +101,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.5.0")
 
     //okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
@@ -139,7 +139,10 @@ dependencies {
     //Add Robolectric
 
         // Other dependencies...
-
+   // implementation("org.bouncycastle:bctls-jdk15on:1.72")
+   // implementation("org.bouncycastle:bcprov-jdk15on:1.72")
+   // implementation("org.conscrypt:conscrypt-android:2.5.2")
+    implementation("org.openjsse:openjsse:1.1.12")
 
 
 }
