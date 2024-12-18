@@ -806,7 +806,7 @@ fun NounItem(germanNoun: String, englishNoun: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(30.dp)
+            .height(40.dp)
     ) {
         Text(
             text = germanNoun,
@@ -945,7 +945,7 @@ fun getGermanBodyPartNouns() : List<String> {
 @Composable
 fun getEnglishBodyPartNouns() : List<String> {
     return listOf(
-        "Eye", "Head", "Body", "Mouth", "Ear", "Hair", "Neck", "Arm", "Finger", "Chest", "Elbow",
+        "Eye", "Head", "Body", "Nose", "Mouth", "Ear", "Hair", "Neck", "Arm", "Finger", "Chest", "Elbow",
         "Bone", "Leg", "Foot", "Toe", "Skin", "Back"
     )
 }
@@ -1334,7 +1334,139 @@ fun KannList() {
 }
 
 @Composable
+fun getGermanAccusativePrepositions() : List<String> {
+    return listOf(
+        "für", "um", "bis", "gegen", "durch", "entlang", "ohne", "wider"
+    )
+}
+
+@Composable
+fun getEnglishAccusativePrepositions() : List<String> {
+    return listOf(
+        "for", "around", "until", "against", "through", "along", "without", "against (opposition)"
+    )
+}
+
+@Composable
+fun GermanAccusativePrepositionsList() {
+    val germanAccusative = getGermanAccusativePrepositions()
+    val englishAccusative = getEnglishAccusativePrepositions()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(320.dp)
+    ) {
+        items(germanAccusative) { germanPrep ->
+            val index = germanAccusative.indexOf(germanPrep)
+            val translatedPrep =
+                if (index < englishAccusative.size) englishAccusative[index] else ""
+
+            VerbRow(verbs = germanPrep, translations = translatedPrep)
+        }
+    }
+}
+
+@Composable
+fun getGermanTwoWayPrepositions() : List<String> {
+    return listOf(
+        "an", "auf", "hinter", "neben", "in", "über", "unter", "vor"
+    )
+}
+
+@Composable
+fun getEnglishTwoWayPrepositions() : List<String> {
+    return listOf(
+        "on", "ontop of", "behind", "next to", "in", "above", "under", "in front of"
+    )
+}
+
+@Composable
+fun GermanTwoWayPrepositionsList() {
+    val germanTwoWay = getGermanTwoWayPrepositions()
+    val englishTwoWay = getEnglishTwoWayPrepositions()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(400.dp)
+    ) {
+        items(germanTwoWay) { germanPrep ->
+            val index = germanTwoWay.indexOf(germanPrep)
+            val translatedPrep =
+                if (index < englishTwoWay.size) englishTwoWay[index] else ""
+
+            VerbRow(verbs = germanPrep, translations = translatedPrep)
+        }
+    }
+}
+
+@Composable
+fun getGermanDativePrepositions() : List<String> {
+    return listOf(
+        "mit", "aus", "außer", "bei", "nach", "seit", "von", "zu", "gegenüber (von) "
+    )
+}
+
+@Composable
+fun getEnglishDativePrepositions() : List<String> {
+    return listOf(
+        "with", "out of", "except for/apart from", "at", "after", "since", "from", "to, at",
+        "opposite of"
+    )
+}
+
+@Composable
+fun GermanDativePrepositionsList() {
+    val germanDative = getGermanDativePrepositions()
+    val englishDative = getEnglishDativePrepositions()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(400.dp)
+    ) {
+        items(germanDative) { germanPrep ->
+            val index = germanDative.indexOf(germanPrep)
+            val translatedPrep =
+                if (index < englishDative.size) englishDative[index] else ""
+
+            VerbRow(verbs = germanPrep, translations = translatedPrep)
+        }
+    }
+}
+
+@Composable
+fun getGermanGenitivePrepositions() : List<String> {
+    return listOf(
+        "innerhalb", "außerhalb", "anstatt/statt", "trotz", "während", "wegen"
+    )
+}
+
+@Composable
+fun getEnglishGenitivePrepositions() : List<String> {
+    return listOf(
+        "Within/inside of", "outside of", "instead of", "despite", "during", "because of"
+    )
+}
+
+@Composable
+fun GermanGenitivePrepositionsList() {
+    val germanGenitive = getGermanGenitivePrepositions()
+    val englishGenitive = getEnglishGenitivePrepositions()
+
+    LazyColumn(
+        modifier = Modifier
+            .height(250.dp)
+    ) {
+        items(germanGenitive) { germanPrep ->
+            val index = germanGenitive.indexOf(germanPrep)
+            val translatedPrep =
+                if (index < englishGenitive.size) englishGenitive[index] else ""
+
+            VerbRow(verbs = germanPrep, translations = translatedPrep)
+        }
+    }
+}
+@Composable
 @Preview(showBackground = true)
 fun ViewComponents() {
-    GermanFoodNounList()
+    GermanGenitivePrepositionsList()
 }

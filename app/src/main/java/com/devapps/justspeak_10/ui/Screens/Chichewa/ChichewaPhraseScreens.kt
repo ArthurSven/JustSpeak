@@ -1,4 +1,4 @@
-package com.devapps.justspeak_10.ui.Screens.German
+package com.devapps.justspeak_10.ui.Screens.Chichewa
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -34,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,45 +44,50 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devapps.justspeak_10.data.remote.model.UserData
+import com.devapps.justspeak_10.ui.Components.ChichewaCrimePhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaDaysList
+import com.devapps.justspeak_10.ui.Components.ChichewaDiningPhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaExpressionList
+import com.devapps.justspeak_10.ui.Components.ChichewaGeneralEmergencyList
+import com.devapps.justspeak_10.ui.Components.ChichewaGoodbyeList
+import com.devapps.justspeak_10.ui.Components.ChichewaGreetingsList
+import com.devapps.justspeak_10.ui.Components.ChichewaIntroductionPhraseList
+import com.devapps.justspeak_10.ui.Components.ChichewaKeyWordList
+import com.devapps.justspeak_10.ui.Components.ChichewaMedicalEmergencyList
+import com.devapps.justspeak_10.ui.Components.ChichewaQuestionsList
+import com.devapps.justspeak_10.ui.Components.ChichewaShoppingList
 import com.devapps.justspeak_10.ui.Components.GermanBasicExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanCrimeEmergencyList
-import com.devapps.justspeak_10.ui.Components.GermanEatingPhraseList
 import com.devapps.justspeak_10.ui.Components.GermanEmergencyList
-import com.devapps.justspeak_10.ui.Components.GermanFormQuestionList
 import com.devapps.justspeak_10.ui.Components.GermanGoodbyeList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanGreetingList
 import com.devapps.justspeak_10.ui.Components.GermanIntroductionExpressionList
 import com.devapps.justspeak_10.ui.Components.GermanMedicalEmergencyList
 import com.devapps.justspeak_10.ui.Components.GermanPhraseCard
-import com.devapps.justspeak_10.ui.Components.GermanQuestionStarterList
-import com.devapps.justspeak_10.ui.Components.GermanShoppingList
-import com.devapps.justspeak_10.ui.Components.GermanTimeEssentialsList
-import com.devapps.justspeak_10.ui.Components.GermanTimeList
-import com.devapps.justspeak_10.ui.Components.GermanVerbQuestionList
 import com.devapps.justspeak_10.ui.Components.UserBar
-import com.devapps.justspeak_10.ui.Components.makeBulletedList
-import com.devapps.justspeak_10.ui.destinations.GermanEatingScreen
-import com.devapps.justspeak_10.ui.destinations.GermanEmergencyScreen
-import com.devapps.justspeak_10.ui.destinations.GermanExpressionScreen
-import com.devapps.justspeak_10.ui.destinations.GermanHomeScreen
-import com.devapps.justspeak_10.ui.destinations.GermanIntroductionScreen
-import com.devapps.justspeak_10.ui.destinations.GermanPhraseListScreen
-import com.devapps.justspeak_10.ui.destinations.GermanQuestionsScreen
-import com.devapps.justspeak_10.ui.destinations.GermanTimeScreen
+import com.devapps.justspeak_10.ui.Screens.German.GermanEating
+import com.devapps.justspeak_10.ui.Screens.German.GermanEmergency
+import com.devapps.justspeak_10.ui.Screens.German.GermanExpressions
+import com.devapps.justspeak_10.ui.Screens.German.GermanIntroductions
+import com.devapps.justspeak_10.ui.Screens.German.GermanQuestion
+import com.devapps.justspeak_10.ui.Screens.German.GermanTime
+import com.devapps.justspeak_10.ui.Screens.German.PhraseListItem
+import com.devapps.justspeak_10.ui.destinations.ChichewaEatingScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaEmergencyScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaExpressionScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaHomeScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaIntroductionScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaPhraseListScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaQuestionScreen
+import com.devapps.justspeak_10.ui.destinations.ChichewaTimeScreen
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.AzureBlue
-import com.devapps.justspeak_10.ui.theme.offWhite
 
-data class PhraseListItem(
-    val itemTitle: String,
-    val itemDescription: String,
-    val itemRoute: String
-)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GermanPhraseScreen(
-    germanPhraseNavController: NavController,
+fun ChichewaPhraseScreen(
+    chichewaPhraseNavController: NavController,
     userData: UserData?,
     onSignOut: () -> Unit) {
     val showMenu = remember { mutableStateOf(false) }
@@ -114,7 +120,7 @@ fun GermanPhraseScreen(
                                 color = Color.Black)
                         },
                         onClick = {
-                            germanPhraseNavController.navigate(Signout.route)
+                            chichewaPhraseNavController.navigate(Signout.route)
                             onSignOut()
                         },
                         modifier = Modifier
@@ -122,14 +128,15 @@ fun GermanPhraseScreen(
                 }
             },
             navigationIcon = {
-                             IconButton(
-                                 onClick = { germanPhraseNavController.navigate(GermanHomeScreen.route)
-                                 }) {
-                                 Icon(
-                                     imageVector = Icons.Default.ArrowBack,
-                                     contentDescription = "exit button",
-                                     tint = AzureBlue)
-                             }
+                IconButton(
+                    onClick = { chichewaPhraseNavController.navigate(ChichewaHomeScreen.route)
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "exit button",
+                        tint = AzureBlue
+                    )
+                }
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -154,7 +161,7 @@ fun GermanPhraseScreen(
 
                 Spacer(modifier = Modifier
                     .height(20.dp))
-                GermanPhraseNavigation(germanPhraseNavController)
+                ChichewaPhraseNavigation(chichewaPhraseNavController)
             }
         }
 
@@ -164,39 +171,39 @@ fun GermanPhraseScreen(
 }
 
 @Composable
-fun GermanPhraseNavigation(navController: NavController) {
+fun ChichewaPhraseNavigation(navController: NavController) {
 
-    val germanPhraseNavController = rememberNavController()
+    val chichewaPhraseNavController = rememberNavController()
 
-    NavHost(navController = germanPhraseNavController,
-        startDestination = GermanPhraseListScreen.route) {
-        composable(GermanPhraseListScreen.route) {
-            GermanPhraseListLandingScreen(germanPhraseNavController)
+    NavHost(navController = chichewaPhraseNavController,
+        startDestination = ChichewaPhraseListScreen.route) {
+        composable(ChichewaPhraseListScreen.route) {
+            ChichewaPhraseListLandingScreen(chichewaPhraseNavController)
         }
-        composable(GermanIntroductionScreen.route) {
-            GermanIntroductions()
+        composable(ChichewaIntroductionScreen.route) {
+            ChichewaIntroductions()
         }
-        composable(GermanExpressionScreen.route) {
-            GermanExpressions()
+        composable(ChichewaExpressionScreen.route) {
+            ChichewaExpressions()
         }
-        composable(GermanEatingScreen.route) {
-            GermanEating()
+        composable(ChichewaEatingScreen.route) {
+            ChichewaDiningAndEating()
         }
-        composable(GermanEmergencyScreen.route) {
-            GermanEmergency()
+        composable(ChichewaEmergencyScreen.route) {
+            ChichewaEmergency()
         }
-        composable(GermanQuestionsScreen.route) {
-            GermanQuestion()
+        composable(ChichewaQuestionScreen.route) {
+            ChichewaQuestion()
         }
-        composable(GermanTimeScreen.route) {
-            GermanTime()
+        composable(ChichewaTimeScreen.route) {
+            ChichewaTime()
         }
     }
 }
 
 
 @Composable
-fun GermanPhraseListLandingScreen(
+fun ChichewaPhraseListLandingScreen(
     navController: NavController
 ) {
     val selectedItemIndex by rememberSaveable {
@@ -205,39 +212,38 @@ fun GermanPhraseListLandingScreen(
     val topics = listOf(
         PhraseListItem(
             itemTitle = "Introductions",
-            itemDescription = "Learn to introduce yourself the german way. Distinguish the formal" +
+            itemDescription = "Learn to introduce yourself the Malawian way. Distinguish the formal" +
                     "from informal greetings, learn the appropriate greeting based on the time!",
-            itemRoute = GermanIntroductionScreen.route
+            itemRoute = ChichewaIntroductionScreen.route
         ),
         PhraseListItem(
             itemTitle = "Expressions",
             itemDescription = "Master the art of expressing yourself the right wy in German, learn" +
                     "the commonly used phrases in day to day life to get by easily.",
-            itemRoute = GermanExpressionScreen.route
+            itemRoute = ChichewaExpressionScreen.route
         ),
         PhraseListItem(
             itemTitle = "Dining and Shopping",
-            itemDescription = "Imagine yourself at a nice cafe in Vienna... Learn to express yourself " +
-                    "when you go out shopping or to dine.",
-            itemRoute = GermanEatingScreen.route
+            itemDescription = "Key phrases when you go out to enjpy fine dining or when you visit the" +
+                    " bustling markets of Malawi",
+            itemRoute = ChichewaEatingScreen.route
         ),
         PhraseListItem(
             itemTitle = "Emergencies",
             itemDescription = "Learn the key phrases in emergency situations so that you are not " +
                     "tongue tied when something happens unexpectedly.",
-            itemRoute = GermanEmergencyScreen.route
+            itemRoute = ChichewaEmergencyScreen.route
         ),
         PhraseListItem(
             itemTitle = "Questions",
             itemDescription = "Learning how to ask and structure questions is a key component when" +
-                    " it comes to speaking German",
-            itemRoute = GermanQuestionsScreen.route
+                    " it comes to speaking Chichewa",
+            itemRoute = ChichewaQuestionScreen.route
         ),
         PhraseListItem(
-            itemTitle = "Tell the time",
-            itemDescription = "What time is it? Learn to tell the time the German way, never get" +
-                    "caught off-guard with German punctuality.",
-            itemRoute = GermanTimeScreen.route
+            itemTitle = "Time",
+            itemDescription = "Days of the week and telling the time",
+            itemRoute = ChichewaTimeScreen.route
         ),
     )
     Column(
@@ -264,20 +270,21 @@ fun GermanPhraseListLandingScreen(
                     selected = selectedItemIndex == i,
                     phraseTitle = topicItem.itemTitle,
                     phraseDescription = topicItem.itemDescription,
-                   onClick =  {
-                       navController.navigate(topicItem.itemRoute)
-                   })
+                    onClick =  {
+                        navController.navigate(topicItem.itemRoute)
+                    })
             }
         })
     }
 }
 
 @Composable
-fun GermanIntroductions() {
+fun ChichewaIntroductions() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -313,9 +320,8 @@ fun GermanIntroductions() {
                         .height(10.dp)
                 )
                 Text(
-                    text = "In German culture, it is important to introduce yourself when you arrive" +
-                            "at a place where there's people. This section will take you through " +
-                            "introductions and greetings used in the German speaking world:"
+                    text = "In Malawian culture, politeness and courtesy is important. Learn key " +
+                            "introduction phrases as ice breakers:"
                 )
             }
         }
@@ -352,7 +358,7 @@ fun GermanIntroductions() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanGreetingList()
+                ChichewaGreetingsList()
             }
         }
         Spacer(
@@ -388,7 +394,7 @@ fun GermanIntroductions() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanGoodbyeList()
+                ChichewaGoodbyeList()
             }
         }
         Spacer(
@@ -415,38 +421,6 @@ fun GermanIntroductions() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "Expressions",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Black
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                GermanGreetingExpressionList()
-            }
-        }
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-        ElevatedCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(10.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 10.dp,
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 10.dp)
-            ) {
-                Text(
                     text = "Introduction phrases",
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
@@ -456,14 +430,14 @@ fun GermanIntroductions() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanIntroductionExpressionList()
+                ChichewaIntroductionPhraseList()
             }
         }
     }
 }
 
 @Composable
-fun GermanExpressions() {
+fun ChichewaExpressions() {
     ElevatedCard(
         modifier = Modifier
             .fillMaxSize()
@@ -496,24 +470,25 @@ fun GermanExpressions() {
             )
             Text(
                 text = "Expressions help us form common sentences we use in a language, below you " +
-                        "will find a list of common basic phrases you will often hear in your german" +
+                        "will find a list of common basic phrases you will often hear in your chichewa" +
                         "learning journey:"
             )
             Spacer(
                 modifier = Modifier
                     .height(20.dp)
             )
-            GermanBasicExpressionList()
+            ChichewaExpressionList()
         }
     }
 }
 
 @Composable
-fun GermanEating() {
+fun ChichewaDiningAndEating() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -539,7 +514,7 @@ fun GermanEating() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "Dining and Shopping",
+                    text = "Shopping and Dining",
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp,
                     color = Color.Black
@@ -549,9 +524,8 @@ fun GermanEating() {
                         .height(10.dp)
                 )
                 Text(
-                    text = "Dining and shopping are essential part of modern day life. Perhaps you" +
-                            " fancy a good dinner or a shopping spree in the German speaking world, this" +
-                            " section covers both dining out and shopping:"
+                    text = "Learn key phrases which can come in handy when you either go shopping or" +
+                            " dining in chichewa speaking areas:"
                 )
             }
         }
@@ -574,60 +548,69 @@ fun GermanEating() {
                     .fillMaxWidth()
                     .padding(all = 10.dp)
             ) {
-                Text(
-                    text = "Dining out",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.Black
-                )
                 Spacer(
                     modifier = Modifier
-                        .height(10.dp)
+                        .height(20.dp)
                 )
-                GermanEatingPhraseList()
-            }
-        }
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-        ElevatedCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(10.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 10.dp,
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 10.dp)
-            ) {
                 Text(
                     text = "Shopping",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     color = Color.Black
                 )
                 Spacer(
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanShoppingList()
+                ChichewaShoppingList()
+            }
+        }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Dining",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(10.dp)
+                )
+                ChichewaDiningPhraseList()
             }
         }
     }
 }
 
 @Composable
-fun GermanEmergency() {
+fun ChichewaEmergency() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -664,8 +647,8 @@ fun GermanEmergency() {
                 )
                 Text(
                     text = "Emergencies can occur without warning, however you should not be caught " +
-                            "off guard when it happens in the German speaking world. Below you will " +
-                            "learn general emergency phrases as well as medical and crime related"
+                            "off guard when it happens. Below you will learn general emergency " +
+                            "phrases as well as medical and crime related"
                 )
                 Spacer(
                     modifier = Modifier
@@ -707,7 +690,7 @@ fun GermanEmergency() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanEmergencyList()
+                ChichewaGeneralEmergencyList()
             }
         }
         Spacer(
@@ -743,7 +726,7 @@ fun GermanEmergency() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanMedicalEmergencyList()
+                ChichewaMedicalEmergencyList()
             }
         }
         Spacer(
@@ -779,19 +762,19 @@ fun GermanEmergency() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                GermanCrimeEmergencyList()
+                ChichewaCrimePhraseList()
             }
         }
     }
 }
 
 @Composable
-fun GermanQuestion() {
+fun ChichewaQuestion() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = Color.LightGray)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -826,15 +809,16 @@ fun GermanQuestion() {
                     modifier = Modifier
                         .height(10.dp)
                 )
-                Text(text = "Questions are an essential aspect of language learning. Questions " +
-                        "enable you to ask for information regarding interests. Knowing how to ask" +
-                        " questions in German enables you to find out more about things you are " +
-                        "curious about")
+                Text(
+                    text = "Questions form an essential part of a language. They allow people to " +
+                            "acquire pieces of information from others. This section focuses on how " +
+                            "questions are formed and example questions in chichewa"
+                )
             }
         }
         Spacer(
             modifier = Modifier
-                .height(20.dp)
+                .height(10.dp)
         )
         ElevatedCard(
             modifier = Modifier
@@ -855,27 +839,29 @@ fun GermanQuestion() {
                     modifier = Modifier
                         .height(20.dp)
                 )
-                Text(
-                    text = "Common question starters",
+                Text(text = "Question key words",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.Black
+                    fontSize = 18.sp
                 )
                 Spacer(
                     modifier = Modifier
                         .height(5.dp)
                 )
-                Text(text = "Below are some common words we use to form questions in German:")
+                Text(
+                    text = "In chichewa, questions can be formulated in different ways, below" +
+                        " is a list of words to look out for to be able to tell if it is a question" +
+                        " or not. Many of these can be added as prefixes to verbs:"
+                )
                 Spacer(
                     modifier = Modifier
-                        .height(10.dp)
+                        .height(15.dp)
                 )
-                GermanQuestionStarterList()
+                ChichewaKeyWordList()
             }
         }
         Spacer(
             modifier = Modifier
-                .height(20.dp)
+                .height(10.dp)
         )
         ElevatedCard(
             modifier = Modifier
@@ -896,82 +882,35 @@ fun GermanQuestion() {
                     modifier = Modifier
                         .height(20.dp)
                 )
-                Text(
-                    text = "How to form questions",
+                Text(text = "Example Questions",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.Black
+                    fontSize = 18.sp
                 )
                 Spacer(
                     modifier = Modifier
                         .height(5.dp)
                 )
-                Text(text = "To form questions, we use the common question starters at the beginning" +
-                        " of the sentence. The sentence is usually followed by a verb much like it is " +
-                        "in english with which being the exception:"
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                GermanFormQuestionList()
-
-            }
-        }
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-        ElevatedCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(10.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 10.dp,
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 10.dp)
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .height(20.dp)
-                )
                 Text(
-                    text = "Forming questions with verbs",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.Black
+                    text = "This section has a set of example sentences and how the keywords above " +
+                            "can be used in sentences:"
                 )
                 Spacer(
                     modifier = Modifier
-                        .height(5.dp)
+                        .height(15.dp)
                 )
-                Text(text = "There are some instances where questions can be formed not wth the Ws" +
-                        " but verbs. In english this is equivalent to questions that start with does," +
-                        " do, are, will, etc. These questions start with the verb at the beginning:"
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                GermanVerbQuestionList()
+                ChichewaQuestionsList()
             }
         }
-            }
+    }
 }
 
 @Composable
-fun GermanTime() {
+fun ChichewaTime() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(color = Color.LightGray)
+            .background(color = LightGray)
     ) {
         Spacer(
             modifier = Modifier
@@ -997,7 +936,7 @@ fun GermanTime() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "Telling the time",
+                    text = "Days, Months and Time",
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp,
                     color = Color.Black
@@ -1007,14 +946,14 @@ fun GermanTime() {
                         .height(10.dp)
                 )
                 Text(
-                    text = "In the German speaking world, time is of essence. Time is taken very" +
-                            "seriously, that means try your best to be at least 5 minutes early. " +
-                            "This section teaches you how to read and tell time in German:"
+                    text = "This section covers on time related vocabulary in chichewa, below you will" +
+                            " find lists of days, months and a few phrases on telling the time."
                 )
             }
         }
-        Spacer(modifier = Modifier
-            .height(20.dp)
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
         )
         ElevatedCard(
             modifier = Modifier
@@ -1036,7 +975,7 @@ fun GermanTime() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "Essential phrases for time",
+                    text = "Days (Masiku)",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black
@@ -1045,16 +984,12 @@ fun GermanTime() {
                     modifier = Modifier
                         .height(5.dp)
                 )
-                Text(text = "The following are phrases key to telling the time in German:")
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                )
-                GermanTimeEssentialsList()
+                ChichewaDaysList()
             }
         }
-        Spacer(modifier = Modifier
-            .height(20.dp)
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
         )
         ElevatedCard(
             modifier = Modifier
@@ -1076,42 +1011,39 @@ fun GermanTime() {
                         .height(20.dp)
                 )
                 Text(
-                    text = "How to tell the time",
+                    text = "Months (Miyezi) and time (Nthawi)",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black
                 )
                 Spacer(
                     modifier = Modifier
-                        .height(5.dp)
-                )
-                val items = listOf<String>(
-                    "In german, if the time has the word nach, it is equivalent to the word past",
-                    "The word vor is equivalent to the word to: Viertel vor Neun (Quarter to nine)",
-                    "In german if the time is 8:30, it will not be halb acht rather halb neun",
-                    "easiest way to tell minutes is to say the number of the minutes then either " +
-                            "vor or nach and the the hour"
-                )
-                Text(text = makeBulletedList(items = items))
-                Spacer(
-                    modifier = Modifier
-                        .height(5.dp)
-                )
-                Text(
-                    text = "The following are different examples of telling time in German:"
-                )
-                Spacer(
-                    modifier = Modifier
                         .height(10.dp)
                 )
-                GermanTimeList()
+                Text(
+                    text = "Months in Chichewa are the same as in English, sometimes they are " +
+                        "pronounced with a corruption but generally the same as english, thus no months" +
+                        " list."
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(7.dp)
+                )
+                Text(
+                    text = "Telling the time in chichewa is similar to the way it is done in English"
+                )
             }
         }
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
     }
 }
 
+
 @Composable
 @Preview(showBackground = true)
-fun ViewPhraseScreens() {
-    GermanTime()
+fun ChichewaScreensPreview() {
+    ChichewaQuestion()
 }

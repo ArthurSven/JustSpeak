@@ -79,8 +79,10 @@ import androidx.compose.ui.text.withStyle
 import com.devapps.justspeak_10.data.remote.model.UserData
 import com.devapps.justspeak_10.data.remote.repository.GoogleClientAuth
 import com.devapps.justspeak_10.ui.Components.UserBar
+import com.devapps.justspeak_10.ui.Screens.Chichewa.ChichewaNavigation
 import com.devapps.justspeak_10.ui.Screens.German.GermanNavigation
 import com.devapps.justspeak_10.ui.destinations.Check
+import com.devapps.justspeak_10.ui.destinations.ChichewaNavigation
 import com.devapps.justspeak_10.ui.destinations.GermanNavigation
 import com.devapps.justspeak_10.ui.destinations.Signout
 import com.devapps.justspeak_10.ui.theme.Purple40
@@ -136,6 +138,9 @@ fun Navigation() {
         }
         composable(GermanNavigation.route) {
             GermanNavigation(startNavController)
+        }
+        composable(ChichewaNavigation.route) {
+            com.devapps.justspeak_10.ui.Screens.Chichewa.ChichewaNavigation(startNavController)
         }
         composable(Check.route) {
             LaunchedEffect(key1 = Unit) {
@@ -368,8 +373,10 @@ fun SelectLanguageScreen(
             content = "German is one of the most commonly " +
                     "used languages in the European Union and national language of Germany")
         LanguageCard(
-            onClick = { /*TODO*/ },
-            backgroundColor = Purple40,
+            onClick = {
+                      navController.navigate(ChichewaNavigation.route)
+            },
+            backgroundColor = AzureBlue,
             country = R.drawable.malawi,
             language = "Chichewa",
             borderColor = Color.Blue,
@@ -406,7 +413,7 @@ fun LanguageCard(
             ,
             modifier = Modifier
                 .padding(all = 20.dp)
-               // .height(200.dp)
+                // .height(200.dp)
                 .clickable {
                     onClick()
                 }

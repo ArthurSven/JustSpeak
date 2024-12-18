@@ -23,13 +23,26 @@ android {
         }
     }
 
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+            isIncludeAndroidResources = true
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
+
+        }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -57,17 +70,19 @@ dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("androidx.test.ext:junit-ktx:1.2.1")
+    implementation("androidx.compose.ui:ui-test-junit4-android:1.5.0")
+    implementation("com.google.ar:core:1.44.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    androidTestImplementation("androidx.test:runner:1.5.0")
+    androidTestImplementation("androidx.test:rules:1.5.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
@@ -86,7 +101,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.5.0")
 
     //okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
@@ -113,5 +128,21 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0")
+
+    //mockito
+    // Mockito dependencies
+    testImplementation("org.mockito:mockito-core:5.0.0")
+    androidTestImplementation("org.mockito:mockito-android:5.0.0")
+
+    //Add Robolectric
+
+        // Other dependencies...
+   // implementation("org.bouncycastle:bctls-jdk15on:1.72")
+   // implementation("org.bouncycastle:bcprov-jdk15on:1.72")
+   // implementation("org.conscrypt:conscrypt-android:2.5.2")
+    implementation("org.openjsse:openjsse:1.1.12")
+
 
 }

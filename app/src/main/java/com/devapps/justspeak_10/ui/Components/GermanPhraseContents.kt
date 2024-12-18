@@ -148,9 +148,9 @@ fun GermanGreetingExpressionList() {
 fun getGermanIntroductories() : List<String> {
     return listOf(
     "Darf ich ... vorstellen?", "Das ist", "Wie heißt du/heißen Sie?", "Ich heiße",
-        "Wie ist dein/Ihr Name?", "Mein Name ist", "Ich bin ...", "Wia hoaßt du", "I hoaß",
-        "Wie häissisch", "Woher kommst du", "Ich komme aus ...", "Wohar chunsch", "Ich chume us",
-        "Wo wohnst du", "Ich wohne in..."
+        "Wie ist dein/Ihr Name?", "Mein Name ist", "Ich bin ...", "Wia hoaßt du", "Wie heissisch du"
+        , "Woher kommst du", "Ich komme aus ...", "Wohar chunsch", "Ich chume us", "Wo wohnst du",
+        "Ich wohne in..."
     )
 }
 
@@ -166,20 +166,446 @@ fun getEnglishIntroductories() : List<String> {
 }
 
 @Composable
-fun getGermanPhrases() : List<String> {
-    return listOf(
-        "Entschuldigung", "Sprechen Sie Englisch/Sprichst du Englisch", "Ja", "Nein", "Bitte",
-        "Danke", "Gern geschehen", "Wie sagt man... auf deutsch", "Was ist das?",
-        "Sprechen Sie bitte langsamer", "Leise bitte!", "Mein Deutsch ist begrenzt",
-        "Ich verstehe nicht", "Ich verstehe", "Wie kann ich..", "Alles in Ordnung", "Komm her",
-        "Hau ab"
-    )
+fun GermanIntroductionExpressionList() {
+    val german = getGermanIntroductories()
+    val english = getEnglishIntroductories()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
 }
 
 
 
 @Composable
+fun getGermanPhrases() : List<String> {
+    return listOf(
+        "Entschuldigung", "Sprechen Sie Englisch/Sprichst du Englisch", "Ja", "Nein", "Bitte",
+        "Danke", "Gern geschehen", "Wie sagt man... auf deutsch", "Was ist das?",
+        "Sprechen Sie bitte langsamer", "Leise bitte!", "Mein Deutsch ist begrenzt",
+        "Ich verstehe nicht", "Ich verstehe", "Wie kann ich...", "Alles in Ordnung", "Komm her",
+        "Hau ab"
+    )
+}
+
+@Composable
+fun getEnglishPhrases() : List<String> {
+    return listOf(
+        "Excuse me", "Do you speak english", "Yes", "No", "Please", "Thanks", "Pleasure",
+        "How do you say... in german", "What is that?", "Speak slowly please", "Keep quiet!",
+        "My german is limited", "I do not understand", "I understand", "How can I...",
+        "Everything's alright", "Come here", "Get out!"
+    )
+}
+
+@Composable
+fun GermanBasicExpressionList() {
+    val german = getGermanPhrases()
+    val english = getEnglishPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun germanEatingRestaurantPhraseList() : List<String> {
+    return listOf(
+        "Einen Tisch für vier, bitte", "Ist dieser Platz frei?", "Die Speiserkarte, bitte",
+        "Ich möchte bestellen", "Ich hätte gern...", "Was würden Sie empfehlen",
+        "Nein, das habe ich nicht bestellt", "Hat es ihnen/dir geschmeckt", "Noch eins",
+        "Guten Appetite", "Prost", "Sonst noch was?", "Entschuldingen Sie bitte", "Zahlen, bitte",
+        "Könnte ich das einpacken lassen?", "Ich möchte eine Reservierung machen", "an Guadn",
+        "en Guete", "Kann ich mit Karte bezahlen?", "Kann ich mit Bargeld bezahlen?",
+        "Ich bezahle mit Karte", "Ich bezahle mit Bargeld"
+    )
+}
+
+fun englishEatingRestaurantPhraseList() : List<String> {
+    return listOf(
+        "A table for four, please", "Is this seat free?", "Menu, please", "I would like to order",
+        "I would like...", "What would you recommend?", "No, I did not order this", "Did you enjoy the food?", "One more",
+        "Have a nice meal", "Cheers!", "Anything else?", "Excuse me", "Bill please",
+        "Can I have this wrapped?", "I would like to make a reservation",
+        "Have a nice meal (Bavarian)", "Have a nice meal (Switzerland)", "Can I pay with a card?",
+        "Can I pay with cash?", "I will pay with a card", "I will pay with cash"
+    )
+}
+
+@Composable
+fun GermanEatingPhraseList() {
+    val german = germanEatingRestaurantPhraseList()
+    val english = englishEatingRestaurantPhraseList()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanShoppingPhrases() : List<String> {
+    return listOf(
+        "Ich gehe einkaufen", "Wo kann ich .. finden?", "Wie viel kostet das?", "der Preis", "die Kleidung",
+        "das Geschäft", "Haben Sie...?", "Verkaufen Sie?", "Ich suche...", "Ich möchte ...", "Das ist teuer",
+        "Das ist billig", "Kann ich eine Quittung haben?", "auf welcher Stock kann ich ... finden",
+        "Wo finde ich ...", "Das gefällt mir", "Das gefällt mir nicht", "Probier es an"
+    )
+}
+
+@Composable
+fun getEnglishShoppingPhrases() : List<String> {
+    return listOf(
+        "I am going shopping", "Where can I find...?", "How much does this cost?", "The price",
+        "the clothes", "the shop", "Do you have...?", "Do you sell...?", "I am looking for...",
+        "I would like...", "That's expensive", "That's cheap", "Can I have a receipt?",
+        "On which floor can I find...?", "Where can I find...?", "I like that", "I don't like that",
+        "Try it on"
+    )
+}
+
+@Composable
+fun GermanShoppingList() {
+    val german = getGermanShoppingPhrases()
+    val english = getEnglishShoppingPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanEmergencyPhrases() : List<String> {
+    return listOf(
+        "Hilfe!", "Achtung!", "Beeilen Sie sich", "Beeil dich", "Sei Vorsichtig!", "Pass auf!",
+        "Können Sie mir helfen?", "Kannst du mir helfen?", "Wie kann ich Ihnen helfen?",
+        "Wie kann ich dir helfen?", "Was ist passiert?", "Ich habe einen Notfall", "Es gab einen Unfall"
+    )
+}
+
+@Composable
+fun getEnglishEmergencyPhrases() : List<String> {
+    return listOf(
+       "Help", "Attention!", "Hurry up (formal)", "Hurry up (informal)", "Be careful", "Take care",
+        "Can you help me? (formal)", "Can you help me? (informal)", "How can I help you? (formal)",
+        "How can I help you? (informal)", "What happened?", "I have an emergency",
+        "There was an accident"
+    )
+}
+
+@Composable
+fun GermanEmergencyList() {
+    val german = getGermanEmergencyPhrases()
+    val english = getEnglishEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanMedicalEmergencyPhrases() : List<String> {
+    return listOf(
+        "Ich bin krank", "Bring mich zum Krankenhaus", "Ich bin verletzt", "Ruf den KrankenWagen",
+        "Feuer!", "Ich habe eine Erkältung", "Sie ist in Ohnmacht gefallen", "Er ist tot",
+        "Ich brauche einen Arzt", "Ich habe mich verbrannt", "Ich habe mich geschnitten",
+        "Ist alles in Ordnung?"
+    )
+}
+
+@Composable
+fun getEnglishMedicalEmergencyPhrases() : List<String> {
+    return listOf(
+        "I am sick", "Take me to the hospital", "I am injured", "Call the ambulance", "Fire!",
+        "I have a cold", "She fainted", "He is dead", "I need a doctor", "I burned myself",
+        "I cut myself", "Is everything alright?"
+    )
+}
+
+@Composable
+fun GermanMedicalEmergencyList() {
+    val german = getGermanMedicalEmergencyPhrases()
+    val english = getEnglishMedicalEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanCrimeEmergencyPhrases() : List<String> {
+    return listOf(
+        "Ich wurde beraubt", "Mein Gepäck wurde gestohlen", "Ruf die Polizei", "Haltet den Dieb!",
+        "Meine Wohnung wurde eingebrochen", "Ich möchte ein Verbrechen melden"
+    )
+}
+
+@Composable
+fun getEnglishCrimeEmergencyPhrases() : List<String> {
+    return listOf(
+        "I was robbed", "My backpack was stolen", "Call the police", "Stop the thief!",
+        "My apartment was broken into", "I would like to report a crime"
+    )
+}
+
+@Composable
+fun GermanCrimeEmergencyList() {
+    val german = getGermanCrimeEmergencyPhrases()
+    val english = getEnglishCrimeEmergencyPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanQuestionStarters() : List<String> {
+    return listOf(
+        "Was", "Wie", "Wo", "Wann", "Welche", "Wer", "Warum", "Wieso", "Woher", "Wohin", "Was für"
+    )
+}
+
+@Composable
+fun getEnglishQuestionStarters() : List<String> {
+    return listOf(
+        "What", "How", "Where", "When", "Which", "Who", "Why", "Why", "Where... from", "Where... to", "What " +
+                "kind of"
+    )
+}
+
+@Composable
+fun GermanQuestionStarterList() {
+    val german = getGermanQuestionStarters()
+    val english = getEnglishQuestionStarters()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanFormQuestions() : List<String> {
+    return listOf(
+        "Was ist das?", "Wie komme ich zum Bahnhof??", "Wo ist das Badezimmer?",
+        "Wann kommt der Bus an?", "Welche Mannschaft unterstützen Sie",
+        "Wer hat mein Pizza gegessen?", "Woher kommt er?", "Wohin geht Ihr?", "Was für ein Auto ist" +
+                " das?"
+
+    )
+}
+
+@Composable
+fun getEnglishFormQuestions() : List<String> {
+    return listOf(
+        "What's this/that?", "How do I get to the train station?", "Where is the bathroom",
+        "When does the bus arrive?", "Which team do you support?", "Who ate my pizza?",
+        "Where does he come from?", "Where are you guys going to?", "What kind of car is that?"
+    )
+}
+
+@Composable
+fun GermanFormQuestionList() {
+    val german = getGermanFormQuestions()
+    val english = getEnglishFormQuestions()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanVerbQuestions() : List<String> {
+    return listOf(
+        "Kannst du mir eine Nachricht schicken?", "Trinkst du auch Bier?", "Kommen Sie zur Party?",
+        "Arbeitest du bei IKEA?", "Bist du müde?", "Sind sie jetzt besser?"
+    )
+}
+
+@Composable
+fun getEnglishVerbQuestion() : List<String> {
+    return listOf(
+        "Can you send me a Message?", "Do you also drink beer?", "Are you coming to the party?",
+        "Do you work at IKEA?", "Are you tired?", "Are they better now?"
+    )
+}
+
+@Composable
+fun GermanVerbQuestionList() {
+    val german = getGermanVerbQuestions()
+    val english = getEnglishVerbQuestion()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanTimeEssentialPhrases() : List<String> {
+    return listOf(
+        "Entschuldigung, wie viel Uhr ist es?", "Wie spät ist es?", "Es ist ... Uhr", "die Zeit",
+        "Der Tag", "Das Jahr", "Gestern", "Heute", "Morgen", "Mittag", "Nachmittag", "Abend",
+        "Nacht", "Letztes Jahr", "Dieses Jahr", "Nächstes Jahr", "Diesen Monat", "Letzten Monat",
+        "Nächsten Monat"
+    )
+}
+
+@Composable
+fun geEnglishTimeEssentialPhrases() : List<String> {
+    return listOf(
+        "Excuse me, what time is it?", "What time is it (How late is it)", "It is ... 0'clock",
+        "The time", "The day", "The year", "Yesterday", "Today", "Tomorrow", "Midday", "Afternoon",
+        "Evening", "Night", "Last year", "This year", "Next year", "This month", "Last month",
+        "Next month"
+    )
+}
+
+@Composable
+fun GermanTimeEssentialsList() {
+    val german = getGermanTimeEssentialPhrases()
+    val english = geEnglishTimeEssentialPhrases()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
+fun getGermanTime() : List<String> {
+    return listOf(
+        "Es ist ein Uhr", "Es is kurz nach zwei", "Fünf nach drei", "Zehn nach drei", "Viertel nach drei",
+        "zwanzig nach vier", "FÜnf vor halb sechs", "Halb sechs", "Fünf nach halb sechs",
+        "zwanzig vor sieben", "Viertel vor sieben", "zehn vor sieben", "Fünf vor sieben",
+        "kurz vor sieben"
+    )
+}
+
+@Composable
+fun getEnglishTime() : List<String> {
+    return listOf(
+        "01:00", "02:03", "03:05", "03:10", "03:15", "04:20", "05:25", "05:30", "05:35", "06:40",
+        "06:45", "06:50", "06:55", "06:57"
+    )
+}
+
+@Composable
+fun GermanTimeList() {
+    val german = getGermanTime()
+    val english = getEnglishTime()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        items(german) { germanPhrases ->
+            val index = german.indexOf(germanPhrases)
+            val englishPhrases = if (index < english.size) english[index] else ""
+
+            PhraseComponent(germanPhrases , englishPhrases)
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun viewPhraseContents() {
-    GermanGreetingList()
+    GermanIntroductionExpressionList()
 }
